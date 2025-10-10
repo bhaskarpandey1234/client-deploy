@@ -1,0 +1,12 @@
+@import './lib/styles/tokens.css';
+
+.reveal{animation:fadeUp .24s cubic-bezier(.17,.84,.44,1) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)}}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
