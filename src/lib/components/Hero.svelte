@@ -3,13 +3,13 @@
 </script>
 
 <section class="section" use:inview>
-  <div class="footer-lang">
+  <!-- <div class="footer-lang">
     <select class="lang-selector">
       <option value="en">English</option>
       <option value="es">Español</option>
       <option value="fr">Français</option>
     </select>
-  </div>
+  </div> -->
 
   <div class="grid" style="grid-template-columns: 1.2fr 1fr; align-items:center;">
     <div>
@@ -31,7 +31,7 @@
   </div>
 </section>
 
-<style>
+<!-- <style>
   .footer-lang {
     position: absolute;
     top: 16px;
@@ -52,4 +52,4 @@
     font-size: 13px;
     cursor: pointer;
   }
-</style>
+</style> -->

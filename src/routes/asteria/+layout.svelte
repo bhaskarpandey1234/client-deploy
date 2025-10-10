@@ -12,6 +12,7 @@
 
 <script>
   import { onMount } from 'svelte';
+  import HeaderAsteria from '$lib/components/HeaderAsteria.svelte';
   import '../../app.css';
 
   onMount(() => {
@@ -22,4 +23,7 @@
   });
 </script>
 
-<slot />
+<HeaderAsteria />
+<main style="padding-top: 80px;">
+  <slot />
+</main>

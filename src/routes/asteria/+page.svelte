@@ -18,14 +18,14 @@
 </script>
 
 <Hero />
-<CreatorStrip />
 <QuizTeaser />
 <HowItWorks />
 <TeaserDemo />
 <JourneysGrid />
+<CreatorStrip />
 <ResonancePanel />
 <!-- <PricingRibbon /> -->
-<EthicsAccordion />
+<!-- <EthicsAccordion /> -->
 <FAQ />
 <!-- <InstallCTA /> -->
 <Newsletter />
