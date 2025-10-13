@@ -4,7 +4,10 @@
   import ShellCast from '$lib/components/ShellCast.svelte';
   import ShellSVG from '$lib/components/ShellSVG.svelte';
   import LuckyWindow from '$lib/components/LuckyWindow.svelte';
+  import HowItWorksVideo from '$lib/components/HowItWorksVideo.svelte';
+  import SocialProof from '$lib/components/SocialProof.svelte';
   import { lunarInfo } from '$lib/lunar';
+  import FooterMain from '$lib/components/FooterMain.svelte'
 
   const shells = ['cowrie', 'conch', 'scallop', 'clam', 'limpet', 'olive', 'auger', 'turban', 'sundial', 'top', 'star', 'moon'];
   let showLucky = false;
@@ -13,12 +16,33 @@
   function toggleLucky() {
     showLucky = !showLucky;
   }
+
+  function handleImageError(img) {
+    img.style.display = 'none';
+    const placeholder = img.nextElementSibling;
+    if (placeholder) placeholder.hidden = false;
+  }
 </script>
 
 <div class="demo-page">
+  <!-- Hero Image -->
+  <div class="hero-image card">
+    <img 
+      src="/images/shell-casting-hero.jpg" 
+      alt="Shell Casting Ritual" 
+      on:error={handleImageError}
+    />
+    <div class="image-placeholder" hidden>
+      <span aria-hidden="true" style="font-size: 96px;">🐚</span>
+      <p>Sacred Shell Casting</p>
+    </div>
+  </div>
+
   <div class="section">
-    <h1 class="h1">Shell Casting Demo</h1>
+    <h1 class="h1">Shell Casting</h1>
     <p class="sub">Experience the sound and haptic feedback of shell casting with elegant SVG icons.</p>
+    
+    
     
     <SettingsBar />
     
@@ -52,12 +76,50 @@
       </div>
     </div>
   </div>
+
+  <!-- How It Works with Video -->
+  <HowItWorksVideo />
+
+  <!-- Social Proof -->
+  <SocialProof variant="both" />
+  <FooterMain />
 </div>
 
 <style>
   .demo-page {
     min-height: 100vh;
     padding-top: 80px;
+  }
+
+  .hero-image {
+    margin: 32px 0;
+    overflow: hidden;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+  }
+
+  .image-placeholder {
+    aspect-ratio: 16/9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--panel);
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .image-placeholder p {
+    font-size: 18px;
+    margin-top: 16px;
   }
 
   .shells-grid {
