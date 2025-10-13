@@ -19,37 +19,43 @@
         <a class="btn" href="#quiz">Start Your Ritual</a>
         <button class="btn" aria-label="Watch demo">Watch 20s Demo</button>
       </div>
-      <div style="display:flex; gap:16px; margin-top:16px; opacity:.9">
+      <!-- <div style="display:flex; gap:16px; margin-top:16px; opacity:.9">
         <span>2,314 rituals this week</span>
         <span>• 4.7/5 resonance</span>
         <span>• Double Reading Guarantee</span>
-      </div>
+      </div> -->
     </div>
-    <div class="card" style="aspect-ratio:1/1; max-width:560px; margin-left:auto; display:grid; place-items:center">
-      <div aria-hidden="true">[Altar Animation]</div>
+    <div class="card hero-image-card">
+      <div class="image-placeholder">
+        <p>add image here</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- <style>
-  .footer-lang {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    z-index: 10;
+<style>
+  .hero-image-card {
+    aspect-ratio: 1/1;
+    max-width: 560px;
+    margin-left: auto;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
   }
 
-  .lang-selector {
-    padding: 8px;
-    font-size: 0.9rem;
+  .image-placeholder {
+    background: var(--panel);
+    color: var(--muted);
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .lang-selector {
-    padding: 8px 12px;
-    background: var(--bg);
-    border: 1px solid #ffffff22;
-    border-radius: 8px;
-    color: var(--ink);
-    font-size: 13px;
-    cursor: pointer;
+
+  .image-placeholder p {
+    font-size: 18px;
+    color: var(--muted);
   }
-</style> -->
+</style>

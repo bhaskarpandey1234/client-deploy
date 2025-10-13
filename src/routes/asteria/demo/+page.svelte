@@ -10,31 +10,24 @@
   import FooterMain from '$lib/components/FooterMain.svelte'
 
   const shells = ['cowrie', 'conch', 'scallop', 'clam', 'limpet', 'olive', 'auger', 'turban', 'sundial', 'top', 'star', 'moon'];
-  let showLucky = false;
-  let lunar = lunarInfo();
+  let showPopup = false;
+  let castResult = null;
 
-  function toggleLucky() {
-    showLucky = !showLucky;
+  function handleCastComplete(event) {
+    castResult = event.detail;
+    showPopup = true;
   }
 
-  function handleImageError(img) {
-    img.style.display = 'none';
-    const placeholder = img.nextElementSibling;
-    if (placeholder) placeholder.hidden = false;
+  function closePopup() {
+    showPopup = false;
   }
 </script>
 
 <div class="demo-page">
   <!-- Hero Image -->
   <div class="hero-image card">
-    <img 
-      src="/images/shell-casting-hero.jpg" 
-      alt="Shell Casting Ritual" 
-      on:error={handleImageError}
-    />
-    <div class="image-placeholder" hidden>
-      <span aria-hidden="true" style="font-size: 96px;">🐚</span>
-      <p>Sacred Shell Casting</p>
+    <div class="image-placeholder">
+      <p>add img here</p>
     </div>
   </div>
 
@@ -46,9 +39,9 @@
     
     <SettingsBar />
     
-    <ShellCast />
+    <ShellCast on:castComplete={handleCastComplete} />
     
-    <div class="demo-controls">
+    <!-- <div class="demo-controls">
       <button class="btn" on:click={toggleLucky}>
         {showLucky ? 'Hide' : 'Show'} Lucky Window
       </button>
@@ -62,7 +55,7 @@
       <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: -1; opacity: 0.3;">
         Demo Area
       </div>
-    </div>
+    </div> -->
     
     <div class="shells-grid">
       <h3 class="h3">Shell Collection</h3>
@@ -85,6 +78,21 @@
   <FooterMain />
 </div>
 
+{#if showPopup}
+  <div class="popup-overlay" on:click={closePopup}>
+    <div class="popup" on:click|stopPropagation>
+      <h3>Shell Cast Results</h3>
+      {#if castResult?.lucky}
+        <div class="lucky-result">✨ Lucky Window! ✨</div>
+      {/if}
+      <div class="lunar-result">
+        Moon: {castResult?.lunar?.phase} ({Math.round(castResult?.lunar?.fraction * 100)}%)
+      </div>
+      <button class="close-btn" on:click={closePopup}>Close</button>
+    </div>
+  </div>
+{/if}
+
 <style>
   .demo-page {
     min-height: 100vh;
@@ -94,7 +102,7 @@
   .hero-image {
     margin: 32px 0;
     overflow: hidden;
-    max-width: 900px;
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -159,5 +167,47 @@
     border: 1px dashed var(--muted);
     border-radius: 12px;
     background: var(--glass);
+  }
+
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .popup {
+    background: var(--panel);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid var(--muted);
+    text-align: center;
+    min-width: 300px;
+  }
+
+  .lucky-result {
+    color: #ffd700;
+    font-size: 18px;
+    margin: 16px 0;
+  }
+
+  .lunar-result {
+    color: var(--muted);
+    margin: 16px 0;
+  }
+
+  .close-btn {
+    padding: 8px 16px;
+    background: var(--glass);
+    border: 1px solid var(--muted);
+    border-radius: 8px;
+    color: var(--ink);
+    cursor: pointer;
   }
 </style>

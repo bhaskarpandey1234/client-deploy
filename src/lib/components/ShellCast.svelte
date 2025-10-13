@@ -1,9 +1,11 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, createEventDispatcher } from 'svelte';
   import ShellSVG from './ShellSVG.svelte';
   import * as sound from '$lib/sound';
   import * as haptics from '$lib/haptics';
   import { lunarInfo } from '$lib/lunar';
+
+  const dispatch = createEventDispatcher();
 
   let casting = false;
   let lastCast: any = null;
@@ -39,6 +41,7 @@
         haptics.vibrate(haptics.LUCKY_PATTERN);
       }
       
+      dispatch('castComplete', { lucky: isLucky, lunar });
       casting = false;
     }, 420);
   }

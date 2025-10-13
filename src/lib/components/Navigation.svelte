@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { page } from '$app/stores';
+  
   let mobileMenuOpen = false;
   let divinationOpen = false;
 
@@ -16,22 +18,15 @@
   }
 </script>
 
-<header class="header">
-  <div class="container">
-    <a href="/asteria" class="logo">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/>
-        <path d="M16 8l4 8-4 8-4-8z" fill="currentColor"/>
-        <circle cx="16" cy="16" r="3" fill="currentColor"/>
-      </svg>
-      <span class="logo-text">Asteria</span>
-    </a>
-
+<nav class="navigation">
+  <div class="nav-container">
+    <a href="/asteria" class="logo">Asteria</a>
+    
     <button class="mobile-toggle" on:click={toggleMobileMenu} aria-label="Toggle menu">
       {mobileMenuOpen ? '✕' : '☰'}
     </button>
 
-    <nav class="nav-menu" class:open={mobileMenuOpen}>
+    <div class="nav-menu" class:open={mobileMenuOpen}>
       <a href="/asteria/astrology" class="nav-link" on:click={closeMobileMenu}>
         Astrology
       </a>
@@ -54,59 +49,39 @@
         {/if}
       </div>
 
-      <a href="/asteria#quiz" class="btn-nav" on:click={closeMobileMenu}>
+      <a href="/asteria#pricing" class="btn-nav" on:click={closeMobileMenu}>
         Get Started
       </a>
-    </nav>
-
-    <div class="footer-lang">
-      <select class="lang-selector">
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="fr">Français</option>
-      </select>
     </div>
   </div>
-</header>
+</nav>
 
 <style>
-  .header {
+  .navigation {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
     background: var(--bg);
-    backdrop-filter: blur(20px);
     border-bottom: 1px solid #ffffff1f;
+    backdrop-filter: blur(20px);
   }
 
-  .container {
-    max-width: 1200px;
+  .nav-container {
+    max-width: 1120px;
     margin: 0 auto;
     padding: 16px 24px;
-    display: grid;
-    grid-template-columns: auto 1fr auto auto;
+    display: flex;
     align-items: center;
-    gap: 24px;
-    position: relative;
+    justify-content: space-between;
   }
 
   .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    font-size: 24px;
+    font-weight: 700;
     color: var(--ink);
     text-decoration: none;
-  }
-
-  .logo svg {
-    color: var(--destiny);
-  }
-
-  .logo-text {
-    font-size: 1.25rem;
-    font-weight: 700;
     background: linear-gradient(90deg, var(--destiny), var(--clarity));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -127,7 +102,6 @@
     display: flex;
     align-items: center;
     gap: 32px;
-    justify-self: center;
   }
 
   .nav-link {
@@ -204,29 +178,9 @@
     transform: translateY(-1px);
   }
 
-  .footer-lang {
-    justify-self: end;
-  }
-
-  .lang-selector {
-    padding: 8px 12px;
-    background: none;
-    border: 1px solid #ffffff22;
-    border-radius: 8px;
-    color: var(--ink);
-    font-size: 13px;
-    cursor: pointer;
-  }
-
   @media (max-width: 768px) {
-    .container {
-      padding: 16px;
-    }
-
     .mobile-toggle {
       display: block;
-      position: relative;
-      z-index: 102;
     }
 
     .nav-menu {
@@ -264,9 +218,6 @@
       margin-top: 8px;
       text-align: center;
     }
-
-    .footer-lang {
-      right: 16px;
-    }
   }
 </style>
+

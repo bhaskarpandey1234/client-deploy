@@ -20,8 +20,8 @@
 <Hero />
 <QuizTeaser />
 <HowItWorks />
-<TeaserDemo />
-<JourneysGrid />
+<!-- <TeaserDemo /> -->
+<!-- JourneysGrid now shown inside QuizTeaser -->
 <CreatorStrip />
 <ResonancePanel />
 <!-- <PricingRibbon /> -->
