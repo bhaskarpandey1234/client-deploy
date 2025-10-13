@@ -6,6 +6,7 @@
   --clarity:#30D5C8; --clarity-400:#6BE8DF;
   --good:#5CE38A; --warn:#FFC857; --bad:#F07167;
   --glass:rgba(255,255,255,0.06); --radius:20px; --gap:16px;
+  --icon: #c9a86a; --accent: #9C6CFF;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui, "Inter", sans-serif}
