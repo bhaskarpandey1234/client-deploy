@@ -1,17 +1,29 @@
 <script lang="ts">
-  let mobileMenuOpen = false;
+  let astrologyOpen = false;
+  let numerologyOpen = false;
   let divinationOpen = false;
 
-  function toggleMobileMenu() {
-    mobileMenuOpen = !mobileMenuOpen;
+  function toggleAstrology() {
+    astrologyOpen = !astrologyOpen;
+    numerologyOpen = false;
+    divinationOpen = false;
+  }
+
+  function toggleNumerology() {
+    numerologyOpen = !numerologyOpen;
+    astrologyOpen = false;
+    divinationOpen = false;
   }
 
   function toggleDivination() {
     divinationOpen = !divinationOpen;
+    astrologyOpen = false;
+    numerologyOpen = false;
   }
 
-  function closeMobileMenu() {
-    mobileMenuOpen = false;
+  function closeAllDropdowns() {
+    astrologyOpen = false;
+    numerologyOpen = false;
     divinationOpen = false;
   }
 </script>
@@ -27,18 +39,40 @@
       <span class="logo-text">Asteria</span>
     </a>
 
-    <button class="mobile-toggle" on:click={toggleMobileMenu} aria-label="Toggle menu">
-      {mobileMenuOpen ? '✕' : '☰'}
-    </button>
-
-    <nav class="nav-menu" class:open={mobileMenuOpen}>
-      <a href="/asteria/astrology" class="nav-link" on:click={closeMobileMenu}>
-        Astrology
-      </a>
+    <nav class="nav-menu">
+      <div class="nav-dropdown">
+        <button class="nav-link dropdown-toggle" on:click={toggleAstrology}>
+          Astrology
+          <span class="arrow">{astrologyOpen ? '▲' : '▼'}</span>
+        </button>
+        {#if astrologyOpen}
+          <div class="dropdown-menu">
+            <a href="/asteria/astrology/celtic-tree-zodiac" class="dropdown-item" on:click={closeAllDropdowns}>Celtic Tree Zodiac</a>
+            <a href="/asteria/astrology/chinese-zodiac" class="dropdown-item" on:click={closeAllDropdowns}>Chinese Zodiac</a>
+            <a href="/asteria/astrology/egyptian" class="dropdown-item" on:click={closeAllDropdowns}>Egyptian</a>
+            <a href="/asteria/astrology/japanese" class="dropdown-item" on:click={closeAllDropdowns}>Japanese</a>
+            <a href="/asteria/astrology/mayan" class="dropdown-item" on:click={closeAllDropdowns}>Mayan</a>
+            <a href="/asteria/astrology/vedic" class="dropdown-item" on:click={closeAllDropdowns}>Vedic</a>
+            <a href="/asteria/astrology/western" class="dropdown-item" on:click={closeAllDropdowns}>Western</a>
+          </div>
+        {/if}
+      </div>
       
-      <a href="/asteria/numerology" class="nav-link" on:click={closeMobileMenu}>
-        Numerology
-      </a>
+      <div class="nav-dropdown">
+        <button class="nav-link dropdown-toggle" on:click={toggleNumerology}>
+          Numerology
+          <span class="arrow">{numerologyOpen ? '▲' : '▼'}</span>
+        </button>
+        {#if numerologyOpen}
+          <div class="dropdown-menu">
+            <a href="/asteria/numerology/angel-numbers" class="dropdown-item" on:click={closeAllDropdowns}>Angel Numbers</a>
+            <a href="/asteria/numerology/chaldean" class="dropdown-item" on:click={closeAllDropdowns}>Chaldean</a>
+            <a href="/asteria/numerology/chinese" class="dropdown-item" on:click={closeAllDropdowns}>Chinese</a>
+            <a href="/asteria/numerology/kabbalistic" class="dropdown-item" on:click={closeAllDropdowns}>Kabbalistic</a>
+            <a href="/asteria/numerology/western" class="dropdown-item" on:click={closeAllDropdowns}>Western</a>
+          </div>
+        {/if}
+      </div>
       
       <div class="nav-dropdown">
         <button class="nav-link dropdown-toggle" on:click={toggleDivination}>
@@ -47,14 +81,18 @@
         </button>
         {#if divinationOpen}
           <div class="dropdown-menu">
-            <a href="/asteria/demo" class="dropdown-item" on:click={closeMobileMenu}>
-              Shell Casting
-            </a>
+            <a href="/asteria/demo" class="dropdown-item" on:click={closeAllDropdowns}>Conchomancy</a>
+            <a href="/asteria/divination/i-ching" class="dropdown-item" on:click={closeAllDropdowns}>I Ching</a>
+            <a href="/asteria/divination/oracle-cards" class="dropdown-item" on:click={closeAllDropdowns}>Oracle Cards</a>
+            <a href="/asteria/divination/palmistry" class="dropdown-item" on:click={closeAllDropdowns}>Palmistry</a>
+            <a href="/asteria/divination/runes" class="dropdown-item" on:click={closeAllDropdowns}>Runes</a>
+            <a href="/asteria/divination/tarot-cards" class="dropdown-item" on:click={closeAllDropdowns}>Tarot Cards</a>
+            <a href="/asteria/divination/vedic" class="dropdown-item" on:click={closeAllDropdowns}>Vedic</a>
           </div>
         {/if}
       </div>
 
-      <a href="/asteria#quiz" class="btn-nav" on:click={closeMobileMenu}>
+      <a href="/asteria#quiz" class="btn-nav" on:click={closeAllDropdowns}>
         Get Started
       </a>
     </nav>
@@ -113,15 +151,7 @@
     background-clip: text;
   }
 
-  .mobile-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--ink);
-    font-size: 24px;
-    cursor: pointer;
-    padding: 8px;
-  }
+
 
   .nav-menu {
     display: flex;
@@ -210,7 +240,7 @@
 
   .lang-selector {
     padding: 8px 12px;
-    background: none;
+    background: var(--panel);
     border: 1px solid #ffffff22;
     border-radius: 8px;
     color: var(--ink);
@@ -221,52 +251,17 @@
   @media (max-width: 768px) {
     .container {
       padding: 16px;
-    }
-
-    .mobile-toggle {
-      display: block;
-      position: relative;
-      z-index: 102;
+      grid-template-columns: auto 1fr auto;
     }
 
     .nav-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: var(--panel);
-      border-bottom: 1px solid #ffffff1f;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
-      padding: 16px;
-      display: none;
-    }
-
-    .nav-menu.open {
-      display: flex;
-    }
-
-    .nav-link {
-      padding: 12px 16px;
-      width: 100%;
-      justify-content: space-between;
+      gap: 16px;
     }
 
     .dropdown-menu {
       position: static;
       margin-top: 8px;
-      margin-left: 16px;
       box-shadow: none;
-    }
-
-    .btn-nav {
-      margin-top: 8px;
-      text-align: center;
-    }
-
-    .footer-lang {
-      right: 16px;
     }
   }
 </style>
