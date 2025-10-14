@@ -52,6 +52,7 @@
             <a href="/asteria/astrology/egyptian" class="dropdown-item" on:click={closeAllDropdowns}>Egyptian</a>
             <a href="/asteria/astrology/japanese" class="dropdown-item" on:click={closeAllDropdowns}>Japanese</a>
             <a href="/asteria/astrology/mayan" class="dropdown-item" on:click={closeAllDropdowns}>Mayan</a>
+            <a href="/asteria/astrology/panchang" class="dropdown-item" on:click={closeAllDropdowns}>Panchang</a>
             <a href="/asteria/astrology/vedic" class="dropdown-item" on:click={closeAllDropdowns}>Vedic</a>
             <a href="/asteria/astrology/western" class="dropdown-item" on:click={closeAllDropdowns}>Western</a>
           </div>
@@ -92,9 +93,7 @@
         {/if}
       </div>
 
-      <a href="/asteria#quiz" class="btn-nav" on:click={closeAllDropdowns}>
-        Get Started
-      </a>
+
     </nav>
 
     <div class="footer-lang">
@@ -124,7 +123,7 @@
     margin: 0 auto;
     padding: 16px 24px;
     display: grid;
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 24px;
     position: relative;
@@ -251,7 +250,6 @@
   @media (max-width: 768px) {
     .container {
       padding: 16px;
-      grid-template-columns: auto 1fr auto;
     }
 
     .nav-menu {

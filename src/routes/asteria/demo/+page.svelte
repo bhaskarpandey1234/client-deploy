@@ -13,6 +13,25 @@
   let showPopup = false;
   let castResult = null;
 
+  // Shell Casting specific steps
+  const shellCastingSteps = [
+    {
+      title: "Cast the Shells",
+      description: "Tap or shake to cast the sacred shells. Each shell carries its own meaning and energy.",
+      icon: "🐚"
+    },
+    {
+      title: "Read the Pattern",
+      description: "Our AI interprets the pattern using traditional divination wisdom combined with your question.",
+      icon: "✨"
+    },
+    {
+      title: "Receive Guidance",
+      description: "Get specific, actionable insights with timing windows and clear next steps.",
+      icon: "🔮"
+    }
+  ];
+
   function handleCastComplete(event) {
     castResult = event.detail;
     showPopup = true;
@@ -71,7 +90,15 @@
   </div>
 
   <!-- How It Works with Video -->
-  <HowItWorksVideo />
+  <HowItWorksVideo 
+    title="How Shell Casting Works"
+    videoUrl=""
+    posterUrl=""
+    placeholderIcon="🐚"
+    placeholderText="Shell Casting Video Demo"
+    placeholderSubtext="Video coming soon"
+    steps={shellCastingSteps}
+  />
 
   <!-- Social Proof -->
   <SocialProof variant="both" />

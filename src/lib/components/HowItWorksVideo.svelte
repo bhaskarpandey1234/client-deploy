@@ -1,53 +1,74 @@
 <script lang="ts">
-  // How It Works component with video for shell casting
-  export let videoUrl = '';
-  export let posterUrl = '';
+  // Reusable "How It Works" component with video and steps
   
-  const steps = [
+  // Type definition for step data
+  export type Step = {
+    title: string;
+    description: string;
+    icon: string;
+  };
+
+  // Props
+  export let title: string = "How It Works";
+  export let videoUrl: string = '';
+  export let posterUrl: string = '';
+  export let placeholderIcon: string = '🎬';
+  export let placeholderText: string = 'Video Demo';
+  export let placeholderSubtext: string = 'Video coming soon';
+  export let showVideo: boolean = true;
+  export let steps: Step[] = [];
+
+  // Default steps if none provided
+  const defaultSteps: Step[] = [
     {
-      title: "Cast the Shells",
-      description: "Tap or shake to cast the sacred shells. Each shell carries its own meaning and energy.",
-      icon: "🐚"
+      title: "Step 1",
+      description: "First step description goes here.",
+      icon: "1️⃣"
     },
     {
-      title: "Read the Pattern",
-      description: "Our AI interprets the pattern using traditional divination wisdom combined with your question.",
-      icon: "✨"
+      title: "Step 2",
+      description: "Second step description goes here.",
+      icon: "2️⃣"
     },
     {
-      title: "Receive Guidance",
-      description: "Get specific, actionable insights with timing windows and clear next steps.",
-      icon: "🔮"
+      title: "Step 3",
+      description: "Third step description goes here.",
+      icon: "3️⃣"
     }
   ];
+
+  // Use provided steps or default
+  $: displaySteps = steps.length > 0 ? steps : defaultSteps;
 </script>
 
 <section class="how-it-works-video">
-  <h2 class="section-title">How Shell Casting Works</h2>
+  <h2 class="section-title">{title}</h2>
   
-  <div class="video-container">
-    {#if videoUrl}
-      <video 
-        controls 
-        poster={posterUrl}
-        class="demo-video"
-      >
-        <source src={videoUrl} type="video/mp4" />
-        Your browser doesn't support video playback.
-      </video>
-    {:else}
-      <div class="video-placeholder card">
-        <div class="placeholder-content">
-          <span style="font-size: 64px;">🎬</span>
-          <p>Shell Casting Video Demo</p>
-          <p style="font-size: 14px; opacity: 0.7;">Video coming soon</p>
+  {#if showVideo}
+    <div class="video-container">
+      {#if videoUrl}
+        <video 
+          controls 
+          poster={posterUrl}
+          class="demo-video"
+        >
+          <source src={videoUrl} type="video/mp4" />
+          Your browser doesn't support video playback.
+        </video>
+      {:else}
+        <div class="video-placeholder card">
+          <div class="placeholder-content">
+            <span style="font-size: 64px;">{placeholderIcon}</span>
+            <p>{placeholderText}</p>
+            <p style="font-size: 14px; opacity: 0.7;">{placeholderSubtext}</p>
+          </div>
         </div>
-      </div>
-    {/if}
-  </div>
+      {/if}
+    </div>
+  {/if}
 
-  <div class="steps-grid">
-    {#each steps as step}
+  <div class="steps-grid" style="grid-template-columns: repeat({displaySteps.length > 3 ? 'auto-fit' : displaySteps.length}, minmax(200px, 1fr));">
+    {#each displaySteps as step}
       <div class="step-card card">
         <div class="step-icon">{step.icon}</div>
         <h3 class="step-title">{step.title}</h3>
