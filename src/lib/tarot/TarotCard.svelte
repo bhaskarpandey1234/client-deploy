@@ -33,7 +33,7 @@
       <div class="back-badge">TAROT</div>
     </div>
     <div class="face front">
-      {#if card}
+      {#if card && faceUp}
         <div class="title">{card.name}</div>
         <div class="meta">
           {#if card.arcana === 'Major'}Major Arcana{/if}
@@ -44,6 +44,7 @@
           {(reversed ? card.keywords.reversed : card.keywords.upright).slice(0,4).join(' • ')}
         </div>
       {:else}
+        <!-- Card is face down or not placed - show blank front -->
         <div class="title">—</div>
       {/if}
     </div>
@@ -55,7 +56,8 @@
   .wrap{ perspective: 900px; display:flex; flex-direction:column; align-items:center; }
   .card{ width:100%; height:100%; position:relative; transform-style:preserve-3d; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
   .wrap.flipped .card{ transform: rotateY(180deg); }
-  .wrap.rev .front{ transform: rotateZ(180deg); } /* reversed presentation */
+  /* For reversed cards: flip horizontally when showing front */
+  .wrap.rev.flipped .card{ transform: rotateY(180deg) ; }
   .face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:12px; overflow:clip; border:1px solid #2a364e; }
   .back{
     background:

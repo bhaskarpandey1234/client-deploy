@@ -25,9 +25,11 @@
   let faceUp: Record<string, boolean> = {};
   let flipPulse: Record<string, boolean> = {};
   let reading: ReturnType<typeof interpretSpread> | null = null;
+  let usedCardIds: string[] = []; // Track used card IDs
 
   // Fan direct placement helpers
   let armedSlot: string | null = null;
+  let fanDeck: FanDeck;
 
   // --- Select-N auto-place ---
   let selectNActive = false;
@@ -40,17 +42,19 @@
   // Sound theme
   let themeSel = getTheme();
 
-  function reset(shuffleSeed = seed) {
+  export function reset(shuffleSeed = seed) {
     deck = buildDeck();
     remaining = deck.slice();
     placed = {};
     faceUp = {};
     flipPulse = {};
     reading = null;
+    usedCardIds = [];
     seed = shuffleSeed;
     armedSlot = null;
     selectNActive = false;
     armedSequence = [];
+    fanDeck?.resetSelection();
   }
 
   // position order for auto placement
@@ -124,7 +128,8 @@
   // Shared place & feedback
   function place(slotId: string, card: DealtCard) {
     placed[slotId] = card;
-    faceUp[slotId] = false;
+    faceUp[slotId] = false; // Always start face down
+    usedCardIds = [...usedCardIds, card.id]; // Track used cards
     sound.playCast();
     haptics.vibrate([8, 16, 8]);
     maybeComputeReading();
@@ -139,7 +144,12 @@
   }
 
   function flipAll() {
-    for (const p of spread.positions) faceUp[p.id] = true;
+    // Only flip cards that are placed and not already face up
+    for (const p of spread.positions) {
+      if (placed[p.id] && !faceUp[p.id]) {
+        faceUp[p.id] = true;
+      }
+    }
     sound.playSettle();
     haptics.vibrate([10, 22, 10]);
     maybeComputeReading();
@@ -165,10 +175,19 @@
   function allDealt() { return spread.positions.every(p => placed[p.id]); }
 
   function maybeComputeReading() {
-    if (!allDealt()) return;
     const anyUp = spread.positions.some(p => faceUp[p.id]);
-    if (!anyUp) return;
-    reading = interpretSpread(spread, placed);
+    if (!anyUp) {
+      reading = null;
+      return;
+    }
+    // Only pass cards that are face up
+    const flippedCards: Record<string, DealtCard | undefined> = {};
+    for (const pos of spread.positions) {
+      if (faceUp[pos.id] && placed[pos.id]) {
+        flippedCards[pos.id] = placed[pos.id];
+      }
+    }
+    reading = interpretSpread(spread, flippedCards);
   }
 
   // --- Select N helpers ---
@@ -214,8 +233,8 @@
   <!-- LEFT: Deck & Controls -->
   <div class="deck-area">
     <div class="mode">
-      <button class="seg {deckMode==='fan'?'a':''}" on:click={() => deckMode='fan'}>Fan</button>
-      <button class="seg {deckMode==='stack'?'a':''}" on:click={() => deckMode='stack'}>Stack</button>
+      <button class="seg {deckMode==='fan'?'a':''}" on:click={() => {deckMode='fan'; reset();}}>Fan</button>
+      <button class="seg {deckMode==='stack'?'a':''}" on:click={() => {deckMode='stack'; reset();}}>Stack</button>
     </div>
 
     {#if deckMode==='stack'}
@@ -223,17 +242,17 @@
         {#each Array(5) as _,i}<div class="stub" style={`transform: translateY(${-i*2}px) translateX(${i*2}px);`}></div>{/each}
       </div>
     {:else}
-      <FanDeck {remaining} {seed} on:pick={(e) => pickFromFan(e.detail)} />
-      <div class="hint small">
+      <FanDeck bind:this={fanDeck} {remaining} {seed} {usedCardIds} maxSelections={spread.positions.length} on:pick={(e) => pickFromFan(e.detail)} />
+      <!-- <div class="hint small">
         • Click a slot to <strong>arm</strong> it (gold border), then pick from the fan to place there.<br/>
         • Or use <strong>Select N</strong> to auto‑fill slots in order.
-      </div>
+      </div> -->
     {/if}
 
     <div class="controls">
       <button class="button" on:click={() => reset(`tarot|${Date.now()}`)}>Reset</button>
-      <button class="button" disabled={!allDealt()} on:click={flipAll}>Flip all</button>
-      <button class="button" disabled={!allDealt()} on:click={flipAllCinematic}>Flip all — cinematic</button>
+      <!-- <button class="button" disabled={!allDealt()} on:click={flipAll}>Flip all</button>
+      <button class="button" disabled={!allDealt()} on:click={flipAllCinematic}>Flip all — cinematic</button> -->
       <button class="button" on:click={exportPNG}>Export PNG</button>
       
       <label class="row">Sound
@@ -242,7 +261,7 @@
         </select>
       </label>
 
-      <div class="autoplace">
+      <!-- <div class="autoplace">
         <div class="subtitle">Auto‑place (Select N)</div>
         <label class="row">
           N
@@ -256,7 +275,7 @@
         {#if selectNActive}
           <div class="small">Selecting… remaining: {armedSequence.length}</div>
         {/if}
-      </div>
+      </div> -->
 
       <label class="slider">Reversed
         <input type="range" min="0" max="1" step="0.01" bind:value={reversedChance}>
@@ -270,7 +289,7 @@
     <div class="spread">
       {#each spread.positions as pos (pos.id)}
         <div
-          class="slot {armedSlot===pos.id && !placed[pos.id] ? 'armed' : ''} {flipPulse[pos.id] ? 'pulse' : ''}"
+          class="slot {armedSlot===pos.id && !placed[pos.id] ? 'armed' : ''} {placed[pos.id] ? 'selected' : ''} {flipPulse[pos.id] ? 'pulse' : ''}"
           style={`left:${pos.x*100}%; top:${pos.y*100}%`}>
           {#if placed[pos.id]}
             <div in:fly={{ x: -120, y: -120, duration: 280 }}>
@@ -321,7 +340,8 @@
 </div>
 
 <style>
-  .board{ display:grid; grid-template-columns: 260px 1fr 360px; gap:16px; align-items:start; }
+  /* .board{ display:grid; grid-template-columns: 260px 1fr 360px; gap:16px; align-items:start; } */
+  .board{ display:grid; grid-template-columns: 33.5% 55.5% 20%; gap:16px; align-items:start; }
   .deck-area{ display:flex; flex-direction:column; gap:12px; }
   .mode{ display:inline-flex; border:1px solid #2a364e; border-radius:10px; overflow:hidden; }
   .seg{ background:#121a2a; color:#e9eef8; border:none; padding:8px 10px; cursor:pointer; }
@@ -344,9 +364,10 @@
   .row input[type="number"]{ width:70px; background:#121a2a; color:#e9eef8; border:1px solid #2a364e; border-radius:8px; padding:4px 6px; }
 
   .export-wrap{ grid-column: 2 / span 2; display:grid; grid-template-columns: 1fr 360px; gap:16px; }
-  .spread{ position:relative; background:#0e1524; border:1px solid #2a364e; border-radius:16px; min-height:520px; }
+  .spread{ position:relative; background:#0e1524; border:1px solid #2a364e; border-radius:16px; min-height:710px; }
   .slot{ position:absolute; transform: translate(-50%,-50%); text-align:center; transition: filter .15s ease; }
   .slot.armed{ filter: drop-shadow(0 0 10px rgba(201,168,106,.35)); }
+  .slot.selected{ filter: drop-shadow(0 0 8px rgba(99,168,201,.25)); }
   .slot.pulse::after{
     content:''; position:absolute; left:50%; top:50%; width:160px; height:240px; transform: translate(-50%,-50%);
     border-radius:12px; pointer-events:none;

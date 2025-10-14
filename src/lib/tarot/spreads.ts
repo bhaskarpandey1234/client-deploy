@@ -21,22 +21,21 @@ export const THREE_CARD: Spread = {
   ]
 };
 
-// Celtic Cross (RWS-style layout)
+// Celtic Cross (Matrix layout)
 export const CELTIC_CROSS: Spread = {
   key: 'celtic',
   name: 'Celtic Cross (10)',
   positions: [
-    { id:'1', label:'Present',         x:0.35, y:0.50 },
-    { id:'2', label:'Challenge',       x:0.35, y:0.50 }, // crosses 1 visually; we offset in CSS
-    { id:'3', label:'Subconscious',    x:0.35, y:0.72 },
-    { id:'4', label:'Past',            x:0.18, y:0.50 },
-    { id:'5', label:'Conscious',       x:0.35, y:0.28 },
-    { id:'6', label:'Near Future',     x:0.52, y:0.50 },
-    // Staff on the right
-    { id:'7', label:'You',             x:0.72, y:0.20 },
-    { id:'8', label:'Environment',     x:0.72, y:0.36 },
-    { id:'9', label:'Hopes / Fears',   x:0.72, y:0.52 },
-    { id:'10',label:'Outcome',         x:0.72, y:0.68 },
+    { id:'1', label:'Present',         x:0.15, y:0.20 },
+    { id:'2', label:'Challenge',       x:0.35, y:0.20 },
+    { id:'3', label:'Subconscious',    x:0.55, y:0.20 },
+    { id:'4', label:'Past',            x:0.75, y:0.20 },
+    { id:'5', label:'Conscious',       x:0.15, y:0.50 },
+    { id:'6', label:'Near Future',     x:0.35, y:0.50 },
+    { id:'7', label:'You',             x:0.55, y:0.50 },
+    { id:'8', label:'Environment',     x:0.75, y:0.50 },
+    { id:'9', label:'Hopes / Fears',   x:0.25, y:0.80 },
+    { id:'10',label:'Outcome',         x:0.65, y:0.80 },
   ]
 };
 

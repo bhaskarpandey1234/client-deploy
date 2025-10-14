@@ -9,8 +9,15 @@
   export let visibleCount = 36;       // how many cards we show in the fan (out of remaining)
   export let angleRange = 120;        // total degrees (-range/2 .. +range/2)
   export let radius = 110;            // how far cards fan out
+  export let usedCardIds: string[] = []; // IDs of cards already selected
+  export let maxSelections = 11;      // maximum number of cards that can be selected
 
   const dispatch = createEventDispatcher<{ pick: number }>();
+  let selectedIndices = new Set<number>();
+
+  export function resetSelection() {
+    selectedIndices = new Set<number>();
+  }
 
   // Evenly sample indices from the remaining deck so the fan represents the whole deck.
   function sampleIndices(N: number, take: number): number[] {
@@ -48,9 +55,20 @@
 
   function onPick(k: number) {
     if (disabled) return;
+    if (selectedIndices.has(k)) return; // Prevent clicking same card multiple times
     const deckIndex = indices[k];        // Which index in remaining[] the user picked
     if (deckIndex == null) return;
+    const card = remaining[deckIndex];
+    if (usedCardIds.includes(card.id)) return; // Prevent selecting already used cards
+    if (selectedIndices.size >= maxSelections) return; // Prevent selecting more than max
+    selectedIndices.add(k);
+    selectedIndices = selectedIndices;
     dispatch('pick', deckIndex);
+  }
+
+  function isCardUsed(deckIndex: number): boolean {
+    const card = remaining[deckIndex];
+    return card && usedCardIds.includes(card.id);
   }
 </script>
 
@@ -59,10 +77,10 @@
     <div class="empty">No cards remaining</div>
   {:else}
     {#each indices as deckIndex, k (deckIndex)}
-      <button class="stub"
+      <button class="stub {isCardUsed(deckIndex) ? 'used' : ''} {selectedIndices.has(k) ? 'selected' : ''}"
               style={styleFor(deckIndex, k)}
               on:click={() => onPick(k)}
-              disabled={disabled}
+              disabled={disabled || isCardUsed(deckIndex)}
               aria-label="Pick this card">
         <div class="back"></div>
       </button>
@@ -94,7 +112,22 @@
     box-shadow: 0 6px 22px rgba(0,0,0,.35) inset, 0 6px 28px rgba(201,168,106,.18);
     filter: brightness(1.06);
   }
+  .stub.selected{
+    border-color:#c9a86a !important;
+    box-shadow: 0 6px 22px rgba(0,0,0,.35) inset, 0 0 35px rgba(201,168,106,.5) !important;
+    filter: brightness(1.15) !important;
+    /* transform: scale(1.05) !important; */
+  }
   .stub:disabled{ opacity:.55; cursor:not-allowed; }
+  .stub.used{ 
+    opacity:.2; 
+    filter:grayscale(1) brightness(0.5); 
+    cursor:not-allowed; 
+    border-color:#444; 
+    transform: scale(0.95) !important;
+    pointer-events: none;
+  }
+  .stub.used .back{ opacity:.3; }
   .back{
     position:absolute; inset:0; border-radius:10px;
     background:
