@@ -30,6 +30,9 @@
   <div class="card" aria-hidden={!faceUp}>
     <div class="face back">
       <div class="pattern"></div>
+      {#if card}
+        <div class="back-name">{card.name}</div>
+      {/if}
       <div class="back-badge">TAROT</div>
     </div>
     <div class="face front">
@@ -76,6 +79,11 @@
       radial-gradient(closest-side, #c9a86a33, transparent 60%) 20% 25%/ 80px 80px repeat,
       radial-gradient(closest-side, #c9a86a22, transparent 60%) 60% 60%/ 100px 100px repeat;
     filter: blur(.6px);
+  }
+  .back-name{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    font-weight:600; font-size:.85rem; color:#c9a86a; text-align:center;
+    padding:0 12px; letter-spacing:.02em;
   }
   .back-badge{
     position:absolute; bottom:8px; right:8px; font-weight:700; letter-spacing:.15em;

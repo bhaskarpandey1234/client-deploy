@@ -255,11 +255,11 @@
       <button class="button" disabled={!allDealt()} on:click={flipAllCinematic}>Flip all — cinematic</button> -->
       <button class="button" on:click={exportPNG}>Export PNG</button>
       
-      <label class="row">Sound
+      <!-- <label class="row">Sound
         <select class="button" bind:value={themeSel} on:change={() => setTheme(themeSel)}>
           {#each SOUND_THEMES as t}<option value={t}>{t}</option>{/each}
         </select>
-      </label>
+      </label> -->
 
       <!-- <div class="autoplace">
         <div class="subtitle">Auto‑place (Select N)</div>
@@ -277,10 +277,10 @@
         {/if}
       </div> -->
 
-      <label class="slider">Reversed
+      <!-- <label class="slider">Reversed
         <input type="range" min="0" max="1" step="0.01" bind:value={reversedChance}>
         <span>{Math.round(reversedChance*100)}%</span>
-      </label>
+      </label> -->
     </div>
   </div>
 

@@ -1,10 +1,10 @@
 <script>
   import '$lib/styles/tokens.css';
   import HeaderAsteria from '$lib/components/HeaderAsteria.svelte';
-  import TarotApp from '$lib/tarot/TarotApp.svelte';
   import FooterMain from '$lib/components/FooterMain.svelte';
   import HowItWorksVideo from '$lib/components/HowItWorksVideo.svelte';
   import SocialProof from '$lib/components/SocialProof.svelte';
+  import { goto } from '$app/navigation';
 
   // Tarot-specific steps
   const tarotSteps = [
@@ -44,8 +44,10 @@
     </div>
   </div>
 
-  <div class="tarot-section">
-    <TarotApp />
+  <div class="cta-section">
+    <button class="ready-btn" on:click={() => goto('/asteria/divination/tarot-cards/experience')}>
+      Ready to Play
+    </button>
   </div>
  <!-- How It Works with Video -->
  <HowItWorksVideo 
@@ -112,8 +114,31 @@
     align-items: center;
   }
 
-  .tarot-section {
-    padding: 24px;
+  .cta-section {
+    padding: 48px 24px;
+    text-align: center;
     background: var(--panel);
+  }
+
+  .ready-btn {
+    background: linear-gradient(135deg, #c9a86a, #d4b87a);
+    color: #0b0f14;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 18px 48px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 20px rgba(201, 168, 106, 0.3);
+  }
+
+  .ready-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 28px rgba(201, 168, 106, 0.4);
+  }
+
+  .ready-btn:active {
+    transform: translateY(0) scale(0.98);
   }
 </style>
