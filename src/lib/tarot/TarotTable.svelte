@@ -26,6 +26,7 @@
   let flipPulse: Record<string, boolean> = {};
   let reading: ReturnType<typeof interpretSpread> | null = null;
   let usedCardIds: string[] = []; // Track used card IDs
+  export let allCardsSelected = false;
 
   // Fan direct placement helpers
   let armedSlot: string | null = null;
@@ -54,6 +55,7 @@
     armedSlot = null;
     selectNActive = false;
     armedSequence = [];
+    allCardsSelected = false;
     fanDeck?.resetSelection();
   }
 
@@ -132,6 +134,7 @@
     usedCardIds = [...usedCardIds, card.id]; // Track used cards
     sound.playCast();
     haptics.vibrate([8, 16, 8]);
+    allCardsSelected = spread.positions.every(p => placed[p.id]);
     maybeComputeReading();
   }
 

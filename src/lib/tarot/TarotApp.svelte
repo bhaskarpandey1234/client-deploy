@@ -6,6 +6,7 @@
   let seed = `user|${Date.now()}`;
   let reversedChance = 0.45;
   let tarotTable: TarotTable;
+  export let allCardsSelected = false;
 
   $: if (tarotTable && spread) {
     tarotTable.reset(`user|${Date.now()}`);
@@ -23,7 +24,7 @@
     </div>
   </div>
 
-  <TarotTable bind:this={tarotTable} {spread} {seed} bind:reversedChance />
+  <TarotTable bind:this={tarotTable} {spread} {seed} bind:reversedChance bind:allCardsSelected />
 </div>
 
 <style>

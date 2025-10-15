@@ -3,14 +3,20 @@
   import HeaderAsteria from '$lib/components/HeaderAsteria.svelte';
   import TarotApp from '$lib/tarot/TarotApp.svelte';
   import FooterMain from '$lib/components/FooterMain.svelte';
+  import ReadingCTA from '$lib/components/ReadingCTA.svelte';
+
+  let allCardsSelected = false;
 </script>
 
 <HeaderAsteria />
 
 <div class="page">
   <div class="tarot-section">
-    <TarotApp />
+    <TarotApp bind:allCardsSelected />
   </div>
+  {#if allCardsSelected}
+    <ReadingCTA />
+  {/if}
   <FooterMain />
 </div>
 
