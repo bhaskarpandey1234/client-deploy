@@ -1,0 +1,288 @@
+---
+description: Netlify deployment and build configuration
+---
+
+# Deployment & Build Guidelines
+
+## Netlify Configuration
+
+### Build Settings
+Configuration file: [netlify.toml](mdc:netlify.toml)
+
+```toml
+[build]
+  command = "npm run build"
+  publish = "build"
+```
+
+### Adapter
+Uses `@sveltejs/adapter-netlify` configured in [svelte.config.js](mdc:svelte.config.js)
+
+## Build Process
+
+### Local Build
+```bash
+npm run build
+```
+
+Output directory: `build/`
+
+### Preview Build
+```bash
+npm run preview
+```
+
+Serves the production build locally for testing.
+
+### Type Checking
+```bash
+npm run check
+```
+
+Validates TypeScript and Svelte components.
+
+## Static Assets
+
+### Public Files
+Located in [static/](mdc:static/)
+
+Accessible at root of deployed site:
+- `/manifest.webmanifest` - PWA manifest
+- `/robots.txt` - Search engine directives
+- `/icons/*` - App icons and assets
+
+### Build Output
+The build process generates:
+- Optimized JavaScript bundles
+- CSS files with scoped styles
+- Prerendered HTML pages
+- Asset hashing for cache busting
+
+## Redirects & Headers
+
+### Redirects
+Managed in [_redirects](mdc:_redirects)
+
+Example patterns:
+```
+/old-path  /new-path  301
+/*         /index.html  200  # SPA fallback
+```
+
+### Security Headers
+Can be configured in `build/_headers` (auto-generated) or via `netlify.toml`:
+
+```toml
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+```
+
+## Environment Variables
+
+### Development
+Create `.env` file (don't commit):
+```
+PUBLIC_API_URL=https://api.example.com
+SECRET_KEY=your-secret-key
+```
+
+### Production (Netlify)
+Set in Netlify dashboard under Site Settings > Environment Variables
+
+**Public variables** (accessible in client):
+- Prefix with `PUBLIC_` 
+- Example: `PUBLIC_API_URL`
+
+**Private variables** (server-only):
+- Available in `+page.server.ts` and API routes
+- Example: `SECRET_KEY`
+
+### Usage
+```typescript
+// Public (client-side)
+import { PUBLIC_API_URL } from '$env/static/public';
+
+// Private (server-side only)
+import { SECRET_KEY } from '$env/static/private';
+```
+
+## PWA Deployment
+
+### Manifest
+File: [static/manifest.webmanifest](mdc:static/manifest.webmanifest)
+
+Update for production:
+- Icons: Add actual PNG files to `static/icons/`
+- Name and short_name
+- Theme color
+- Start URL
+- Scope
+
+### Service Worker
+For offline support, add service worker:
+
+```javascript
+// static/sw.js
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open('v1').then((cache) => {
+      return cache.addAll([
+        '/',
+        '/app.css',
+        '/manifest.webmanifest'
+      ]);
+    })
+  );
+});
+```
+
+Register in [src/app.html](mdc:src/app.html):
+```html
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+</script>
+```
+
+## Performance Optimization
+
+### Build Optimizations
+- Vite automatically code-splits routes
+- CSS is extracted and minified
+- Images should use modern formats (WebP, AVIF)
+- Enable preloading with `data-sveltekit-preload-data`
+
+### Asset Optimization
+- Compress images before adding to `static/`
+- Use SVG for icons when possible
+- Lazy load images with `loading="lazy"`
+- Implement responsive images with `srcset`
+
+### Lighthouse Targets
+Aim for:
+- Performance: > 90
+- Accessibility: 100
+- Best Practices: > 95
+- SEO: 100
+- PWA: Installable
+
+## Pre-deployment Checklist
+
+### Code Quality
+- [ ] Run `npm run check` (no TypeScript errors)
+- [ ] Test both `/asteria` and `/cosmo` routes
+- [ ] Verify responsive layouts (mobile, tablet, desktop)
+- [ ] Test keyboard navigation
+- [ ] Check reduced motion support
+
+### Content
+- [ ] Update meta tags (title, description)
+- [ ] Add Open Graph images
+- [ ] Verify all links work
+- [ ] Test form submissions
+- [ ] Check analytics integration
+
+### Assets
+- [ ] Compress images
+- [ ] Generate PWA icons (192x192, 512x512)
+- [ ] Add favicon
+- [ ] Update manifest.webmanifest
+
+### Performance
+- [ ] Run Lighthouse audit
+- [ ] Check bundle sizes
+- [ ] Test on slow 3G connection
+- [ ] Verify lazy loading works
+
+### SEO
+- [ ] Add structured data (JSON-LD)
+- [ ] Create robots.txt
+- [ ] Add sitemap.xml
+- [ ] Configure canonical URLs
+
+## Continuous Deployment
+
+### Netlify Auto-Deploy
+Netlify automatically deploys on:
+- Push to `main` branch (production)
+- Pull requests (preview deploys)
+
+### Branch Deploys
+- `main` → Production: your-site.netlify.app
+- Other branches → Preview: branch-name--your-site.netlify.app
+
+### Deploy Previews
+Each PR gets a unique preview URL for testing before merging.
+
+## Rollbacks
+
+### Netlify Dashboard
+Can rollback to any previous deploy via:
+1. Deploys tab
+2. Select previous version
+3. Click "Publish deploy"
+
+### Git Revert
+```bash
+git revert <commit-hash>
+git push
+```
+
+Triggers new deploy with reverted changes.
+
+## Monitoring
+
+### Build Logs
+Check Netlify deploy logs for:
+- Build errors
+- TypeScript errors
+- Missing dependencies
+- Asset optimization warnings
+
+### Analytics
+Consider adding:
+- Netlify Analytics (built-in)
+- Google Analytics 4
+- Plausible (privacy-friendly)
+- Fathom (simple, privacy-first)
+
+### Error Tracking
+Integrate error monitoring:
+- Sentry
+- LogRocket
+- Rollbar
+
+## Troubleshooting
+
+### Build Failures
+1. Check Node.js version (should match local)
+2. Clear cache and retry deploy
+3. Check for missing environment variables
+4. Review build logs for specific errors
+
+### 404 Errors
+- Ensure `_redirects` has SPA fallback
+- Check route file names (case-sensitive)
+- Verify static assets are in `static/` folder
+
+### Slow Build Times
+- Check for large dependencies
+- Optimize image assets
+- Use dynamic imports for large components
+- Consider build caching strategies
+
+## Best Practices
+
+1. **Test Builds Locally**: Always run `npm run build` before pushing
+2. **Environment Parity**: Match Node versions between local and Netlify
+3. **Incremental Deploys**: Deploy small changes frequently
+4. **Preview First**: Use deploy previews to catch issues
+5. **Monitor Performance**: Run Lighthouse on every deploy
+6. **Cache Busting**: Let Vite handle asset hashing
+7. **Error Pages**: Create custom 404 and error pages
+8. **Security**: Use HTTPS, set security headers

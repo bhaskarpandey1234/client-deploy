@@ -1,0 +1,227 @@
+---
+description: GSAP animation guidelines and patterns
+---
+
+# GSAP Animation Guidelines
+
+## Setup
+GSAP is configured in [src/lib/gsap.ts](mdc:src/lib/gsap.ts) with ScrollTrigger plugin.
+
+```typescript
+import { gsap } from '$lib/gsap';
+```
+
+## Common Patterns
+
+### Svelte 5 + GSAP Integration
+```typescript
+<script lang="ts">
+  import { gsap } from '$lib/gsap';
+  import { onMount } from 'svelte';
+  
+  let element: HTMLElement;
+  let timeline: gsap.core.Timeline | null = null;
+  
+  $effect(() => {
+    timeline = gsap.timeline();
+    timeline.to(element, { opacity: 1, duration: 0.3 });
+    
+    // Cleanup
+    return () => {
+      timeline?.kill();
+    };
+  });
+</script>
+
+<div bind:this={element}>Content</div>
+```
+
+### ScrollTrigger
+Used in [src/lib/components/RevealSection.svelte](mdc:src/lib/components/RevealSection.svelte)
+
+```typescript
+import { gsap } from '$lib/gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.to(element, {
+  scrollTrigger: {
+    trigger: element,
+    start: 'top 80%', // When top of element hits 80% down viewport
+    end: 'bottom 20%',
+    toggleActions: 'play none none reverse',
+    markers: false // Set to true for debugging
+  },
+  y: 0,
+  opacity: 1,
+  duration: 0.6
+});
+```
+
+### Timeline Animations
+For sequential animations:
+
+```typescript
+const tl = gsap.timeline();
+
+tl.to('.element1', { opacity: 1, duration: 0.3 })
+  .to('.element2', { y: 0, duration: 0.4 }, '-=0.2') // Overlap by 0.2s
+  .to('.element3', { scale: 1, duration: 0.3 });
+```
+
+### Altar Animation Pattern
+Reference: [src/lib/components/Altar.svelte](mdc:src/lib/components/Altar.svelte)
+
+```typescript
+// Floating animation
+gsap.to(orb, {
+  y: '+=10',
+  duration: 2,
+  repeat: -1,
+  yoyo: true,
+  ease: 'sine.inOut'
+});
+
+// Parallax tilt (mouse move)
+element.addEventListener('mousemove', (e) => {
+  const rect = element.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width - 0.5;
+  const y = (e.clientY - rect.top) / rect.height - 0.5;
+  
+  gsap.to(altar, {
+    rotationX: y * 6,
+    rotationY: x * -6,
+    duration: 0.3
+  });
+});
+```
+
+### PalmPress Hold Interaction
+Reference: [src/lib/components/PalmPress.svelte](mdc:src/lib/components/PalmPress.svelte)
+
+```typescript
+let progress = 0;
+let holding = false;
+
+function onPointerDown() {
+  holding = true;
+  
+  gsap.to({ value: 0 }, {
+    value: 1,
+    duration: 2, // 2 second hold
+    ease: 'none',
+    onUpdate: function() {
+      progress = this.progress();
+    },
+    onComplete: () => {
+      if (holding) {
+        // Trigger completion
+      }
+    }
+  });
+}
+
+function onPointerUp() {
+  holding = false;
+  gsap.killTweensOf({});
+  gsap.to({ value: progress }, {
+    value: 0,
+    duration: 0.2,
+    onUpdate: function() {
+      progress = this.targets()[0].value;
+    }
+  });
+}
+```
+
+## Performance Best Practices
+
+### GPU Acceleration
+Prefer these properties for smooth animations:
+- `transform` (translateX, translateY, scale, rotate)
+- `opacity`
+
+Avoid animating:
+- `width`, `height`
+- `top`, `left`
+- `margin`, `padding`
+
+### Cleanup
+Always kill timelines when component unmounts:
+
+```typescript
+$effect(() => {
+  const tl = gsap.timeline();
+  // ... animations
+  
+  return () => {
+    tl.kill();
+    ScrollTrigger.getAll().forEach(st => st.kill());
+  };
+});
+```
+
+### Reduced Motion
+Check for user preferences:
+
+```typescript
+import { browser } from '$app/environment';
+
+$effect(() => {
+  if (browser) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+      // Skip animations or use instant transitions
+      gsap.set(element, { opacity: 1, y: 0 });
+    } else {
+      // Normal animations
+      gsap.to(element, { opacity: 1, y: 0, duration: 0.6 });
+    }
+  }
+});
+```
+
+## Common Eases
+- `power1.out` - Gentle deceleration (default)
+- `power2.inOut` - Smooth start and end
+- `back.out` - Slight overshoot
+- `elastic.out` - Bouncy effect
+- `sine.inOut` - Smooth, natural motion
+- `none` - Linear (for progress bars)
+
+## Stagger Animations
+For animating lists:
+
+```typescript
+gsap.to('.item', {
+  opacity: 1,
+  y: 0,
+  duration: 0.4,
+  stagger: 0.1 // 0.1s delay between each item
+});
+```
+
+## ScrollTrigger Debugging
+Enable markers during development:
+
+```typescript
+scrollTrigger: {
+  trigger: element,
+  markers: true, // Shows start/end positions
+  // ...
+}
+```
+
+## Animation Timing Guidelines
+- Micro-interactions: 100-200ms
+- UI transitions: 200-400ms
+- Section reveals: 400-600ms
+- Hold interactions: 2000ms
+- Floating/idle animations: 2000-4000ms with yoyo
+
+## Common Gotchas
+- Kill timelines before creating new ones
+- Use `$effect` cleanup for proper disposal
+- Check `browser` before accessing DOM
+- Use `bind:this` for element references
+- Don't animate during SSR

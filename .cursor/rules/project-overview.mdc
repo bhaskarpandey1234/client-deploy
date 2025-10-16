@@ -1,0 +1,57 @@
+---
+alwaysApply: true
+---
+
+# Mystic Advisor PWA - Project Overview
+
+## Tech Stack
+- **Framework**: SvelteKit 2.x with Svelte 5
+- **Language**: TypeScript
+- **Deployment**: Netlify (adapter-netlify)
+- **Build Tool**: Vite
+- **Animations**: GSAP 3.13+ with ScrollTrigger
+- **Additional Libraries**: html-to-image
+
+## Project Structure
+Main entry point: [src/routes/+page.svelte](mdc:src/routes/+page.svelte)
+Global styles: [src/app.css](mdc:src/app.css)
+Design tokens: [src/lib/styles/tokens.css](mdc:src/lib/styles/tokens.css)
+Components: [src/lib/components/](mdc:src/lib/components/)
+Utilities: [src/lib/utils/](mdc:src/lib/utils/)
+
+## Dual Brand System
+This app supports two brand variants controlled by the `data-brand` attribute:
+
+1. **Asteria Guide** (Luxury): `/asteria` route
+   - Glass morphism effects
+   - Serif fonts for headlines
+   - Colors: Love (#F06FA3), Career (#F2C14E), Destiny (#9C6CFF), Clarity (#30D5C8)
+   
+2. **Cosmo Note** ($10 variant): `/cosmo` route
+   - Flat cards with gradients
+   - Grotesk fonts (heavy weight)
+   - Colors: Accent1 (#7CF7FF), Accent2 (#7AA7FF), Accent3 (#C07CFF)
+
+Brand switching is handled in layout files via:
+```svelte
+<svelte:body data-brand="asteria" />
+```
+
+## Key Features
+- PWA with manifest.webmanifest
+- Tarot card reading system ([src/lib/tarot/](mdc:src/lib/tarot/))
+- GSAP-powered animations (Altar, PalmPress, RevealSection)
+- Accessibility-first (keyboard nav, reduced motion support)
+- Responsive design (mobile-first)
+
+## Development Commands
+- `npm run dev` - Start dev server
+- `npm run build` - Production build
+- `npm run preview` - Preview production build
+- `npm run check` - Type checking and validation
+
+## Important Notes
+- CSS variables automatically switch based on `data-brand` attribute
+- All animations respect `prefers-reduced-motion`
+- Components are self-contained with scoped styles
+- Use semantic HTML and proper ARIA labels

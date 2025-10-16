@@ -1,0 +1,252 @@
+---
+description: SvelteKit routing and navigation patterns
+---
+
+# Routing & Navigation Guidelines
+
+## Route Structure
+
+### File-Based Routing
+SvelteKit uses file-based routing in [src/routes/](mdc:src/routes/)
+
+**Key Routes:**
+- `/` - Root (redirects to `/asteria`)
+- `/asteria` - Asteria brand homepage
+- `/asteria/demo` - Demo experience
+- `/asteria/divination/tarot-cards` - Tarot card listing
+- `/asteria/divination/tarot-cards/experience` - Tarot reading experience
+- `/asteria/pricing` - Pricing page
+- `/cosmo` - Cosmo brand homepage
+
+### Layout Files
+Layouts wrap routes and persist across navigation:
+
+```
+src/routes/
+├── +page.svelte              # Root page
+├── asteria/
+│   ├── +layout.svelte        # Asteria layout (sets data-brand)
+│   ├── +page.svelte          # Asteria homepage
+│   └── demo/
+│       └── +page.svelte      # Nested route
+```
+
+**Layout Pattern:**
+```svelte
+<!-- src/routes/asteria/+layout.svelte -->
+<svelte:body data-brand="asteria" />
+
+<slot />
+```
+
+## Navigation
+
+### Internal Links
+Use SvelteKit's native `<a>` tags for client-side navigation:
+
+```svelte
+<a href="/asteria/demo">Try Demo</a>
+<a href="/cosmo">Switch to Cosmo</a>
+```
+
+### Programmatic Navigation
+```typescript
+import { goto } from '$app/navigation';
+
+function navigateToDemo() {
+  goto('/asteria/demo');
+}
+```
+
+### Hash Links (Smooth Scroll)
+For same-page navigation:
+
+```svelte
+<a href="#pricing">View Pricing</a>
+
+<!-- Target section -->
+<section id="pricing">
+  <!-- Content -->
+</section>
+```
+
+Enable smooth scrolling globally in [src/app.css](mdc:src/app.css):
+```css
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+```
+
+## Page Data Loading
+
+### +page.server.ts
+For server-side data loading:
+
+```typescript
+// src/routes/+page.server.ts
+import type { PageServerLoad } from './$types';
+
+export const load: PageServerLoad = async ({ params }) => {
+  return {
+    // Data available to page
+  };
+};
+```
+
+### +page.ts
+For client-side data loading:
+
+```typescript
+import type { PageLoad } from './$types';
+
+export const load: PageLoad = async ({ fetch, params }) => {
+  const response = await fetch('/api/data');
+  const data = await response.json();
+  
+  return { data };
+};
+```
+
+## Route Parameters
+
+### Dynamic Routes
+Create files with `[param]` syntax:
+
+```
+src/routes/
+└── cards/
+    └── [id]/
+        └── +page.svelte
+```
+
+Access params:
+```svelte
+<script lang="ts">
+  import type { PageData } from './$types';
+  
+  let { data }: { data: PageData } = $props();
+</script>
+```
+
+## Navigation State
+
+### Page Store
+Access current page info:
+
+```typescript
+import { page } from '$app/stores';
+
+// Current path
+console.log($page.url.pathname);
+
+// Query parameters
+console.log($page.url.searchParams.get('id'));
+```
+
+### Navigating Store
+Check if navigation is in progress:
+
+```typescript
+import { navigating } from '$app/stores';
+
+$effect(() => {
+  if ($navigating) {
+    // Show loading indicator
+  }
+});
+```
+
+## Preloading
+
+### Data Preloading
+Enable in [src/app.html](mdc:src/app.html):
+```html
+<body data-sveltekit-preload-data="hover">
+```
+
+This preloads data when user hovers over links.
+
+### Manual Preloading
+```typescript
+import { preloadData } from '$app/navigation';
+
+async function prefetch() {
+  await preloadData('/asteria/demo');
+}
+```
+
+## Error Pages
+
+### +error.svelte
+Create custom error pages:
+
+```svelte
+<!-- src/routes/+error.svelte -->
+<script lang="ts">
+  import { page } from '$app/stores';
+</script>
+
+<h1>{$page.status}: {$page.error?.message}</h1>
+```
+
+## Redirects
+
+### Server-Side Redirect
+```typescript
+// +page.server.ts
+import { redirect } from '@sveltejs/kit';
+
+export const load = async () => {
+  throw redirect(302, '/asteria');
+};
+```
+
+### Client-Side Redirect
+```typescript
+import { goto } from '$app/navigation';
+
+goto('/asteria', { replaceState: true });
+```
+
+## Best Practices
+
+1. **Use SvelteKit Navigation**: Prefer `<a>` tags over manual `goto()` for better UX
+2. **Preload Data**: Enable hover preloading for snappy navigation
+3. **Loading States**: Show indicators during navigation
+4. **Error Handling**: Provide custom error pages
+5. **SEO**: Use `+page.server.ts` for server-rendered content
+6. **Brand Context**: Set `data-brand` in layout files
+7. **Smooth Scrolling**: Enable for hash links, respect reduced motion
+
+## Brand-Specific Routes
+
+Asteria and Cosmo share route structure but render different components:
+
+```svelte
+<!-- Use brand-aware logic -->
+<script lang="ts">
+  import { browser } from '$app/environment';
+  import Hero from '$lib/components/Hero.svelte';
+  import HeroCosmo from '$lib/components/cosmo/HeroCosmo.svelte';
+  
+  let isCosmo = $state(false);
+  
+  $effect(() => {
+    if (browser) {
+      isCosmo = document.body.dataset.brand === 'cosmo';
+    }
+  });
+</script>
+
+{#if isCosmo}
+  <HeroCosmo />
+{:else}
+  <Hero />
+{/if}
+```

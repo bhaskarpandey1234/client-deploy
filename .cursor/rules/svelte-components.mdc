@@ -1,0 +1,128 @@
+---
+globs: *.svelte
+---
+
+# Svelte Component Guidelines
+
+## Svelte 5 Syntax
+This project uses **Svelte 5**. Always use modern Svelte 5 runes and syntax:
+
+### State Management
+```svelte
+<script lang="ts">
+  // Use $state for reactive variables (Svelte 5)
+  let count = $state(0);
+  
+  // Use $derived for computed values
+  let doubled = $derived(count * 2);
+  
+  // Use $effect for side effects
+  $effect(() => {
+    console.log('count changed:', count);
+  });
+</script>
+```
+
+### Props
+```svelte
+<script lang="ts">
+  // Define props with proper TypeScript types
+  interface Props {
+    title: string;
+    count?: number;
+  }
+  
+  let { title, count = 0 }: Props = $props();
+</script>
+```
+
+### Event Handling
+```svelte
+<script lang="ts">
+  // Define events with proper typing
+  interface Events {
+    click: CustomEvent<{ id: string }>;
+  }
+  
+  // Use callbacks for parent communication
+  let { onComplete }: { onComplete?: () => void } = $props();
+</script>
+```
+
+## Component Structure
+Always structure components in this order:
+1. Script tag with TypeScript
+2. Markup
+3. Style tag (scoped)
+
+```svelte
+<script lang="ts">
+  import { inview } from '$lib/utils/inview';
+  
+  // Props, state, logic
+</script>
+
+<section class="wrapper">
+  <!-- Markup -->
+</section>
+
+<style>
+  .wrapper {
+    /* Scoped styles */
+  }
+</style>
+```
+
+## Styling Best Practices
+- Use CSS custom properties from [src/lib/styles/tokens.css](mdc:src/lib/styles/tokens.css)
+- Common variables: `--bg`, `--ink`, `--panel`, `--glass`, `--radius`, `--gap`
+- Brand-specific: `--love`, `--career`, `--destiny`, `--clarity` (Asteria)
+- Brand-specific: `--accent1`, `--accent2`, `--accent3` (Cosmo)
+- Always scope styles to avoid leakage
+- Use semantic class names (`.section`, `.card`, `.btn`)
+
+## Accessibility Requirements
+- Use semantic HTML (`<section>`, `<nav>`, `<header>`, etc.)
+- Include `aria-label` for icon-only buttons
+- Ensure keyboard navigation works
+- Test with screen readers
+- Respect `prefers-reduced-motion`
+
+## Common Utilities
+- **InView**: Use `use:inview` action from [src/lib/utils/inview.ts](mdc:src/lib/utils/inview.ts) for intersection observer
+- **GSAP**: Import from [src/lib/gsap.ts](mdc:src/lib/gsap.ts) for animations
+
+## Brand-Aware Components
+For components that differ between brands, check the brand:
+```svelte
+<script lang="ts">
+  import { browser } from '$app/environment';
+  
+  let brand = $state<'asteria' | 'cosmo'>('asteria');
+  
+  $effect(() => {
+    if (browser) {
+      brand = document.body.dataset.brand as 'asteria' | 'cosmo';
+    }
+  });
+</script>
+```
+
+Or use CSS to handle variants:
+```css
+/* Base styles */
+.card {
+  background: var(--glass);
+}
+
+/* Cosmo override */
+:global([data-brand='cosmo']) .card {
+  background: var(--panel);
+}
+```
+
+## Performance
+- Lazy load images with `loading="lazy"`
+- Use `@sveltejs/kit` imports for environment checks
+- Minimize component re-renders
+- Use `$derived` instead of reactive statements where possible

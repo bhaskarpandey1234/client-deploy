@@ -1,0 +1,247 @@
+---
+description: Tarot card reading system implementation guide
+---
+
+# Tarot System Guidelines
+
+## Overview
+The tarot system is located in [src/lib/tarot/](mdc:src/lib/tarot/) and provides a complete tarot reading experience.
+
+## Core Modules
+
+### tarot.ts
+Main tarot data and card definitions: [src/lib/tarot/tarot.ts](mdc:src/lib/tarot/tarot.ts)
+
+Contains:
+- Complete 78-card deck (Major + Minor Arcana)
+- Card meanings (upright & reversed)
+- Card imagery and symbolism
+- Suit associations
+
+### spreads.ts
+Spread layouts and position meanings: [src/lib/tarot/spreads.ts](mdc:src/lib/tarot/spreads.ts)
+
+Common spreads:
+- Three-Card Spread (Past, Present, Future)
+- Celtic Cross (10 cards)
+- Relationship Spread
+- Career Guidance
+
+### reading.ts
+Reading logic and interpretation: [src/lib/tarot/reading.ts](mdc:src/lib/tarot/reading.ts)
+
+Functions:
+- `shuffleDeck()` - Randomize cards
+- `drawCards(count)` - Draw from deck
+- `generateReading(spread, cards)` - Create interpretation
+
+## Components
+
+### TarotApp.svelte
+Main application container: [src/lib/tarot/TarotApp.svelte](mdc:src/lib/tarot/TarotApp.svelte)
+
+Orchestrates the reading flow:
+1. Question input
+2. Spread selection
+3. Card drawing
+4. Reading display
+
+### TarotCard.svelte
+Individual card component: [src/lib/tarot/TarotCard.svelte](mdc:src/lib/tarot/TarotCard.svelte)
+
+Features:
+- Flip animation
+- Upright/reversed states
+- Hover effects
+- Accessibility support
+
+### FanDeck.svelte
+Animated deck display: [src/lib/tarot/FanDeck.svelte](mdc:src/lib/tarot/FanDeck.svelte)
+
+GSAP-powered fan animation for card selection.
+
+### TarotTable.svelte
+Reading layout surface: [src/lib/tarot/TarotTable.svelte](mdc:src/lib/tarot/TarotTable.svelte)
+
+Displays cards in spread formation.
+
+## Data Structure
+
+### Card Type
+```typescript
+interface TarotCard {
+  id: string;
+  name: string;
+  suit?: 'cups' | 'pentacles' | 'swords' | 'wands';
+  arcana: 'major' | 'minor';
+  number?: number;
+  upright: {
+    keywords: string[];
+    meaning: string;
+  };
+  reversed: {
+    keywords: string[];
+    meaning: string;
+  };
+  imagery: string;
+  symbolism: string[];
+}
+```
+
+### Spread Type
+```typescript
+interface TarotSpread {
+  id: string;
+  name: string;
+  cardCount: number;
+  positions: {
+    index: number;
+    label: string;
+    meaning: string;
+  }[];
+  layout: 'linear' | 'cross' | 'circle' | 'custom';
+}
+```
+
+### Reading Type
+```typescript
+interface TarotReading {
+  id: string;
+  timestamp: Date;
+  question: string;
+  spread: TarotSpread;
+  cards: {
+    position: number;
+    card: TarotCard;
+    reversed: boolean;
+  }[];
+  interpretation?: string;
+}
+```
+
+## Usage Patterns
+
+### Creating a Reading
+```typescript
+import { shuffleDeck, drawCards } from '$lib/tarot/reading';
+import { spreads } from '$lib/tarot/spreads';
+
+// Select spread
+const threeCard = spreads.find(s => s.id === 'three-card');
+
+// Draw cards
+const deck = shuffleDeck();
+const drawn = drawCards(deck, threeCard.cardCount);
+
+// Create reading
+const reading = {
+  id: crypto.randomUUID(),
+  timestamp: new Date(),
+  question: userQuestion,
+  spread: threeCard,
+  cards: drawn.map((card, index) => ({
+    position: index,
+    card,
+    reversed: Math.random() > 0.5
+  }))
+};
+```
+
+### Card Animation
+```typescript
+import { gsap } from '$lib/gsap';
+
+// Flip card
+function flipCard(element: HTMLElement) {
+  gsap.to(element, {
+    rotateY: 180,
+    duration: 0.6,
+    ease: 'back.out'
+  });
+}
+
+// Fan deck
+function fanDeck(cards: HTMLElement[]) {
+  cards.forEach((card, i) => {
+    const angle = (i - cards.length / 2) * 5;
+    gsap.to(card, {
+      rotation: angle,
+      y: Math.abs(angle) * 2,
+      duration: 0.8,
+      delay: i * 0.05
+    });
+  });
+}
+```
+
+### Saving Readings
+```typescript
+// Local storage
+function saveReading(reading: TarotReading) {
+  const saved = localStorage.getItem('tarot-readings') || '[]';
+  const readings = JSON.parse(saved);
+  readings.push(reading);
+  localStorage.setItem('tarot-readings', JSON.stringify(readings));
+}
+
+// Retrieve history
+function getReadingHistory(): TarotReading[] {
+  const saved = localStorage.getItem('tarot-readings') || '[]';
+  return JSON.parse(saved);
+}
+```
+
+## Best Practices
+
+### Randomization
+- Use cryptographically secure random for card selection
+- Implement Fisher-Yates shuffle algorithm
+- Ensure each card appears once per reading
+
+### Interpretations
+- Combine card meanings with position meanings
+- Consider card combinations and patterns
+- Provide both literal and intuitive guidance
+- Respect user's question context
+
+### UX Considerations
+- Allow time for contemplation (2-3s pause before reveal)
+- Smooth card flip animations (600ms)
+- Clear position labels in spread
+- Option to save/share reading
+- Ability to draw clarifying cards
+
+### Accessibility
+- Keyboard navigation through cards
+- Screen reader descriptions of card meanings
+- Alt text for card imagery
+- Focus indicators on interactive elements
+
+### Performance
+- Lazy load card images
+- Preload next card during reveal
+- Cache deck data
+- Optimize animations for 60fps
+
+## Integration with Main App
+
+The tarot experience is accessible via:
+- `/asteria/divination/tarot-cards` - Card browsing
+- `/asteria/divination/tarot-cards/experience` - Full reading
+
+Embed in any route:
+```svelte
+<script>
+  import TarotApp from '$lib/tarot/TarotApp.svelte';
+</script>
+
+<TarotApp />
+```
+
+## Future Enhancements
+- AI-powered interpretations
+- Audio guidance
+- Journal integration
+- Reading analytics
+- Deck customization
+- Community readings

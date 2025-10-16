@@ -22,7 +22,9 @@
 		"vite": "^7.1.7"
 	},
 	"dependencies": {
+		"astronomy-engine": "^2.1.19",
 		"gsap": "^3.13.0",
-		"html-to-image": "^1.11.13"
+		"html-to-image": "^1.11.13",
+		"luxon": "^3.7.2"
 	}
 }

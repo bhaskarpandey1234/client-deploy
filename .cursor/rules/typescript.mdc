@@ -1,0 +1,127 @@
+---
+globs: *.ts,*.tsx
+---
+
+# TypeScript Guidelines
+
+## TypeScript Configuration
+Project uses TypeScript 5.9+ with strict mode enabled.
+TypeScript config: [tsconfig.json](mdc:tsconfig.json)
+
+## Type Definitions
+- App-level types: [src/app.d.ts](mdc:src/app.d.ts)
+- Component props: Define inline or in separate `.d.ts` files
+- Always export types/interfaces that may be reused
+
+## Best Practices
+
+### Strong Typing
+```typescript
+// ✅ Good: Explicit types
+interface CardData {
+  id: string;
+  title: string;
+  subtitle?: string;
+}
+
+function processCard(card: CardData): void {
+  // ...
+}
+
+// ❌ Avoid: any types
+function processCard(card: any): void {
+  // ...
+}
+```
+
+### Type Imports
+```typescript
+// Use type imports for better tree-shaking
+import type { ComponentProps } from 'svelte';
+import type { PageData } from './$types';
+```
+
+### SvelteKit Types
+```typescript
+// Use generated types from SvelteKit
+import type { PageLoad } from './$types';
+
+export const load: PageLoad = async ({ params }) => {
+  return {
+    // ...
+  };
+};
+```
+
+### Utility Type Patterns
+```typescript
+// For component props with callbacks
+interface ComponentProps {
+  data: CardData[];
+  onSelect?: (id: string) => void;
+  onClick?: (event: MouseEvent) => void;
+}
+
+// For state with discriminated unions
+type LoadingState =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: CardData[] }
+  | { status: 'error'; error: Error };
+```
+
+### GSAP Integration
+```typescript
+import { gsap } from '$lib/gsap';
+import type { GSAPTimeline } from 'gsap';
+
+let timeline: GSAPTimeline | null = null;
+
+$effect(() => {
+  timeline = gsap.timeline();
+  // ...
+  
+  return () => {
+    timeline?.kill();
+  };
+});
+```
+
+### Browser-Only Code
+```typescript
+import { browser } from '$app/environment';
+
+let element: HTMLElement | null = null;
+
+$effect(() => {
+  if (browser) {
+    element = document.getElementById('target');
+  }
+});
+```
+
+## Module Organization
+- Utilities: [src/lib/utils/](mdc:src/lib/utils/)
+- Tarot logic: [src/lib/tarot/](mdc:src/lib/tarot/)
+- Type definitions co-located with implementation
+- Shared types in dedicated `.d.ts` files
+
+## Error Handling
+```typescript
+// Use proper error types
+try {
+  await somethingAsync();
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  } else {
+    console.error('Unknown error:', error);
+  }
+}
+```
+
+## Avoid
+- Using `any` type
+- Non-null assertions (`!`) without good reason
+- Suppressing TypeScript errors with `@ts-ignore`
+- Overly complex generic types
