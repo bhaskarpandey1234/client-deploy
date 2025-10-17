@@ -52,7 +52,7 @@
             <a href="/asteria/astrology/egyptian" class="dropdown-item" on:click={closeAllDropdowns}>Egyptian</a>
             <a href="/asteria/astrology/japanese" class="dropdown-item" on:click={closeAllDropdowns}>Japanese</a>
             <a href="/asteria/astrology/mayan" class="dropdown-item" on:click={closeAllDropdowns}>Mayan</a>
-            <a href="/asteria/divination/compatibility" class="dropdown-item" on:click={closeAllDropdowns}>Panchang</a>
+            <a href="/asteria/astrology/panchang" class="dropdown-item" on:click={closeAllDropdowns}>Panchang</a>
             <a href="/asteria/astrology/vedic" class="dropdown-item" on:click={closeAllDropdowns}>Vedic</a>
             <a href="/asteria/astrology/western" class="dropdown-item" on:click={closeAllDropdowns}>Western</a>
           </div>
@@ -113,7 +113,8 @@
     left: 0;
     right: 0;
     z-index: 100;
-    background: var(--bg);
+    background: rgba(12, 10, 26, 0.95);
+    background: var(--bg, rgba(12, 10, 26, 0.95));
     backdrop-filter: blur(20px);
     border-bottom: 1px solid #ffffff1f;
   }
@@ -133,18 +134,21 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: var(--ink);
+    color: #EDEBFF;
+    color: var(--ink, #EDEBFF);
     text-decoration: none;
   }
 
   .logo svg {
-    color: var(--destiny);
+    color: #9C6CFF;
+    color: var(--destiny, #9C6CFF);
   }
 
   .logo-text {
     font-size: 1.25rem;
     font-weight: 700;
-    background: linear-gradient(90deg, var(--destiny), var(--clarity));
+    background: linear-gradient(90deg, #9C6CFF, #30D5C8);
+    background: linear-gradient(90deg, var(--destiny, #9C6CFF), var(--clarity, #30D5C8));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -160,7 +164,8 @@
   }
 
   .nav-link {
-    color: var(--ink);
+    color: #EDEBFF;
+    color: var(--ink, #EDEBFF);
     text-decoration: none;
     font-size: 15px;
     font-weight: 500;
@@ -174,7 +179,8 @@
   }
 
   .nav-link:hover {
-    color: var(--clarity);
+    color: #30D5C8;
+    color: var(--clarity, #30D5C8);
   }
 
   .nav-dropdown {
@@ -196,7 +202,8 @@
     top: 100%;
     left: 0;
     margin-top: 8px;
-    background: var(--panel);
+    background: rgba(20, 17, 39, 0.98);
+    background: var(--panel, rgba(20, 17, 39, 0.98));
     border: 1px solid #ffffff1f;
     border-radius: 12px;
     padding: 8px;
@@ -207,7 +214,8 @@
   .dropdown-item {
     display: block;
     padding: 12px 16px;
-    color: var(--ink);
+    color: #EDEBFF;
+    color: var(--ink, #EDEBFF);
     text-decoration: none;
     font-size: 14px;
     border-radius: 8px;
@@ -215,22 +223,8 @@
   }
 
   .dropdown-item:hover {
-    background: var(--glass);
-  }
-
-  .btn-nav {
-    padding: 10px 20px;
-    background: var(--destiny);
-    color: #fff;
-    border-radius: 12px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    transition: transform 0.2s;
-  }
-
-  .btn-nav:hover {
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.06);
+    background: var(--glass, rgba(255, 255, 255, 0.06));
   }
 
   .footer-lang {
@@ -239,10 +233,12 @@
 
   .lang-selector {
     padding: 8px 12px;
-    background: var(--panel);
+    background: rgba(20, 17, 39, 0.98);
+    background: var(--panel, rgba(20, 17, 39, 0.98));
     border: 1px solid #ffffff22;
     border-radius: 8px;
-    color: var(--ink);
+    color: #EDEBFF;
+    color: var(--ink, #EDEBFF);
     font-size: 13px;
     cursor: pointer;
   }
