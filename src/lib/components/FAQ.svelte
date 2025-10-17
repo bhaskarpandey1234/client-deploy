@@ -91,7 +91,8 @@
   }
   .faq-answer p {
     margin: 0;
-    color: var(--muted);
+    color: black;
+    /* color: var(--muted); */
     line-height: 1.6;
     font-size: 15px;
   }
