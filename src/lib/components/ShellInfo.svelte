@@ -175,10 +175,8 @@
 	/>
 
 		<div class="info-wrapper">
-			<div class="info-box">
-				<WhatItIs content={whatItIsContent} />
-			</div>
-			<WhyItHelps items={whyItHelpsItems} />
+				<WhatItIs subtitle="A maritime pattern language." content={whatItIsContent} />
+			<WhyItHelps subtitle="Because timing shapes outcomes." items={whyItHelpsItems} />
 		</div>
 
 
@@ -188,7 +186,7 @@
 		{shells}
 	/>
 
-				<WhatYouGet items={whatYouGetItems} />
+				<WhatYouGet subtitle="Your cast, distilled to Now · Next · Avoid." items={whatYouGetItems} />
 
 
 	<!-- How Shell Casting Works -->

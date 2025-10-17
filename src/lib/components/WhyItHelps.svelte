@@ -1,10 +1,12 @@
 <script lang="ts">
   export let title = "Why it helps";
+  export let subtitle = "";
   export let items: string[] = [];
 </script>
 
 <section class="section">
   <h2>{title}</h2>
+  {#if subtitle}<h2 class="subtitle">{subtitle}</h2>{/if}
   <ul>
     {#each items as item}
       <li>{item}</li>
@@ -23,6 +25,11 @@
     color: white;
     margin: 0 0 1.5rem 0;
     letter-spacing: 1px;
+  }
+
+  h2.subtitle {
+    font-size: 1.2rem;
+    margin: -1rem 0 1rem 0;
   }
 
   ul {

@@ -1,10 +1,12 @@
 <script lang="ts">
   export let title = "What it is";
+  export let subtitle = "";
   export let content = "";
 </script>
 
 <section class="section">
   <h2>{title}</h2>
+  {#if subtitle}<h2 class="subtitle">{subtitle}</h2>{/if}
   <p>{content}</p>
 </section>
 
@@ -20,6 +22,11 @@
     color: white;
     margin: 0 0 1.5rem 0;
     letter-spacing: 1px;
+  }
+
+  h2.subtitle {
+    font-size: 1.2rem;
+    margin: -1rem 0 1rem 0;
   }
 
   p {
