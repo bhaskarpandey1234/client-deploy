@@ -1,11 +1,60 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
   import FAQ from "./FAQ.svelte";
   import FooterMain from "./FooterMain.svelte";
   import HeaderAsteria from "./HeaderAsteria.svelte";
   import HeroSection from "./HeroSection.svelte";
   import ShellCollection from "./ShellCollection.svelte";
   import HowShellCastingWorks from "./HowShellCastingWorks.svelte";
+  import WhatItIs from "./WhatItIs.svelte";
+  import WhyItHelps from "./WhyItHelps.svelte";
+  import WhatYouGet from "./WhatYouGet.svelte";
   import Testimonials from "./Testimonials.svelte";
+
+  const whatItIsContent = "Conchomancy is a shell‑casting practice we treat as a precise frame for reflection and timing. A curated set of shells—spiral, bivalve, scallop, cowrie and conch—stands in for clear archetypes: origin and return, threshold and protection, momentum and rhythm, value and exchange, signal and call. A reading begins with a focused question. You cast 3–7 shells onto a neutral cloth marked with discreet lanes for roles, resources, and relationships. We read position (center vs. edge), orientation (opening toward/away), proximity (clusters vs. outliers), and intersections with the lanes to surface the pattern at play.\n\nAsteria layers tide and lunar context as timing—not prediction. Ebb often favors review and consolidation; flood favors reach and reveal. From there, we translate the cast into a decision brief: constraints, leverage, sequencing, and the most elegant next move. It is not omen‑hunting. It is an elegant way to slow the moment, notice signal, and act with intent.";
+
+  const whyItHelpsItems = [
+    "Clarity under ambiguity—turn a complex question into a legible pattern.",
+    "Actionable language—insight expressed as strengths, cautions, and next moves.",
+    "Tide‑aware timing—ebb for refine, flood for reach—mapped to your horizon.",
+    "Stakeholder awareness—how roles and resources want to flow together.",
+    "Repeatable structure—consistent casts for comparable decisions over time."
+  ];
+
+  const whatYouGetItems = [
+    "A one‑page brief of your question, cast diagram, and core pattern.",
+    "Strengths, blind spots, and leverage points tied to each shell's landing.",
+    "Now / Next / Avoid actions with a light timing window (weeks to quarter).",
+    "Compatibility and co‑navigation notes when relationships are in scope.",
+    "Reflection prompts and a minimalist tide ritual (optional)."
+  ];
+
+  const shellFaqs = [
+    {
+      question: "Which shells do you use?",
+      answer: "A respectfully sourced, non‑living set: spiral, bivalve, scallop, cowrie, and conch forms. We avoid dyed/novelty pieces to keep signals clean."
+    },
+    {
+      question: "How does a reading work?",
+      answer: "You frame a clear question. We cast 3–7 shells onto a neutral cloth with subtle lanes (roles/resources/relationships) and interpret position, orientation, and proximity."
+    },
+    {
+      question: "Is this predictive?",
+      answer: "No. We translate patterns into practical context so you can decide with confidence."
+    },
+    {
+      question: "Do orientations matter?",
+      answer: "Yes—as qualifiers. Opening toward you can imply invitation; away can suggest privacy or pacing. It informs tone, not doom."
+    },
+    {
+      question: "How often should I consult shells?",
+      answer: "Weekly for momentum or ahead of key decisions. Single‑shell pulls are useful for daily focus."
+    },
+    {
+      question: "Ethics & sourcing?",
+      answer: "We use non‑living, responsibly sourced shells. Treat them as instruments, not trophies; return or replace respectfully if damaged."
+    }
+  ];
 
 	interface Shell {
 		id: string;
@@ -92,8 +141,7 @@
 	];
 
 	function handleCastShells(): void {
-		console.log('Cast shells clicked');
-		// Add your cast shells logic here
+		goto('/asteria/divination/conchomancy/experience');
 	}
 
 	function handlePlayVideo(): void {
@@ -119,18 +167,29 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Panchang"
-		logoImage="/panch_logo.png"
+		title="Shell Casting"
+		logoImage="/shell.png"
 		buttonText="CAST SHELLS"
 		description="Discover the ancient wisdom of shell casting divination"
 		onButtonClick={handleCastShells}
 	/>
+
+		<div class="info-wrapper">
+			<div class="info-box">
+				<WhatItIs content={whatItIsContent} />
+			</div>
+			<WhyItHelps items={whyItHelpsItems} />
+		</div>
+
 
 	<!-- Shell Collection -->
 	<ShellCollection 
 		title="Shell Collection"
 		{shells}
 	/>
+
+				<WhatYouGet items={whatYouGetItems} />
+
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
@@ -141,7 +200,9 @@
 	/>
 
 	<!-- FAQ -->
-	<FAQ/>
+	<FAQ title="Frequently Asked Questions" faqs={shellFaqs} />
+
+	<!-- Conchomancy Info -->
 
 	<!-- Testimonials -->
 	<Testimonials 
@@ -238,7 +299,21 @@ background-attachment: fixed;
 
 	.panchang-container :global(.header) {
 		z-index: 1000 !important;
-		
+	}
+
+	.info-box {
+		background: rgba(237, 234, 226, 0.10);
+		border: 1px solid rgba(0, 255, 255, 0.2);
+		border-radius: 8px;
+		padding: 1rem;
+		color: #b8b4a9;
+		font-size: 0.95rem;
+		line-height: 1.6;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto;
+		max-width: 75%;
 	}
 
 </style>
