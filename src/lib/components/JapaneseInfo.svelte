@@ -11,48 +11,48 @@
   import WhatYouGet from "./WhatYouGet.svelte";
   import Testimonials from "./Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "Japanese astrology, as we practice it, is a decision‑literate read of Nine Star Ki (Kyūsei Kigaku)—a matrix of nine \"stars\" mapped to the Five Elements (Wood, Fire, Earth, Metal, Water) and yin–yang cycles. From your birth year and month (and optionally day) we derive three lenses: a Year number (principal posture), a Month number (style/operating mode), and a Day number (surface tempo). These sit inside 9‑year, 9‑month, and 9‑day rhythms.\n\nThe system uses a solar year that turns around Setsubun (early February), so January and early‑February births are often counted with the previous year—we adjust for your location and time zone. We translate the pattern into operating language: constraints to respect, leverage to apply, and sequencing that reduces drag. Rather than forecast destiny, we map windows—initiate, iterate, reveal, recover—and the element interactions that shape chemistry in teams and partnerships.\n\nWe default to standard Nine Star Ki calculations and, where helpful, add gentle day‑level cues (monthly star in transit, optional Rokuyō flags) without theatrics. The outcome is a clear, premium brief you can use to time launches, negotiate, plan creative sprints, or reset routines.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Strategic clarity—turn a complex profile into a one‑page decision brief.",
+    "Rhythm‑aware timing—identify initiate · iterate · reveal · recover windows.",
+    "Partnership intelligence—element interactions that clarify chemistry and roles.",
+    "Premium synthesis—Year · Month · Day numbers expressed as strengths, cautions, and cues.",
+    "Rituals that scale—tiny practices that anchor attention without superstition."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "Your Year/Month/Day numbers with concise strengths/edges and signature pace.",
+    "A 3–6 month timing map anchored to nine‑year and nine‑month cycles.",
+    "Compatibility & collaboration cues (productive vs. frictional element dynamics).",
+    "Daily/weekly micro‑cues with Now · Next · Avoid actions.",
+    "Boundary notes for Setsubun/month edges and a minimalist ritual kit (dawn/midday/night)."
   ];
 
-  const chineseFaqs = [
+  const japaneseFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "Which system do you use?",
+      answer: "Nine Star Ki (Kyūsei Kigaku), framed as a modern, secular decision tool. We avoid reenactment and focus on clarity and timing."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "Do I need my birth time?",
+      answer: "No. Year and month are sufficient; day adds nuance. Time is only relevant for rare boundary cases around local midnight."
     },
     {
-      question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      question: "I was born in January or early February—what then?",
+      answer: "Nine Star Ki's year turns at Setsubun (around Feb 3–4). Our tool assigns your year correctly based on location and time zone."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
+      question: "Is this predictive?",
+      answer: "No. We translate cyclic patterns into context and timing so you can choose with confidence."
     },
     {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
+      question: "How often should I check?",
+      answer: "Monthly for planning; weekly for rhythm checks. Avoid recasting the same question repeatedly—act, then revisit."
     },
     {
-      question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      question: "How does this relate to Chinese or Western astrology?",
+      answer: "It's complementary. Many clients pair Nine Star Ki (rhythm/element tone) with Chinese Zodiac (year animal) and Western (psychology/transits)."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
+		title="Japanese"
+		logoImage="/japanese.png"
 		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		description="Discover your Year, Month, and Day numbers"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="Nine Star Ki, distilled for decisions." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because rhythm changes outcomes." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="Year · Month · Day—at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="Japanese Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How Japanese Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={japaneseFaqs} />
 
 	<!-- Conchomancy Info -->
 

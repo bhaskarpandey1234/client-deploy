@@ -11,48 +11,48 @@
   import WhatYouGet from "./WhatYouGet.svelte";
   import Testimonials from "./Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "Vedic astrology—Jyotiṣa—is a sidereal, timing‑forward framework we translate into a clean decision brief. It works with 12 rāśi (signs), 27 nakṣatra (lunar mansions), the graha set (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, plus lunar nodes), and 12 houses that map life areas. Two tools drive timing: daśā periods (seasonal emphasis, e.g., Vimśottarī) and gochar (transits). Your chart is calculated from birth date, place, and time; when time is unknown, we provide a Moon‑based reading and flag confidence levels. We default to a standard sidereal ayanāṃśa (Lahiri); other options are available on request.\n\nAsteria reads the pattern as operating language—constraints to respect, leverage to apply, and sequencing that reduces drag. We synthesize Lagna (rising), Moon sign and nakṣatra, key yogas (meaningful combinations), current daśā/bhukti, and major transits (e.g., Jupiter/Saturn shifts, eclipses) into practical cues you can schedule. The aim isn't prophecy. It's clear context for launches, negotiations, creative sprints, and recovery—delivered in precise, modern terms.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Strategic clarity—turn a complex chart into a one‑page brief.",
+    "Rhythm‑aware timing—daśā seasons and transit windows you can plan against.",
+    "Partnership intelligence—element/house overlays for roles and chemistry.",
+    "Premium synthesis—Lagna · Moon/nakṣatra · yogas · daśā/gochar.",
+    "Rituals that scale—tiny practices to anchor intent without superstition."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "Your Lagna (rising), Moon sign, and birth nakṣatra with concise strengths/edges.",
+    "House‑by‑house snapshot of priorities for work, money, relationships, creativity, health.",
+    "Daśā/bhukti timeline for the next 6–18 months with Initiate · Iterate · Reveal · Recover windows.",
+    "Transit radar (Jupiter, Saturn, nodes, eclipse seasons) with Now · Next · Avoid actions.",
+    "Compatibility/collaboration notes and a minimalist ritual kit (dawn focus / night reset)."
   ];
 
-  const chineseFaqs = [
+  const vedicFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "Do you use tropical or sidereal?",
+      answer: "Sidereal by default (Lahiri ayanāṃśa). We can compute other ayanāṃśas on request."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "What if I don't know my birth time?",
+      answer: "We can do a Moon‑based chart and provide confidence ranges. For critical decisions we recommend a rectification session."
     },
     {
-      question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      question: "Is this predictive?",
+      answer: "No. We translate cyclic patterns into context and timing so you can choose with confidence."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
+      question: "Which daśā system do you use?",
+      answer: "Vimśottarī by default; we may reference alternatives when they add clarity."
     },
     {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
+      question: "How often should I check?",
+      answer: "Monthly for planning; quarterly for strategy; weekly for rhythm checks."
     },
     {
-      question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      question: "Does this replace therapy, legal, or medical advice?",
+      answer: "No. It's a context tool—use it to time and frame actions, not to replace professional care."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
-		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		title="Vedic"
+		logoImage="/vedic.png"
+		buttonText="GET YOUR CHART"
+		description="Sidereal clarity, modern brief—timing you can trust"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="Sidereal clarity, modern brief." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because rhythm changes outcomes." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="Your Lagna and nakṣatra at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="Vedic Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How Vedic Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={vedicFaqs} />
 
 	<!-- Conchomancy Info -->
 

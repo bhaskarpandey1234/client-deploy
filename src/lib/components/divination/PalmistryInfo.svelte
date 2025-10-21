@@ -1,58 +1,58 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import FAQ from "./FAQ.svelte";
-  import FooterMain from "./FooterMain.svelte";
-  import HeaderAsteria from "./HeaderAsteria.svelte";
-  import HeroSection from "./HeroSection.svelte";
-  import ShellCollection from "./ShellCollection.svelte";
-  import HowShellCastingWorks from "./HowShellCastingWorks.svelte";
-  import WhatItIs from "./WhatItIs.svelte";
-  import WhyItHelps from "./WhyItHelps.svelte";
-  import WhatYouGet from "./WhatYouGet.svelte";
-  import Testimonials from "./Testimonials.svelte";
+  import FAQ from "../FAQ.svelte";
+  import FooterMain from "../FooterMain.svelte";
+  import HeaderAsteria from "../HeaderAsteria.svelte";
+  import HeroSection from "../HeroSection.svelte";
+  import ShellCollection from "../ShellCollection.svelte";
+  import HowShellCastingWorks from "../HowShellCastingWorks.svelte";
+  import WhatItIs from "../WhatItIs.svelte";
+  import WhyItHelps from "../WhyItHelps.svelte";
+  import WhatYouGet from "../WhatYouGet.svelte";
+  import Testimonials from "../Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "Palmistry—chiromancy—is a structured study of the hands as a living map of tendencies, attention, and pacing. Asteria uses a modern, non‑predictive method. We examine: hand shape and proportions (strategy and tempo), mount tone and texture (resource emphasis), finger set and flexibility (communication and drive), and the major lines—Life, Head, Heart, and Fate—with their depth, continuity, branches, and intersections. We read both hands: the dominant hand for current expression under choice and pressure; the non‑dominant as a baseline pattern. Lines evolve with use; change is part of the evidence.\n\nYour question frames the reading. We translate features into a decision design: where you hold tension versus flow, how you process complexity, what motivates commitment, and what drains momentum. Ambiguities (breaks, islands, crossings) are treated as nuance about pacing and context—never doom. Timing is expressed as relative windows (near, mid, long) grounded in the stability or volatility of features, not fixed dates. The result is a concise brief you can apply to launches, roles, communication, and recovery routines.\n\nPattern over prophecy; clarity over drama.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Strategic clarity fast—turn complex cues into a one‑page brief.",
+    "Actionable language—strengths, cautions, and concrete next moves.",
+    "Timing intelligence—windows for go / steady / pause based on feature stability.",
+    "Stakeholder insight—finger set and court‑style roles guide collaboration.",
+    "Repeatable method—photographic baselines let you track change over time."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "A calibrated scan of hand shape, mounts, finger set, and the major lines (Life, Head, Heart, Fate).",
+    "Strengths, blind spots, and leverage points tied to your question.",
+    "Now / Next / Avoid actions with timing windows (weeks, quarter, season).",
+    "Collaboration cues (communication style, decision pace, recovery needs).",
+    "A minimalist daily ritual and a photographic baseline to revisit."
   ];
 
-  const chineseFaqs = [
+  const palmistryFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "Which hand do you read?",
+      answer: "Both. The dominant hand reflects current expression under choice and pressure; the non‑dominant shows baseline tendencies."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "Do lines predict lifespan?",
+      answer: "No. The Life line describes vitality, recovery, and pacing—not length of life."
+    },
+    {
+      question: "Do hands change?",
+      answer: "Yes. Skin tone, line depth, and small branches can evolve with stress, use, and recovery—change is meaningful signal."
     },
     {
       question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      answer: "No. We translate pattern into context and timing so you can decide with confidence."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
+      question: "Can you read from photos?",
+      answer: "Yes. Clear, natural‑light photos of both hands (palms and backs) allow a solid reading; in‑person adds texture and warmth."
     },
     {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
-    },
-    {
-      question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      question: "Medical or legal advice?",
+      answer: "Palmistry is a reflective tool, not a substitute for medical, legal, or financial counsel."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
+		title="Palmistry"
+		logoImage="/palmistry.png"
 		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		description="Your hands, as a living brief—pattern, not prophecy"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="Your hands, as a living brief." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because timing changes outcomes." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="A one‑page hand map for decisions." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="Palmistry Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How Palmistry Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={palmistryFaqs} />
 
 	<!-- Conchomancy Info -->
 

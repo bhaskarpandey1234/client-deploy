@@ -11,48 +11,48 @@
   import WhatYouGet from "./WhatYouGet.svelte";
   import Testimonials from "./Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "Celtic Tree Zodiac (Asteria) is a modern poetic framework—not a verified historical system. Popular versions draw on 20th‑century interpretations of Irish tree lore and Ogham symbolism; we treat them as creative lenses for timing and temperament. We use a curated 13‑tree wheel keyed to the lunar year (Birch, Rowan, Ash, Alder, Willow, Hawthorn, Oak, Holly, Hazel, Vine, Ivy, Reed, Elder). Each tree names a strategic posture—Birch (beginnings), Rowan (protection & pattern), Willow (adaptability), Oak (enduring leadership), Hazel (insight), Elder (closure/renewal), and so on.\n\nYour profile blends (1) a guiding tree mapped to your birth window, (2) a lunar cadence (new/first quarter/full/last quarter emphasis), and (3) a path motif derived from Ogham‑inspired qualities (focus, boundary, exchange, reveal). The output is an elegant brief—context, leverage, sequencing—free of dogma, ready for planning.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Strategic clarity—turn mythic trees into a one‑page decision brief.",
+    "Lunar cadence—initiate · build · share · close windows you can schedule.",
+    "Partnership intelligence—complementary vs. catalytic tree pairings.",
+    "Premium synthesis—tree archetype × lunar phase × path motif.",
+    "Rituals that scale—tiny practices to anchor attention."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "Your guiding tree with strengths/edges at a glance.",
+    "Lunar‑phase emphasis and monthly timing notes (initiate/build/share/close).",
+    "3–6 month windows to plan launches, collaborations, or recovery.",
+    "Compatibility map and co‑navigation cues for key relationships.",
+    "A minimalist ritual kit: dawn focus, threshold check, night release."
   ];
 
-  const chineseFaqs = [
+  const celticFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "Is this historically authentic Celtic astrology?",
+      answer: "No. It's a modern synthesis inspired by Irish tree lore and Ogham motifs, treated as a practical lens rather than a reenactment."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "How do you assign my tree?",
+      answer: "We map your birth date to a 13‑tree lunar wheel widely used in modern interpretations and provide boundary notes where dates vary."
     },
     {
-      question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      question: "Do you use Ogham letters directly?",
+      answer: "We reference qualities attributed to the trees without requiring users to know the script."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
+      question: "Is this predictive?",
+      answer: "No. We translate pattern into context and timing so you can choose with confidence."
     },
     {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
+      question: "What if my birthday sits on a boundary?",
+      answer: "We show both trees and give tests to see which reads true this season."
     },
     {
-      question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      question: "Can I pair this with other systems?",
+      answer: "Yes—use it alongside Western or Vedic astrology for complementary timing language."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
-		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		title="Celtic Tree Zodiac"
+		logoImage="/celtic.png"
+		buttonText="READ YOUR ROOTS"
+		description="Discover the ancient wisdom of shell casting divination"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="Trees and timing, distilled." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because phase changes outcomes." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="Your guiding tree at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="Celtic Tree Zodiac Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How Celtic Tree Zodiac Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={celticFaqs} />
 
 	<!-- Conchomancy Info -->
 

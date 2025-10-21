@@ -1,58 +1,58 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import FAQ from "./FAQ.svelte";
-  import FooterMain from "./FooterMain.svelte";
-  import HeaderAsteria from "./HeaderAsteria.svelte";
-  import HeroSection from "./HeroSection.svelte";
-  import ShellCollection from "./ShellCollection.svelte";
-  import HowShellCastingWorks from "./HowShellCastingWorks.svelte";
-  import WhatItIs from "./WhatItIs.svelte";
-  import WhyItHelps from "./WhyItHelps.svelte";
-  import WhatYouGet from "./WhatYouGet.svelte";
-  import Testimonials from "./Testimonials.svelte";
+  import FAQ from "../FAQ.svelte";
+  import FooterMain from "../FooterMain.svelte";
+  import HeaderAsteria from "../HeaderAsteria.svelte";
+  import HeroSection from "../HeroSection.svelte";
+  import ShellCollection from "../ShellCollection.svelte";
+  import HowShellCastingWorks from "../HowShellCastingWorks.svelte";
+  import WhatItIs from "../WhatItIs.svelte";
+  import WhyItHelps from "../WhyItHelps.svelte";
+  import WhatYouGet from "../WhatYouGet.svelte";
+  import Testimonials from "../Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "Kabbalistic numerology, as we practice it, is a modern, secular read of Hebrew gematria—the practice of assigning numbers to letters to study pattern. We work primarily with Mispar Hechrechi (standard values Aleph=1 … Tav=400) and use Mispar Katan (digit reduction) to read tone and pacing. Where helpful, we note final‑letter variants (Mispar Gadol) and document the differences. For non‑Hebrew names we create a careful transliteration and, when sensible, test 1–2 alternatives so you can see trade‑offs.\n\nWe translate totals into operating language: the compound sum frames the story‑arc, the single‑digit root sets tone, and recurring letter clusters flag leverage and friction. Birth dates add a second lens—the day number and reduced full date; optionally we record the Hebrew calendar date for seasonal color, without religious claims. We do not compute or evaluate sacred/divine names; respect is non‑negotiable.\n\nThe output is a clean decision brief—constraints to respect, leverage to apply, and a sequence that reduces drag (Now / Next / Avoid). Use it to name a product, choose a professional handle, plan a launch window, or tune communication. Pattern over prophecy; clarity over drama.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Strategic clarity—turn symbolic math into a one‑page decision brief.",
+    "Name as handle—how you initiate and are received under pressure.",
+    "Compound nuance—surface leverage and risk inside the total.",
+    "Timing awareness—short windows keyed to 1–9 cycles.",
+    "Premium care—transliteration, culture, and ethics handled explicitly."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "Name profile: standard total + single‑digit root + compound read; key letter clusters and tonal cues.",
+    "Birth‑date profile: day number, reduced full‑date, and personal cycle highlights (1–9).",
+    "Action plan: Now · Next · Avoid with 2–12 week timing windows.",
+    "Compatibility notes (complementary vs. catalytic numbers) for partners/teams.",
+    "Optional: transliteration alternatives or spelling/nickname variants—trade‑offs, not prescriptions."
   ];
 
-  const chineseFaqs = [
+  const kabbalisticFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "Which gematria system do you use?",
+      answer: "Mispar Hechrechi by default, with Mispar Katan for reduction. Where useful, we note Mispar Gadol (final letters) and explain the effect."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "Do I need a Hebrew spelling?",
+      answer: "If you have one, great. If not, we create a respectful transliteration and may test 1–2 sensible variants so you can compare."
     },
     {
-      question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      question: "Is this predictive?",
+      answer: "No. We translate pattern into context and timing so you can choose with confidence."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
+      question: "Can this change my fate if I change my name?",
+      answer: "We treat spelling and aliases as design choices that shift emphasis and perception, not destiny edits."
     },
     {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
+      question: "Do you analyze sacred names or verses?",
+      answer: "No. We avoid divine names and sacred texts. This is a respectful, secular practice."
     },
     {
-      question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      question: "How does this differ from Chaldean/Pythagorean systems?",
+      answer: "Different letter values and priorities. We can show complements and differences if helpful."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
+		title="Kabbalistic"
+		logoImage="/kabbalistic.png"
 		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		description="Gematria, distilled for decisions—pattern, not prophecy"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="Gematria, distilled for decisions." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because names carry signal." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="Your name's root and compound—at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="Kabbalistic Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How Kabbalistic Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={kabbalisticFaqs} />
 
 	<!-- Conchomancy Info -->
 

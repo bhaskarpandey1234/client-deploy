@@ -1,58 +1,58 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import FAQ from "./FAQ.svelte";
-  import FooterMain from "./FooterMain.svelte";
-  import HeaderAsteria from "./HeaderAsteria.svelte";
-  import HeroSection from "./HeroSection.svelte";
-  import ShellCollection from "./ShellCollection.svelte";
-  import HowShellCastingWorks from "./HowShellCastingWorks.svelte";
-  import WhatItIs from "./WhatItIs.svelte";
-  import WhyItHelps from "./WhyItHelps.svelte";
-  import WhatYouGet from "./WhatYouGet.svelte";
-  import Testimonials from "./Testimonials.svelte";
+  import FAQ from "../FAQ.svelte";
+  import FooterMain from "../FooterMain.svelte";
+  import HeaderAsteria from "../HeaderAsteria.svelte";
+  import HeroSection from "../HeroSection.svelte";
+  import ShellCollection from "../ShellCollection.svelte";
+  import HowShellCastingWorks from "../HowShellCastingWorks.svelte";
+  import WhatItIs from "../WhatItIs.svelte";
+  import WhyItHelps from "../WhyItHelps.svelte";
+  import WhatYouGet from "../WhatYouGet.svelte";
+  import Testimonials from "../Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "Angel numbers are repeating or striking number patterns—111, 222, 1212, 1234—that many people notice at meaningful moments. At Asteria, we treat them as elegant pattern prompts: brief signals to pause, check context, and choose with precision. Instead of declaring fate, we map number families to decision language. Ones cue focus and initiation; twos—partnership and alignment; threes—expression and drafting; fours—structure and due diligence; fives—change and optionality; sixes—care and stewardship; sevens—analysis and reflection; eights—results and resources; nines—closure and release; zero—reset and potential. Repetition amplifies tone; mirrored sequences hint at mutuality; ladders (1234) suggest staged action.\n\nIn practice, you record what you saw and where (clock, receipt, mileage), then we translate it into a clean brief: strengths to lean into, cautions to respect, and a Now/Next/Avoid sequence. Time-of-day and timing windows (2–12 weeks) help execution. The point isn't to chase signs—it's to use attention wisely. Angel numbers become a shared language for timing, pacing, and accountability—premium, secular, and practical.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Clarity on demand—turns a fleeting pattern into a decision cue.",
+    "Sequencing you can execute—Now · Next · Avoid instead of vague advice.",
+    "Shared language for teams—aligns focus, care, and pace without hype.",
+    "Timing you can plan against—short windows that respect real constraints.",
+    "Repeatable practice—log, interpret, act, review."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "A live decoder for core families (0–9), repeats (111–999), mirrors (121, 1221), and ladders (123, 1234).",
+    "Plain‑language themes with strengths, cautions, and leverage points.",
+    "Action cues for work/relationships/creativity mapped to 2–12 week windows.",
+    "Patterns dashboard to spot streaks and blind spots over time.",
+    "Journaling prompts and a minimalist ritual for focus and review."
   ];
 
-  const chineseFaqs = [
+  const angelFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "Is this predictive?",
+      answer: "No. We don't forecast fate. We use number patterns as attention triggers that translate into practical context and timing."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "What if I rarely see patterns?",
+      answer: "Use manual prompts (set a two‑hour check). The value is in reflection and execution, not in volume."
     },
     {
-      question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      question: "Are certain numbers \"good\" or \"bad\"?",
+      answer: "We avoid superstition. Each family carries strengths and cautions; context decides the move."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
+      question: "What about 11, 22, 33 (master tones)?",
+      answer: "We treat doubles as emphasis—clarity (11), build (22), synthesis (33)—without fatalism."
     },
     {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
+      question: "Does time or place matter?",
+      answer: "Sometimes. We log time-of-day and context to tailor actions (e.g., 444 near a contract ≠ 444 during training)."
     },
     {
-      question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      question: "Can teams use this?",
+      answer: "Yes. It becomes a lightweight check‑in language—clean, respectful, and outcome‑oriented."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
-		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		title="Angel Numbers"
+		logoImage="/angle.png"
+		buttonText="DECODE YOUR NUMBERS"
+		description="From pattern to plan in minutes—signals, not superstition"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="Signals, not superstition." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because attention is scarce." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="A live decoder for 0–9 and repeats." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="Angel Numbers Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How Angel Numbers Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={angelFaqs} />
 
 	<!-- Conchomancy Info -->
 

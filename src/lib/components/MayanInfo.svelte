@@ -11,48 +11,48 @@
   import WhatYouGet from "./WhatYouGet.svelte";
   import Testimonials from "./Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "Mayan astrology, as we practice it, is a respectful modern synthesis centered on the Tzolk'in—the 260‑day matrix formed by 20 day‑signs (archetypes) × 13 tones (tempo). Your birth date maps to a day‑sign that describes posture and motive, and a tone that describes pacing and how momentum builds. We may reference the solar Haab (365‑day) calendar and the 52‑year Calendar Round for context, but our operating cadence comes from the Tzolk'in.\n\nWe read three lenses: (1) Day‑sign archetype—your default stance and strengths; (2) Tone (1–13)—how you initiate, iterate, and integrate; and (3) the trecena, the 13‑day wave you're moving through now, which colors short‑term timing. We translate these into decision language—constraints to respect, levers to apply, and sequences that reduce drag.\n\nOur calculations default to a widely used GMT correlation and adjust for your local date and time zone. The goal is not reenactment or fate‑telling; it's a clear, secular brief you can use for launches, creative sprints, negotiations, and resets. Pattern over prophecy; clarity over drama.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Strategic clarity—turn cycle lore into a one‑page decision brief.",
+    "Rhythm‑aware timing—identify Initiate · Iterate · Reveal windows.",
+    "Partnership intelligence—complementary vs. catalytic day‑signs and tones.",
+    "Premium synthesis—day‑sign × tone × trecena expressed as cues you can act on.",
+    "Rituals that scale—tiny practices (dawn focus, midday check, night reset)."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "Your day‑sign and tone profile with concise strengths/edges.",
+    "Current trecena notes and two upcoming windows (start / steady / share).",
+    "A 3–6 month timing map anchored to the 260‑day cycle.",
+    "Compatibility & collaboration cues for key relationships or teams.",
+    "A minimalist ritual kit: sunrise focus, mid‑wave check, night reset."
   ];
 
-  const chineseFaqs = [
+  const mayanFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "Is this historically exact Mayan astrology?",
+      answer: "No. It's a respectful modern synthesis inspired by the Tzolk'in and related timing ideas. We use the rhythm for practical clarity, not reenactment."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "Which correlation do you use to compute dates?",
+      answer: "We default to a widely used GMT correlation and can accommodate others if your lineage prefers a different constant."
     },
     {
-      question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      question: "Do I need my birth time?",
+      answer: "No. Birth time is not required. We use your location to resolve local date boundaries around midnight."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
+      question: "What is a trecena?",
+      answer: "A 13‑day wave anchored by a specific day‑sign. It's a useful lens for short‑term timing and momentum."
     },
     {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
+      question: "Is this predictive?",
+      answer: "No. We translate cyclic patterns into context, timing, and next steps so you can choose with confidence."
     },
     {
-      question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      question: "I'm born near midnight—could my day‑sign shift?",
+      answer: "Rarely. We check your local date/time zone to ensure the correct mapping and note edge cases clearly."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
-		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		title="Mayan"
+		logoImage="/mayan.png"
+		buttonText="REVEAL YOUR MAYAN SIGN"
+		description="Discover your day-sign, tone, and trecena"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="260 days, distilled for decisions." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because rhythm drives outcomes." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="Day‑sign & tone—at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="Mayan Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How Mayan Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={mayanFaqs} />
 
 	<!-- Conchomancy Info -->
 

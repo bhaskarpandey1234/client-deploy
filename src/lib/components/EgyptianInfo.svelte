@@ -11,48 +11,48 @@
   import WhatYouGet from "./WhatYouGet.svelte";
   import Testimonials from "./Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "Egyptian astrology, as we practice it, is a decan‑based framework translated for modern decisions. In temple star clocks, the sky was organized into 36 decans—ten‑day intervals that kept ritual time and marked turning points. Asteria uses this cadence alongside the mythic language of key deities as clear archetypes: strategy, protection, renewal, intelligence, justice, craft, and care. Rather than reenacting antiquity, we work with the spirit of the system—cycle awareness—expressed in clean, contemporary language.\n\nYour profile combines three lenses: (1) a guiding deity archetype that frames posture and motive; (2) your decan cadence (a ten‑day rhythm that hints at when to initiate, consolidate, or reveal); and (3) a simple solar/lunar emphasis around your date (daylight push vs. night‑mind integration). We then add current windows that mirror the decans—where momentum builds, where patience compounds, and where small rituals restore edge. The result is not prophecy but a precise brief: context, leverage, sequencing, and an elegant next move.\n\nThis is a respectful, secular synthesis informed by decanal timing. We honor popular twelve‑deity \"Egyptian zodiac\" mappings when useful, and go deeper with ten‑day decans for nuance. The aim is practical clarity you can use in launches, collaborations, and recovery.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Strategic clarity—turn cycle lore into a one‑page decision brief.",
+    "Decan pacing—identify initiate · integrate · reveal windows.",
+    "Partnership intelligence—complementary vs. catalytic archetypes, explained cleanly.",
+    "Premium synthesis—deity archetype × decan cadence × solar/lunar tone.",
+    "Rituals that scale—tiny practices to anchor attention without theatrics."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "Your guiding archetype with a concise strengths/edge profile.",
+    "Your birth‑decan and nearby neighbors for nuance (±10 days).",
+    "Timing windows for the next 3–6 months mapped to decan rhythm.",
+    "Compatibility notes (complementary, catalytic, tender pairings) and collaboration cues.",
+    "A minimalist ritual kit: dawn focus, mid‑cycle check, and night reset."
   ];
 
-  const chineseFaqs = [
+  const egyptianFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "Is this historically exact Egyptian astrology?",
+      answer: "No. It's a respectful modern synthesis inspired by decans and temple star clocks. We avoid reenactment; we use the rhythm for practical clarity."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "Do you use the twelve‑deity 'Egyptian zodiac'?",
+      answer: "We reference it as a familiar doorway and add depth with the 36 decans (ten‑day intervals). You'll see both where useful."
+    },
+    {
+      question: "Do I need my birth time?",
+      answer: "Not required. Birth time lets us add a simple day/night emphasis and refine nuance, but the core reading works with date alone."
     },
     {
       question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      answer: "No. We don't predict fate. We translate cyclic patterns into context, timing, and next steps."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
-    },
-    {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
+      question: "What if my birthday sits on a decan boundary?",
+      answer: "We show the primary decan and the neighbor on either side. Boundary births receive notes for both, with clear cues on how to test them."
     },
     {
       question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      answer: "Western uses sign and aspect geometry across twelve houses; our Egyptian track emphasizes ten‑day decans and deity archetypes for timing and posture. Many clients use both."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
+		title="Egyptian"
+		logoImage="/egyptian.png"
 		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		description="Discover your deity archetype and decan rhythm"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="Decans, distilled for decisions." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because the right window changes the outcome." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="Your archetype and birth‑decan at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="Egyptian Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How Egyptian Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={egyptianFaqs} />
 
 	<!-- Conchomancy Info -->
 

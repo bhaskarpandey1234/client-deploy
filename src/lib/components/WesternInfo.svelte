@@ -11,48 +11,48 @@
   import WhatYouGet from "./WhatYouGet.svelte";
   import Testimonials from "./Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "Western astrology is a language of timing and temperament built from your natal chart—the sky's layout at the minute you were born. It maps planets to the 12 signs and the 12 houses (life areas), then measures relationships between planets (aspects) to describe how pressure and support move through your life. The Big Three—Sun (core drive), Moon (needs/recovery), and Rising/Ascendant (operating style)—set the posture; the rest of the chart refines pace, leverage, and risk. Transits add motion as planets revisit sensitive points; secondary progressions describe inner seasons.\n\nAsteria treats this as operating language, not prophecy. We translate symbols into execution: constraints to respect, levers to apply, and a practical sequence—now/next/avoid—you can schedule. We focus on what is actionable: where momentum builds, where consolidation pays, and where a pause protects the plan.\n\nIf your birth time is uncertain, we state confidence levels and adjust methods (solar or Moon‑based baselines). The outcome is a clean, premium brief you can use for launches, negotiations, hiring, creative sprints, or recovery—clarity without theatrics.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Strategic clarity—distill a complex chart into a one‑page decision brief.",
+    "Timing intelligence—transit/progression windows for go · steady · pause.",
+    "Partnership insight—chemistry and conflict mapped without drama.",
+    "Premium synthesis—Sun · Moon · Rising plus key aspects, houses, and current cycles.",
+    "Repeatable method—monthly pulse, quarterly plan, annual horizon."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "Your Big Three profile with strengths, edges, and signature pacing.",
+    "House‑by‑house snapshot for work, money, relationships, creativity, and health.",
+    "Transit & progression radar (3–6 months) with Now · Next · Avoid actions.",
+    "Compatibility overlays and collaboration cues for key relationships or teams.",
+    "Monthly pulse notes and a minimalist ritual to anchor intent."
   ];
 
-  const chineseFaqs = [
+  const westernFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "Is this just my Sun sign?",
+      answer: "No. We analyze the full natal chart—Sun, Moon, Rising, planets, houses, and aspects—then deliver a decision brief."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "What if I don't know my exact birth time?",
+      answer: "We can still read much of your chart. We'll use solar or Moon‑based baselines and clearly mark confidence levels."
     },
     {
-      question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      question: "How often should I check transits?",
+      answer: "Monthly for planning; quarterly for strategy; weekly for rhythm checks when stakes are high."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
+      question: "What about Mercury retrograde?",
+      answer: "Context matters. We evaluate retrogrades by house and aspect so you know what actually changes for you."
     },
     {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
+      question: "Do you use progressions?",
+      answer: "Yes, selectively, to track inner seasons—paired with current transits for timing you can act on."
     },
     {
-      question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      question: "Does this replace therapy, legal, or medical advice?",
+      answer: "No. It's context and timing support, not a substitute for professional services."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
-		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		title="Western"
+		logoImage="/western.png"
+		buttonText="GET YOUR CHART"
+		description="Your chart, distilled for decisions—pattern over prophecy"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="Pattern over prophecy." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because timing changes outcomes." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="Your Big Three at a glance—plus the moves that fit." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="Western Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How Western Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={westernFaqs} />
 
 	<!-- Conchomancy Info -->
 

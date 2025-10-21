@@ -1,58 +1,58 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import FAQ from "./FAQ.svelte";
-  import FooterMain from "./FooterMain.svelte";
-  import HeaderAsteria from "./HeaderAsteria.svelte";
-  import HeroSection from "./HeroSection.svelte";
-  import ShellCollection from "./ShellCollection.svelte";
-  import HowShellCastingWorks from "./HowShellCastingWorks.svelte";
-  import WhatItIs from "./WhatItIs.svelte";
-  import WhyItHelps from "./WhyItHelps.svelte";
-  import WhatYouGet from "./WhatYouGet.svelte";
-  import Testimonials from "./Testimonials.svelte";
+  import FAQ from "../FAQ.svelte";
+  import FooterMain from "../FooterMain.svelte";
+  import HeaderAsteria from "../HeaderAsteria.svelte";
+  import HeroSection from "../HeroSection.svelte";
+  import ShellCollection from "../ShellCollection.svelte";
+  import HowShellCastingWorks from "../HowShellCastingWorks.svelte";
+  import WhatItIs from "../WhatItIs.svelte";
+  import WhyItHelps from "../WhyItHelps.svelte";
+  import WhatYouGet from "../WhatYouGet.svelte";
+  import Testimonials from "../Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "Oracle cards are a modular symbol system designed for focused reflection and decision‑making. Unlike Tarot, each deck defines its own language—archetypes, seasons, elements, prompts. Asteria works only with curated decks whose structure is transparent and actionable. We group cards into functional roles: anchor (identity/posture), energy (conditions and timing), and guidance (levers and next moves).\n\nThe method is strategic, not superstitious. You set a precise prompt; we select an appropriate spread (single for a headline; three for context‑constraint‑leverage; five for a strategy map). Card orientation, if used by the deck, is treated as tone—internalization, delay, or overuse—never doom. We layer soft timing windows (roughly 2–12 weeks) and relationship/role considerations when relevant. The result is an elegant brief: strengths to lean into, cautions to respect, and a sequence that reduces drag.\n\nOracle cards here are operating language. They slow the moment so patterns surface and choices become cleaner.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Clarity under ambiguity—turn a noisy question into a legible pattern.",
+    "Actionable language—insight expressed as strengths, cautions, and next moves.",
+    "Timing you can plan against—short windows mapped to your horizon.",
+    "Deck‑aware method—fits the question instead of forcing a template.",
+    "Repeatable structure—consistent spreads for comparable decisions over time."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "A one‑page brief of your question, spread, and the core pattern at play.",
+    "Card‑by‑card analysis distilled into leverage points and risks.",
+    "Now / Next / Avoid actions with a 2–12 week horizon.",
+    "Compatibility and collaboration notes when relationships are in scope.",
+    "Reflection prompts and a minimalist ritual to anchor intent."
   ];
 
-  const chineseFaqs = [
+  const oracleFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "Oracle vs. Tarot—what's the difference?",
+      answer: "Tarot is a fixed 78‑card framework; oracle decks are modular and author‑defined. We choose decks with clear structure for decision use."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "Do reversals matter?",
+      answer: "If the deck supports orientation, we read it as tone (internal, delayed, over‑amped)—not as negative fate."
     },
     {
-      question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      question: "How many decks do you use?",
+      answer: "Usually one per question for coherence; occasionally a cross‑check card from a second deck for contrast."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
+      question: "Is this predictive?",
+      answer: "No. We translate pattern into practical context and timing so you can decide with confidence."
     },
     {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
+      question: "How often should I read?",
+      answer: "Weekly for momentum, or ahead of key decisions. Avoid repeated pulls on the same question in a short window."
     },
     {
-      question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      question: "Can I use my own deck?",
+      answer: "Yes. We can read with your deck if the structure is clear, and we'll map its language to our brief."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
-		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		title="Oracle Cards"
+		logoImage="/oracle.png"
+		buttonText="DRAW YOUR CARDS"
+		description="Your deck, distilled for decisions—pattern over prophecy"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="Your deck, distilled for decisions." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because sequencing changes outcomes." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="A one‑page brief you can act on." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="Oracle Card Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How Oracle Card Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={oracleFaqs} />
 
 	<!-- Conchomancy Info -->
 

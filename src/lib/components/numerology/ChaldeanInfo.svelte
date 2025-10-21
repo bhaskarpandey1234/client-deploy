@@ -1,58 +1,58 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import FAQ from "./FAQ.svelte";
-  import FooterMain from "./FooterMain.svelte";
-  import HeaderAsteria from "./HeaderAsteria.svelte";
-  import HeroSection from "./HeroSection.svelte";
-  import ShellCollection from "./ShellCollection.svelte";
-  import HowShellCastingWorks from "./HowShellCastingWorks.svelte";
-  import WhatItIs from "./WhatItIs.svelte";
-  import WhyItHelps from "./WhyItHelps.svelte";
-  import WhatYouGet from "./WhatYouGet.svelte";
-  import Testimonials from "./Testimonials.svelte";
+  import FAQ from "../FAQ.svelte";
+  import FooterMain from "../FooterMain.svelte";
+  import HeaderAsteria from "../HeaderAsteria.svelte";
+  import HeroSection from "../HeroSection.svelte";
+  import ShellCollection from "../ShellCollection.svelte";
+  import HowShellCastingWorks from "../HowShellCastingWorks.svelte";
+  import WhatItIs from "../WhatItIs.svelte";
+  import WhyItHelps from "../WhyItHelps.svelte";
+  import WhatYouGet from "../WhatYouGet.svelte";
+  import Testimonials from "../Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "Chaldean numerology is a name‑and‑date system that treats numbers as patterns you can work with. Letters are mapped to values 1–8 (with 9 treated as exceptional in many lineages), and names are read by both their total and the single‑digit root. The unreduced total—called the compound number—adds nuance. Birth dates contribute another layer: the day's vibration and the reduced root of the full date. Asteria synthesizes these pieces into operating language: constraints to respect, leverage to apply, and a sequence that reduces drag.\n\nOur approach is modern and secular. We consider phonetics (how a name is said), cultural spellings, and transliteration, then express the outcome as strengths, cautions, and timing cues. Compounds flag pattern dynamics (e.g., when to build support before a push, or where to temper speed). Optional name variants are discussed as design choices, not destiny edits. The aim isn't prophecy—it's clarity for launches, partnerships, and recovery.\n\nYou receive a precise brief that translates number families into decisions: where momentum builds, what to steady, and what to defer.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Strategic clarity—turn symbolic math into a one‑page decision brief.",
+    "Name as handle—how you're perceived and how you initiate under pressure.",
+    "Compound nuance—identify leverage and risk hiding inside the total.",
+    "Timing awareness—short windows mapped to personal cycles (1–9).",
+    "Premium synthesis—phonetics, culture, and context translated without hype."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "Name profile: root and compound number, phonetic emphasis, and tonal cues.",
+    "Birth‑date profile: day vibration, full‑date root, and cycle highlights.",
+    "Action plan: Now · Next · Avoid with 2–12 week windows.",
+    "Compatibility notes (complementary vs. catalytic numbers) for teams/partners.",
+    "Optional: spelling variants discussed as brand/design choices with trade‑offs."
   ];
 
-  const chineseFaqs = [
+  const chaldeanFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "How is Chaldean different from Pythagorean?",
+      answer: "Chaldean maps letters to 1–8 (often reserving 9) and emphasizes the compound number before reduction. Pythagorean uses 1–9 evenly and different letter values."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "Do you change spellings?",
+      answer: "Only if you want to test a design choice (brand alias, initials, spacing). We'll show trade‑offs; you decide."
     },
     {
-      question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      question: "Is this predictive?",
+      answer: "No. We translate pattern into context and timing; you make the call."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
+      question: "Do I need my birth time?",
+      answer: "No. Date is sufficient. Time is used only for edge cases if you want added nuance."
     },
     {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
+      question: "What about non‑Latin names?",
+      answer: "We respect original scripts and use careful transliteration; pronunciation matters, so phonetics are considered."
     },
     {
-      question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      question: "Are certain numbers good or bad?",
+      answer: "We avoid superstition. Each family has strengths and cautions; context decides the move."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
+		title="Chaldean"
+		logoImage="/chaldean.png"
 		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		description="Numbers as operating language—pattern, not prophecy"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="Numbers as operating language." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because names carry signal." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="Your name's root and compound—at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="Chaldean Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How Chaldean Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={chaldeanFaqs} />
 
 	<!-- Conchomancy Info -->
 

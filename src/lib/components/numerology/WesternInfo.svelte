@@ -1,58 +1,58 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import FAQ from "./FAQ.svelte";
-  import FooterMain from "./FooterMain.svelte";
-  import HeaderAsteria from "./HeaderAsteria.svelte";
-  import HeroSection from "./HeroSection.svelte";
-  import ShellCollection from "./ShellCollection.svelte";
-  import HowShellCastingWorks from "./HowShellCastingWorks.svelte";
-  import WhatItIs from "./WhatItIs.svelte";
-  import WhyItHelps from "./WhyItHelps.svelte";
-  import WhatYouGet from "./WhatYouGet.svelte";
-  import Testimonials from "./Testimonials.svelte";
+  import FAQ from "../FAQ.svelte";
+  import FooterMain from "../FooterMain.svelte";
+  import HeaderAsteria from "../HeaderAsteria.svelte";
+  import HeroSection from "../HeroSection.svelte";
+  import ShellCollection from "../ShellCollection.svelte";
+  import HowShellCastingWorks from "../HowShellCastingWorks.svelte";
+  import WhatItIs from "../WhatItIs.svelte";
+  import WhyItHelps from "../WhyItHelps.svelte";
+  import WhatYouGet from "../WhatYouGet.svelte";
+  import Testimonials from "../Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "Western (Pythagorean) numerology turns names and birth dates into a precise pattern language you can use. Letters map to numbers 1–9 (A=1 … I=9, then J=1 again), and we read both the unreduced total and the single‑digit root. Key signatures include: Life Path (full birth date), Expression/Destiny (full name), Soul Urge/Heart's Desire (vowels), Personality (consonants), Birthday (day of month), and Maturity/Realization (Life Path + Expression). We acknowledge Master numbers (11, 22, 33) as intensifiers and also note their reduced roots for practical pacing.\n\nTiming is expressed through Personal Year/Month/Day cycles (1–9) that describe momentum: initiate, build, refine, reveal, and close. We treat numbers as context, not fate. For non‑Latin scripts, we use careful transliteration; for names with variants (legal, professional, preferred), we show trade‑offs so you can choose intentionally. The output is a clean decision brief—constraints to respect, leverage to apply, and a sequence that reduces drag.\n\nUse it to frame launches, shape roles and messaging, or sanity‑check a week. Pattern over prophecy; clarity over drama.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Strategic clarity—distill name/date signals into a one‑page brief.",
+    "Actionable timing—Personal Year/Month windows you can schedule.",
+    "Name as instrument—how you initiate and are received under pressure.",
+    "Master‑number nuance—intensity with grounded reduce‑to‑root guidance.",
+    "Premium synthesis—transliteration, culture, and context handled cleanly."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "Your core profile: Life Path, Expression, Soul Urge, Personality, Birthday, Maturity—strengths, edges, and pacing.",
+    "Master‑number notes (11/22/33) with clear, practical application and root integration.",
+    "A 3–6 month timing map (Personal Year/Month/Day) with Now · Next · Avoid actions.",
+    "Compatibility & collaboration cues by number interplay (complementary vs. catalytic).",
+    "Optional: name/nickname/initial variants presented as design choices with trade‑offs."
   ];
 
-  const chineseFaqs = [
+  const westernNumerologyFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "How is Pythagorean different from Chaldean?",
+      answer: "Pythagorean maps A–Z to 1–9 evenly and emphasizes Life Path + name clusters; Chaldean uses 1–8 with a different letter map and focuses on compounds."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "Do I need my birth time?",
+      answer: "No. Date is sufficient. Time matters only if you want added nuance from adjacent calendars or rectification work."
     },
     {
-      question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      question: "Do I need to change my name?",
+      answer: "Never required. We treat names as instruments: you can adjust usage, initials, or timing without changing legal spelling."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
+      question: "What about Master numbers?",
+      answer: "We keep the compound (11/22/33) and the reduced root for pacing. Intensity without fatalism."
     },
     {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
+      question: "Is this predictive?",
+      answer: "No. It's a context tool to support timing and communication—not prophecy."
     },
     {
-      question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      question: "Non‑Latin names?",
+      answer: "We use respectful transliteration and, if helpful, test one variant so you can compare tone and totals."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
+		title="Western"
+		logoImage="/westernN.png"
 		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		description="Numbers, distilled for decisions—pattern, not prophecy"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="Numbers, distilled for decisions." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because rhythm changes outcomes." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="Your core numbers—at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="Western Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How Western Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={westernNumerologyFaqs} />
 
 	<!-- Conchomancy Info -->
 

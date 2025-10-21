@@ -1,58 +1,58 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import FAQ from "./FAQ.svelte";
-  import FooterMain from "./FooterMain.svelte";
-  import HeaderAsteria from "./HeaderAsteria.svelte";
-  import HeroSection from "./HeroSection.svelte";
-  import ShellCollection from "./ShellCollection.svelte";
-  import HowShellCastingWorks from "./HowShellCastingWorks.svelte";
-  import WhatItIs from "./WhatItIs.svelte";
-  import WhyItHelps from "./WhyItHelps.svelte";
-  import WhatYouGet from "./WhatYouGet.svelte";
-  import Testimonials from "./Testimonials.svelte";
+  import FAQ from "../FAQ.svelte";
+  import FooterMain from "../FooterMain.svelte";
+  import HeaderAsteria from "../HeaderAsteria.svelte";
+  import HeroSection from "../HeroSection.svelte";
+  import ShellCollection from "../ShellCollection.svelte";
+  import HowShellCastingWorks from "../HowShellCastingWorks.svelte";
+  import WhatItIs from "../WhatItIs.svelte";
+  import WhyItHelps from "../WhyItHelps.svelte";
+  import WhatYouGet from "../WhatYouGet.svelte";
+  import Testimonials from "../Testimonials.svelte";
 
-  const whatItIsContent = "The Chinese Zodiac—Shēngxiào—is a 12‑animal cycle that maps time as a living pattern. Each lunar year is paired with one of five elements (Wood, Fire, Earth, Metal, Water) and a yin/yang tone, creating a 60‑year rhythm. Your \"year animal\" is the doorway, but the signature is the triad of Animal + Element + Polarity. Together they sketch temperament, pacing, and the kinds of conditions that help you thrive.\n\nAsteria approaches this tradition as a design language for decisions. We translate classical pairings into contemporary prompts: where your energy runs clean, where friction becomes growth, and when to act or wait. Rather than predicting fate, we reveal context—so you can choose with clarity. Use it to time launches, map roles and partnerships, or simply understand why certain seasons feel charged while others invite rest. The result is a clear, elegant read on your current cycle and the moves that harmonize with it.";
+  const whatItIsContent = "The Yijing (I‑Ching) is a 64‑pattern system for reading change. Each pattern—called a hexagram—is built from two trigrams stacked into six lines. In practice you pose a focused question, cast six lines (traditionally with coins or yarrow stalks), and receive: a primary hexagram that names the current posture, any changing lines that show where movement is already happening, and a relating hexagram that frames direction.\n\nAsteria treats the text as operating language—constraints to respect, leverage to apply, and a sequence that reduces drag. We map Judgment, Image, and the relevant line statements into a concise brief: what is stable, what wants to move, what to test next, and where timing and alliances change the odds. The cast is not an omen; it is a structured conversation with change.\n\nWe default to the three‑coin method for speed and reproducibility; the yarrow‑stalk method is available for ceremonial depth. Readings are secular and decision‑literate: pattern over prophecy, clarity over drama. The goal is elegant guidance you can apply to launches, negotiations, creative work, or recovery routines—without jargon.";
 
   const whyItHelpsItems = [
-    "Clarity under pressure: a fast pattern read when the stakes are high.",
-    "Timing that respects the lunar rhythm—daylight and night cycles matter.",
-    "Partnership chemistry: who amplifies you, who challenges you, and how to work together.",
-    "Premium synthesis: Animal × Element × Yin/Yang expressed as strengths, cautions, and cues.",
-    "Ritual‑friendly: small, sustainable practices to anchor intention."
+    "Strategic clarity—turn ambiguity into a one‑page decision brief.",
+    "Sequencing you can execute—now / next / avoid.",
+    "Timing intelligence—short windows that respect real constraints.",
+    "Stakeholder insight—roles and frictions mapped via Image/lines.",
+    "Repeatable practice—same spread, comparable results over time."
   ];
 
   const whatYouGetItems = [
-    "Your Year Animal, Element, and Yin/Yang profile—the triad at a glance.",
-    "Strengths, blind spots, and signature pace (move/merge/rest).",
-    "Timing windows for the next 3–6 months (favorable, neutral, challenging) with suggested moves.",
-    "Compatibility map: key allies, creative foils, and collaboration advice.",
-    "Monthly pulse notes and a minimalist ritual to ground the theme."
+    "Your Primary Hexagram with a plain‑language theme and posture.",
+    "Changing‑line analysis prioritized into strengths, risks, and levers.",
+    "Relating Hexagram as direction (what's emerging / where to aim).",
+    "Action cues: Now · Next · Avoid, with a 2–12 week timing horizon.",
+    "Compatibility/collaboration notes and a minimalist ritual (optional)."
   ];
 
-  const chineseFaqs = [
+  const ichingFaqs = [
     {
-      question: "How is my sign determined?",
-      answer: "By your lunar‑year of birth. Because Lunar New Year shifts between late January and mid‑February, Asteria converts your Gregorian date automatically to the correct lunar year."
+      question: "Is this predictive?",
+      answer: "No. We translate pattern into practical context and timing so you can choose with confidence."
     },
     {
-      question: "What about Elements and Yin/Yang?",
-      answer: "Each year carries one of five elements and a yin or yang tone. This pairing colors the animal's expression (e.g., Wood adds growth and flexibility; Metal adds edge and precision)."
+      question: "Coins or yarrow—what's the difference?",
+      answer: "Coins are fast and reproducible; yarrow stalks are slower and more ceremonial. Both are valid; the method doesn't change the integrity of the brief."
     },
     {
-      question: "Is this fortune‑telling?",
-      answer: "No. We don't forecast destiny. We translate cyclic patterns into practical context so you can decide with confidence."
+      question: "What do changing lines mean?",
+      answer: "They indicate where movement or pressure already exists. We weigh each line, then synthesize it into actions and cautions."
     },
     {
-      question: "I was born in late January—am I the previous animal?",
-      answer: "Possibly. If your birthday falls before that year's Lunar New Year, your animal is usually the previous one. Our tool checks this for you."
+      question: "How often should I consult the Yijing?",
+      answer: "Use it for key decisions or a weekly focus. Avoid repeated casts on the same question in a short window—act, then revisit."
     },
     {
-      question: "Does time of day matter?",
-      answer: "Some lineages use an hour animal for nuance. Where available, Asteria adds this as a soft modifier—never as a label."
+      question: "Do I need to study the classic text first?",
+      answer: "No. We provide clear, modern language and cite the relevant passages for depth."
     },
     {
-      question: "How does this differ from Western astrology?",
-      answer: "Chinese astrology keys to a lunar year cycle with 12 animals plus Five Elements and yin/yang; Western centers the Sun's position by month. Many clients use both for a fuller view."
+      question: "Does this replace professional advice?",
+      answer: "No. It's a context tool—not medical, legal, or financial counsel."
     }
   ];
 
@@ -167,36 +167,36 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese Zodiac"
-		logoImage="/chinese.png"
-		buttonText="GET YOUR READING"
-		description="Discover your animal, element, and yin/yang signature"
+		title="I Ching"
+		logoImage="/iching.png"
+		buttonText="CAST YOUR HEXAGRAM"
+		description="Change, made legible—pattern over prophecy"
 		onButtonClick={handleCastShells}
 	/>
 
 		<div class="info-wrapper">
-			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
-			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
+			<WhatItIs title="What it is" subtitle="Change, made legible." content={whatItIsContent} />
+			<WhyItHelps title="Why it helps" subtitle="Because sequencing changes outcomes." items={whyItHelpsItems} />
+			<WhatYouGet title="What you get" subtitle="Primary · Lines · Relating—distilled." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
 	<ShellCollection 
-		title="Chinese Zodiac Collection"
+		title="I Ching Collection"
 		{shells}
 	/>
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Zodiac Works"
+		title="How I Ching Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
 
 	<!-- FAQ -->
-	<FAQ title="FAQ" faqs={chineseFaqs} />
+	<FAQ title="FAQ" faqs={ichingFaqs} />
 
 	<!-- Conchomancy Info -->
 

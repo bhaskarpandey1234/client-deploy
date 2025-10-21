@@ -47,14 +47,14 @@
         </button>
         {#if astrologyOpen}
           <div class="dropdown-menu">
-            <a href="/asteria/astrology/celtic-tree-zodiac" class="dropdown-item" on:click={closeAllDropdowns}>Celtic Tree Zodiac</a>
+            <a href="/asteria/astrology/celtic/information" class="dropdown-item" on:click={closeAllDropdowns}>Celtic Tree Zodiac</a>
             <a href="/asteria/astrology/chinese-zodiac/information" class="dropdown-item" on:click={closeAllDropdowns}>Chinese Zodiac</a>
-            <a href="/asteria/astrology/egyptian" class="dropdown-item" on:click={closeAllDropdowns}>Egyptian</a>
-            <a href="/asteria/astrology/japanese" class="dropdown-item" on:click={closeAllDropdowns}>Japanese</a>
-            <a href="/asteria/astrology/mayan" class="dropdown-item" on:click={closeAllDropdowns}>Mayan</a>
+            <a href="/asteria/astrology/egyptian/information" class="dropdown-item" on:click={closeAllDropdowns}>Egyptian</a>
+            <a href="/asteria/astrology/japanese/information" class="dropdown-item" on:click={closeAllDropdowns}>Japanese</a>
+            <a href="/asteria/astrology/mayan/information" class="dropdown-item" on:click={closeAllDropdowns}>Mayan</a>
             <a href="/asteria/astrology/panchang/information" class="dropdown-item" on:click={closeAllDropdowns}>Panchang</a>
-            <a href="/asteria/astrology/vedic" class="dropdown-item" on:click={closeAllDropdowns}>Vedic</a>
-            <a href="/asteria/astrology/western" class="dropdown-item" on:click={closeAllDropdowns}>Western</a>
+            <a href="/asteria/astrology/vedic/information" class="dropdown-item" on:click={closeAllDropdowns}>Vedic</a>
+            <a href="/asteria/astrology/western/information" class="dropdown-item" on:click={closeAllDropdowns}>Western</a>
           </div>
         {/if}
       </div>
@@ -66,11 +66,11 @@
         </button>
         {#if numerologyOpen}
           <div class="dropdown-menu">
-            <a href="/asteria/numerology/angel-numbers" class="dropdown-item" on:click={closeAllDropdowns}>Angel Numbers</a>
-            <a href="/asteria/numerology/chaldean" class="dropdown-item" on:click={closeAllDropdowns}>Chaldean</a>
-            <a href="/asteria/numerology/chinese" class="dropdown-item" on:click={closeAllDropdowns}>Chinese</a>
-            <a href="/asteria/numerology/kabbalistic" class="dropdown-item" on:click={closeAllDropdowns}>Kabbalistic</a>
-            <a href="/asteria/numerology/western" class="dropdown-item" on:click={closeAllDropdowns}>Western</a>
+            <a href="/asteria/numerology/angle/information" class="dropdown-item" on:click={closeAllDropdowns}>Angel Numbers</a>
+            <a href="/asteria/numerology/chaldean/information" class="dropdown-item" on:click={closeAllDropdowns}>Chaldean</a>
+            <a href="/asteria/numerology/chinese/information" class="dropdown-item" on:click={closeAllDropdowns}>Chinese</a>
+            <a href="/asteria/numerology/kabbalistic/information" class="dropdown-item" on:click={closeAllDropdowns}>Kabbalistic</a>
+            <a href="/asteria/numerology/western/information" class="dropdown-item" on:click={closeAllDropdowns}>Western</a>
           </div>
         {/if}
       </div>
@@ -83,12 +83,12 @@
         {#if divinationOpen}
           <div class="dropdown-menu">
             <a href="/asteria/divination/conchomancy/information" class="dropdown-item" on:click={closeAllDropdowns}>Conchomancy</a>
-            <a href="/asteria/divination/i-ching" class="dropdown-item" on:click={closeAllDropdowns}>I Ching</a>
-            <a href="/asteria/divination/oracle-cards" class="dropdown-item" on:click={closeAllDropdowns}>Oracle Cards</a>
-            <a href="/asteria/divination/palmistry" class="dropdown-item" on:click={closeAllDropdowns}>Palmistry</a>
-            <a href="/asteria/divination/runes" class="dropdown-item" on:click={closeAllDropdowns}>Runes</a>
-            <a href="/asteria/divination/tarot-cards" class="dropdown-item" on:click={closeAllDropdowns}>Tarot Cards</a>
-            <a href="/asteria/divination/vedic" class="dropdown-item" on:click={closeAllDropdowns}>Vedic</a>
+            <a href="/asteria/divination/i-ching/information" class="dropdown-item" on:click={closeAllDropdowns}>I Ching</a>
+            <a href="/asteria/divination/oracle/information" class="dropdown-item" on:click={closeAllDropdowns}>Oracle Cards</a>
+            <a href="/asteria/divination/palmistry/information" class="dropdown-item" on:click={closeAllDropdowns}>Palmistry</a>
+            <a href="/asteria/divination/runes/information" class="dropdown-item" on:click={closeAllDropdowns}>Runes</a>
+            <a href="/asteria/divination/tarot-cards/information" class="dropdown-item" on:click={closeAllDropdowns}>Tarot Cards</a>
+            <!-- <a href="/asteria/divination/vedic/information" class="dropdown-item" on:click={closeAllDropdowns}>Vedic</a> -->
           </div>
         {/if}
       </div>
