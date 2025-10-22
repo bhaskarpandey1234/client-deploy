@@ -1,4 +1,5 @@
 <script lang="ts">
+  import FooterMain from '$lib/components/FooterMain.svelte';
   import { onMount } from 'svelte';
 
   type Method = 'coins' | 'yarrow';
@@ -441,11 +442,9 @@
     </section>
   {/if}
 
-  <footer class="footer">
-    <p class="fine">© {new Date().getFullYear()} · For reflection and learning; not a substitute for professional advice.</p>
-  </footer>
+  
 </div>
-
+<FooterMain/>
 <style>
   :root{
     --bg: #0c0d10;

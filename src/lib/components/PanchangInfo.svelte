@@ -140,8 +140,8 @@
 		}
 	];
 
-	function handleCastShells(): void {
-		goto('/asteria/divination/conchomancy/experience');
+	function handlePanchang(): void {
+		goto('/asteria/astrology/panchang/experience');
 	}
 
 	function handlePlayVideo(): void {
@@ -171,7 +171,7 @@
 		logoImage="/panch_logo.png"
 		buttonText="READ THE STARS"
 		description="Five limbs, one clear brief—timing you can schedule"
-		onButtonClick={handleCastShells}
+		onButtonClick={handlePanchang}
 	/>
 
 		<div class="info-wrapper">

@@ -140,8 +140,8 @@
 		}
 	];
 
-	function handleCastShells(): void {
-		goto('/asteria/divination/conchomancy/experience');
+	function handleTarotCards(): void {
+		goto('/asteria/divination/tarot-cards/experience');
 	}
 
 	function handlePlayVideo(): void {
@@ -171,7 +171,7 @@
 		logoImage="/tarot-cards.png"
 		buttonText="DRAW YOUR CARDS"
 		description="A 78‑card system for decisive clarity—pattern over prophecy"
-		onButtonClick={handleCastShells}
+		onButtonClick={handleTarotCards}
 	/>
 
 		<div class="info-wrapper">

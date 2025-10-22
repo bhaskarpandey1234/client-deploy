@@ -1,4 +1,5 @@
 <script lang="ts">
+  import FooterMain from '$lib/components/FooterMain.svelte';
   import { onMount } from 'svelte';
 
   // ———————————————————————————————————————————————
@@ -413,11 +414,9 @@
     </section>
   {/if}
 
-  <footer class="footer">
-    <p class="fine">© {new Date().getFullYear()} · For inspiration and reflection only.</p>
-  </footer>
+  
 </div>
-
+<FooterMain/>
 <style>
   :root{
     --bg: #0c0d10;

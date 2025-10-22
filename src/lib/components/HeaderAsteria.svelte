@@ -98,12 +98,12 @@
 
     <div class="footer-lang">
       <select class="lang-selector">
-        <option value="hr">Croatian</option>
         <option value="en" selected>English</option>
+        <option value="hr">Croatian</option>
         <option value="it">Italian</option>
         <option value="pl">Polish</option>
-        <option value="ru">Russian</option>
-        <option value="sr">Serbian</option>
+        <option value="ru">Русский</option>
+        <option value="sr">Српски</option>
       </select>
     </div>
   </div>
