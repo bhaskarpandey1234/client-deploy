@@ -177,15 +177,14 @@
 		<div class="info-wrapper">
 			<WhatItIs title="What it is" subtitle="Change, made legible." content={whatItIsContent} />
 			<WhyItHelps title="Why it helps" subtitle="Because sequencing changes outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Primary · Lines · Relating—distilled." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
-	<ShellCollection 
+	<!-- <ShellCollection 
 		title="I Ching Collection"
 		{shells}
-	/>
+	/> -->
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
@@ -194,6 +193,8 @@
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+	<WhatYouGet title="What you get" subtitle="Primary · Lines · Relating—distilled." items={whatYouGetItems} />
 
 	<!-- FAQ -->
 	<FAQ title="FAQ" faqs={ichingFaqs} />

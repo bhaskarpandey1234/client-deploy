@@ -177,15 +177,14 @@
 		<div class="info-wrapper">
 			<WhatItIs title="What it is" subtitle="Time, designed as a 12‑animal cycle." content={whatItIsContent} />
 			<WhyItHelps title="Why it helps" subtitle="Because timing decides outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
-	<ShellCollection 
+	<!-- <ShellCollection 
 		title="Chinese Zodiac Collection"
 		{shells}
-	/>
+	/> -->
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
@@ -194,6 +193,8 @@
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+	<WhatYouGet title="What you get" subtitle="Your triad, strengths, cautions, and timing windows." items={whatYouGetItems} />
 
 	<!-- FAQ -->
 	<FAQ title="FAQ" faqs={chineseFaqs} />

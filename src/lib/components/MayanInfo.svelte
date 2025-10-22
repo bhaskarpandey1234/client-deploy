@@ -167,7 +167,7 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Mayan"
+		title="Mayan Astrology"
 		logoImage="/mayan.png"
 		buttonText="REVEAL YOUR MAYAN SIGN"
 		description="Discover your day-sign, tone, and trecena"
@@ -177,23 +177,24 @@
 		<div class="info-wrapper">
 			<WhatItIs title="What it is" subtitle="260 days, distilled for decisions." content={whatItIsContent} />
 			<WhyItHelps title="Why it helps" subtitle="Because rhythm drives outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Day‑sign & tone—at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
-	<ShellCollection 
+	<!-- <ShellCollection 
 		title="Mayan Collection"
 		{shells}
-	/>
+	/> -->
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Mayan Works"
+		title="How Mayan Astrology Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+	<WhatYouGet title="What you get" subtitle="Day‑sign & tone—at a glance." items={whatYouGetItems} />
 
 	<!-- FAQ -->
 	<FAQ title="FAQ" faqs={mayanFaqs} />

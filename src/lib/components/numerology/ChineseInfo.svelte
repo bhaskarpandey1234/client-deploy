@@ -167,7 +167,7 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chinese"
+		title="Chinese Numerology"
 		logoImage="/chineseN.png"
 		buttonText="GET YOUR READING"
 		description="Lo Shu × Five Elements × Sound—pattern over prophecy"
@@ -177,23 +177,24 @@
 		<div class="info-wrapper">
 			<WhatItIs title="What it is" subtitle="Lo Shu × Five Elements × Sound." content={whatItIsContent} />
 			<WhyItHelps title="Why it helps" subtitle="Because placement and timing shape outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your birth‑date signature at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
-	<ShellCollection 
+	<!-- <ShellCollection 
 		title="Chinese Collection"
 		{shells}
-	/>
+	/> -->
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chinese Works"
+		title="How Chinese Numerology Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+	<WhatYouGet title="What you get" subtitle="Your birth‑date signature at a glance." items={whatYouGetItems} />
 
 	<!-- FAQ -->
 	<FAQ title="FAQ" faqs={chineseNumerologyFaqs} />

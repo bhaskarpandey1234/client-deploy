@@ -167,7 +167,7 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Vedic"
+		title="Vedic Astrology"
 		logoImage="/vedic.png"
 		buttonText="GET YOUR CHART"
 		description="Sidereal clarity, modern brief—timing you can trust"
@@ -177,23 +177,24 @@
 		<div class="info-wrapper">
 			<WhatItIs title="What it is" subtitle="Sidereal clarity, modern brief." content={whatItIsContent} />
 			<WhyItHelps title="Why it helps" subtitle="Because rhythm changes outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your Lagna and nakṣatra at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
-	<ShellCollection 
+	<!-- <ShellCollection 
 		title="Vedic Collection"
 		{shells}
-	/>
+	/> -->
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Vedic Works"
+		title="How Vedic Astrology Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+	<WhatYouGet title="What you get" subtitle="Your Lagna and nakṣatra at a glance." items={whatYouGetItems} />
 
 	<!-- FAQ -->
 	<FAQ title="FAQ" faqs={vedicFaqs} />

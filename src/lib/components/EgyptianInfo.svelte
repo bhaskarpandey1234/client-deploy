@@ -167,7 +167,7 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Egyptian"
+		title="Egyptian Astrology"
 		logoImage="/egyptian.png"
 		buttonText="GET YOUR READING"
 		description="Discover your deity archetype and decan rhythm"
@@ -177,23 +177,24 @@
 		<div class="info-wrapper">
 			<WhatItIs title="What it is" subtitle="Decans, distilled for decisions." content={whatItIsContent} />
 			<WhyItHelps title="Why it helps" subtitle="Because the right window changes the outcome." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your archetype and birth‑decan at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
-	<ShellCollection 
+	<!-- <ShellCollection 
 		title="Egyptian Collection"
 		{shells}
-	/>
+	/> -->
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Egyptian Works"
+		title="How Egyptian Astrology Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+	<WhatYouGet title="What you get" subtitle="Your archetype and birth‑decan at a glance." items={whatYouGetItems} />
 
 	<!-- FAQ -->
 	<FAQ title="FAQ" faqs={egyptianFaqs} />

@@ -167,7 +167,7 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Western"
+		title="Western Numerology"
 		logoImage="/westernN.png"
 		buttonText="GET YOUR READING"
 		description="Numbers, distilled for decisions—pattern, not prophecy"
@@ -177,23 +177,24 @@
 		<div class="info-wrapper">
 			<WhatItIs title="What it is" subtitle="Numbers, distilled for decisions." content={whatItIsContent} />
 			<WhyItHelps title="Why it helps" subtitle="Because rhythm changes outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your core numbers—at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
-	<ShellCollection 
+	<!-- <ShellCollection 
 		title="Western Collection"
 		{shells}
-	/>
+	/> -->
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Western Works"
+		title="How Western Numerology Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+	<WhatYouGet title="What you get" subtitle="Your core numbers—at a glance." items={whatYouGetItems} />
 
 	<!-- FAQ -->
 	<FAQ title="FAQ" faqs={westernNumerologyFaqs} />

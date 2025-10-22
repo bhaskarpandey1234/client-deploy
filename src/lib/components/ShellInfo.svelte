@@ -186,7 +186,6 @@
 		{shells}
 	/>
 
-				<WhatYouGet subtitle="Your cast, distilled to Now · Next · Avoid." items={whatYouGetItems} />
 
 
 	<!-- How Shell Casting Works -->
@@ -196,6 +195,9 @@
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+					<WhatYouGet subtitle="Your cast, distilled to Now · Next · Avoid." items={whatYouGetItems} />
+
 
 	<!-- FAQ -->
 	<FAQ title="Frequently Asked Questions" faqs={shellFaqs} />

@@ -177,15 +177,14 @@
 		<div class="info-wrapper">
 			<WhatItIs title="What it is" subtitle="Trees and timing, distilled." content={whatItIsContent} />
 			<WhyItHelps title="Why it helps" subtitle="Because phase changes outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your guiding tree at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
-	<ShellCollection 
+	<!-- <ShellCollection 
 		title="Celtic Tree Zodiac Collection"
 		{shells}
-	/>
+	/> -->
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
@@ -194,6 +193,8 @@
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+	<WhatYouGet title="What you get" subtitle="Your guiding tree at a glance." items={whatYouGetItems} />
 
 	<!-- FAQ -->
 	<FAQ title="FAQ" faqs={celticFaqs} />

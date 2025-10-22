@@ -177,15 +177,14 @@
 		<div class="info-wrapper">
 			<WhatItIs title="What it is" subtitle="Your hands, as a living brief." content={whatItIsContent} />
 			<WhyItHelps title="Why it helps" subtitle="Because timing changes outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="A one‑page hand map for decisions." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
-	<ShellCollection 
+	<!-- <ShellCollection 
 		title="Palmistry Collection"
 		{shells}
-	/>
+	/> -->
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
@@ -194,6 +193,8 @@
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+	<WhatYouGet title="What you get" subtitle="A one‑page hand map for decisions." items={whatYouGetItems} />
 
 	<!-- FAQ -->
 	<FAQ title="FAQ" faqs={palmistryFaqs} />

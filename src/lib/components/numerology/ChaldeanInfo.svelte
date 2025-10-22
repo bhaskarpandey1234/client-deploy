@@ -167,7 +167,7 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Chaldean"
+		title="Chaldean Numerology"
 		logoImage="/chaldean.png"
 		buttonText="GET YOUR READING"
 		description="Numbers as operating language—pattern, not prophecy"
@@ -177,23 +177,24 @@
 		<div class="info-wrapper">
 			<WhatItIs title="What it is" subtitle="Numbers as operating language." content={whatItIsContent} />
 			<WhyItHelps title="Why it helps" subtitle="Because names carry signal." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your name's root and compound—at a glance." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
-	<ShellCollection 
+	<!-- <ShellCollection 
 		title="Chaldean Collection"
 		{shells}
-	/>
+	/> -->
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Chaldean Works"
+		title="How Chaldean Numerology Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+	<WhatYouGet title="What you get" subtitle="Your name's root and compound—at a glance." items={whatYouGetItems} />
 
 	<!-- FAQ -->
 	<FAQ title="FAQ" faqs={chaldeanFaqs} />

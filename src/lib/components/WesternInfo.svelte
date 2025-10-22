@@ -167,7 +167,7 @@
 
 	<!-- Hero Section -->
 	<HeroSection 
-		title="Western"
+		title="Western Astrology"
 		logoImage="/western.png"
 		buttonText="GET YOUR CHART"
 		description="Your chart, distilled for decisions—pattern over prophecy"
@@ -177,23 +177,24 @@
 		<div class="info-wrapper">
 			<WhatItIs title="What it is" subtitle="Pattern over prophecy." content={whatItIsContent} />
 			<WhyItHelps title="Why it helps" subtitle="Because timing changes outcomes." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="Your Big Three at a glance—plus the moves that fit." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
-	<ShellCollection 
+	<!-- <ShellCollection 
 		title="Western Collection"
 		{shells}
-	/>
+	/> -->
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
-		title="How Western Works"
+		title="How Western Astrology Works"
 		videoPlaceholderImage="/closeup.jpg"
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+	<WhatYouGet title="What you get" subtitle="Your Big Three at a glance—plus the moves that fit." items={whatYouGetItems} />
 
 	<!-- FAQ -->
 	<FAQ title="FAQ" faqs={westernFaqs} />

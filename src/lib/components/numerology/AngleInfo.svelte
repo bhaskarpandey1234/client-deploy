@@ -177,15 +177,14 @@
 		<div class="info-wrapper">
 			<WhatItIs title="What it is" subtitle="Signals, not superstition." content={whatItIsContent} />
 			<WhyItHelps title="Why it helps" subtitle="Because attention is scarce." items={whyItHelpsItems} />
-			<WhatYouGet title="What you get" subtitle="A live decoder for 0–9 and repeats." items={whatYouGetItems} />
 		</div>
 
 
 	<!-- Shell Collection -->
-	<ShellCollection 
+	<!-- <ShellCollection 
 		title="Angel Numbers Collection"
 		{shells}
-	/>
+	/> -->
 
 	<!-- How Shell Casting Works -->
 	<HowShellCastingWorks 
@@ -194,6 +193,8 @@
 		{infoCards}
 		onPlayClick={handlePlayVideo}
 	/>
+
+	<WhatYouGet title="What you get" subtitle="A live decoder for 0–9 and repeats." items={whatYouGetItems} />
 
 	<!-- FAQ -->
 	<FAQ title="FAQ" faqs={angelFaqs} />
