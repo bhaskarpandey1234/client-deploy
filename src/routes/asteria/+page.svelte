@@ -72,6 +72,7 @@
 </div>
 <style>
   .container{
-    background: url('/bg.jpg');
+    /* background: url('/bg.jpg'); */
+    background: linear-gradient(rgba(11, 13, 20, 0.7), rgba(11, 13, 20, 0.7)), url('/bg.jpg');
   }
 </style>
