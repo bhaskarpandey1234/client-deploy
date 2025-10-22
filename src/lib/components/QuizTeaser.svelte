@@ -10,13 +10,15 @@
 
 <section id="quiz" class="section" >
   {#if !showJourneys}
-    <div class="card" style="padding:24px">
+    <div class=" container" style="padding:24px">
       <h3 class="h3">What do you want clarity on today?</h3>
-      <div style="display:flex; gap:12px; flex-wrap:wrap; margin:12px 0 8px">
-        <button class="btn">Love</button><button class="btn">Career</button>
-        <button class="btn">Destiny</button><button class="btn">Clarity</button>
+      <div style="display:flex; gap:30px; flex-wrap:wrap; margin:12px 0 8px">
+        <button class="btn">
+          <img class="icon" src="icons/heart.png" alt="hi">Love</button><button class="btn">
+            <img class="icon" src="icons/business.png" alt="hi">Career</button>
+        <button class="btn"><img class="icon" src="icons/destiny.png" alt="hi">Destiny</button><button class="btn"><img  class="icon" src="icons/clarity.png" alt="hi">Clarity</button>
       </div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px">
+      <div style="display:flex; gap:30px; flex-wrap:wrap; margin-bottom:16px">
         <button class="btn">Gentle</button><button class="btn">Practical</button><button class="btn">Tough</button>
         <button class="btn">Next 7 days</button><button class="btn">This month</button><button class="btn">3–6 months</button>
       </div>
@@ -29,8 +31,45 @@
 
 <style>
   .btn.primary {
-    background: var(--destiny);
+    /* background: var(--destiny);
     color: #fff;
-    font-weight: 600;
+    font-weight: 600; */
+    border-radius: 115.2px;
+background: #EDB92E;
+display: inline-flex;
+height: 72px;
+padding: 18.72px 43.2px;
+align-items: center;
+flex-shrink: 0;
+
+color: #0B0D14;
+font-family: Inter;
+font-size: 21.456px;
+font-style: normal;
+font-weight: 600;
+line-height: 34.56px; /* 161.074% */
+  }
+  .btn{
+    border-radius: 25px;
+border: var(--stroke-weight-1, 1px) solid #FFF;
+  }
+  .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  .container h3{
+    color: #FFF;
+font-family: "Playfair Display";
+font-size: 27.3px;
+font-style: normal;
+font-weight: 400;
+line-height: var(--line-height-36, 36px); /* 131.868% */
+  }
+  .icon{
+    width: 18px;
+height: 18px;
+aspect-ratio: 1/1;
   }
 </style>

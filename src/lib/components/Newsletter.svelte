@@ -59,16 +59,36 @@
     margin: 0 auto;
     padding: 48px;
     text-align: center;
+    border-radius: 20px;
+border: var(--stroke-weight-1, 1px) solid rgba(255, 255, 255, 0.12);
+background: #FAEECE;
+backdrop-filter: blur(10px);
   }
   .newsletter-title {
     font-size: 32px;
     line-height: 40px;
     margin: 0 0 12px;
+    color: #2A2A2A;
+text-align: center;
+font-family: Inter;
+font-size: 31.6px;
+font-style: normal;
+font-weight: 700;
+line-height: var(--font-size-40, 40px); /* 126.582% */
   }
   .newsletter-description {
     font-size: 16px;
     color: var(--muted);
     margin: 0 0 24px;
+    color: #2A2A2A;
+text-align: center;
+
+/* asteria-guide.netlify.app/Inter/Regular */
+font-family: var(--font-family-Font-1, Inter);
+font-size: 14.9px;
+font-style: normal;
+font-weight: var(--font-weight-400, 400);
+line-height: var(--line-height-24, 24px); /* 161.074% */
   }
   .newsletter-form {
     display: flex;
@@ -93,6 +113,18 @@
     color: #fff;
     font-weight: 600;
     padding: 12px 24px;
+    border-radius: 12px;
+border: var(--stroke-weight-1, 1px) solid rgba(255, 255, 255, 0.13);
+background: #EDB92E;
+color: #0B0D14;
+text-align: center;
+
+/* asteria-guide.netlify.app/Semantic/Button */
+font-family: Inter;
+font-size: 13.3px;
+font-style: normal;
+font-weight: var(--font-weight-700, 700);
+line-height: normal;
   }
   .consent-label {
     display: flex;
@@ -102,6 +134,16 @@
     font-size: 13px;
     color: var(--muted);
     cursor: pointer;
+
+    color: #2A2A2A;
+text-align: center;
+
+/* asteria-guide.netlify.app/Semantic/Label */
+font-family: var(--font-family-Font-1, Inter);
+font-size: 12.2px;
+font-style: normal;
+font-weight: var(--font-weight-400, 400);
+line-height: var(--line-height-19_5, 19.5px); /* 159.836% */
   }
   .consent-label input {
     cursor: pointer;

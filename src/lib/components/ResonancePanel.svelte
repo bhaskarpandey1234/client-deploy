@@ -42,6 +42,14 @@
     line-height: 48px;
     text-align: center;
     margin-bottom: 48px;
+
+    color: #FFF;
+text-align: center;
+font-family: "Playfair Display";
+font-size: 47.429px;
+font-style: normal;
+font-weight: 500;
+line-height: 56.914px; /* 120% */
   }
   .stats-grid {
     display: grid;
@@ -60,21 +68,50 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    border-radius: 23.714px;
+border: 1.186px solid rgba(255, 255, 255, 0.12);
+background: #FAEECE;
+backdrop-filter: blur(11.85714340209961px);
   }
   .stat-value {
     font-size: 48px;
     font-weight: 700;
     color: var(--clarity);
     line-height: 1;
+
+    color: #2A2A2A;
+text-align: center;
+font-family: Inter;
+font-size: 49.326px;
+font-style: normal;
+font-weight: 700;
+line-height: 56.914px; /* 115.385% */
   }
   .stat-label {
     font-size: 18px;
     font-weight: 600;
     color: var(--ink);
+
+    color: #2A2A2A;
+text-align: center;
+font-family: Inter;
+font-size: 20.987px;
+font-style: normal;
+font-weight: 700;
+line-height: 32.014px; /* 152.542% */
   }
   .stat-description {
     font-size: 14px;
     color: var(--muted);
+
+    color: #2A2A2A;
+text-align: center;
+font-family: Inter;
+font-size: 15.533px;
+font-style: normal;
+font-weight: 400;
+line-height: 24.9px; /* 160.305% */
   }
   .methodology {
     font-size: 12px;

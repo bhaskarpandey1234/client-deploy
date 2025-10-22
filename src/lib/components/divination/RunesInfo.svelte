@@ -141,7 +141,7 @@
 	];
 
 	function handleCastShells(): void {
-		goto('/asteria/divination/conchomancy/experience');
+		goto('/asteria/divination/runes/experience');
 	}
 
 	function handlePlayVideo(): void {

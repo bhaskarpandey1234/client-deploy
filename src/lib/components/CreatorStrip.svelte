@@ -43,6 +43,8 @@
     border-radius: 12px;
     white-space: nowrap;
     min-width: 280px;
+
+    
   }
   .avatar {
     width: 40px;
@@ -68,5 +70,28 @@
     to { transform: translateX(-50%); }
   }
   .carousel:hover { animation-play-state: paused; }
+
+  .proof-item{
+    border-radius: 13.639px;
+border: 1.137px solid rgba(255, 255, 255, 0.12);
+background: #FAEECE;
+backdrop-filter: blur(11.366071701049805px);
+  }
+  .name{
+    color: #2A2A2A;
+font-family: Inter;
+font-size: 15.685px;
+font-style: normal;
+font-weight: 700;
+line-height: 23.869px; /* 152.174% */
+  }
+  .quote{
+    color: #2A2A2A;
+font-family: var(--font-family-Font-1, Inter);
+font-size: 13.867px;
+font-style: normal;
+font-weight: var(--font-weight-400, 400);
+line-height: 22.164px; /* 159.836% */
+  }
 </style>
 
