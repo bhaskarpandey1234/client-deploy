@@ -140,8 +140,8 @@
 		}
 	];
 
-	function handleCastShells(): void {
-		goto('/asteria/divination/conchomancy/experience');
+	function handleIching(): void {
+		goto('/asteria/divination/i-ching/experience');
 	}
 
 	function handlePlayVideo(): void {
@@ -171,7 +171,7 @@
 		logoImage="/iching.png"
 		buttonText="CAST YOUR HEXAGRAM"
 		description="Change, made legible—pattern over prophecy"
-		onButtonClick={handleCastShells}
+		onButtonClick={handleIching}
 	/>
 
 		<div class="info-wrapper">
