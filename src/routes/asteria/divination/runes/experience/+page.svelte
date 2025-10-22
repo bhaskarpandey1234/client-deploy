@@ -104,7 +104,7 @@
   ];
 
   const BLANK_RUNE: Rune = {
-    id: 'blank', glyph: '•', name: 'Blank Rune', alias: 'Odin's Rune', keywords: ['unknown','fate','surrender'],
+    id: 'blank', glyph: '•', name: 'Blank Rune', alias: "Odin's Rune", keywords: ['unknown','fate','surrender'],
     reversible: false,
     meaning: { upright: 'The unknowable; yield control and trust emergence.' }
   };
