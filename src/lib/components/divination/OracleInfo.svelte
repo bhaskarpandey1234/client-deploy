@@ -140,8 +140,8 @@
 		}
 	];
 
-	function handleCastShells(): void {
-		goto('/asteria/divination/conchomancy/experience');
+	function handleOracle(): void {
+		goto('/asteria/divination/oracle/experience');
 	}
 
 	function handlePlayVideo(): void {
@@ -171,7 +171,7 @@
 		logoImage="/oracle.png"
 		buttonText="DRAW YOUR CARDS"
 		description="Your deck, distilled for decisions—pattern over prophecy"
-		onButtonClick={handleCastShells}
+		onButtonClick={handleOracle}
 	/>
 
 		<div class="info-wrapper">

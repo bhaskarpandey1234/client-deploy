@@ -430,7 +430,7 @@
               Many changes indicate flux. Emphasize the primary hexagram's core stance while conditions shift.
             {/if}
           </p>
-          <p class="fine">Method: {result.method === 'yarrow' ? 'Yarrow weights' : 'Three‑coins'} · Seed: {result.seed}</p>
+          <p class="fine">Method: {result.method === 'yarrow' ? 'Yarrow weights' : 'Three‑coins'}</p>
         </div>
       </div>
 

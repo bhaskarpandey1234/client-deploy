@@ -402,7 +402,7 @@
         <div class="synth">
           <h3>Synthesis</h3>
           <p>{result.synthesis}</p>
-          <p class="fine">Seed: {result.seed}</p>
+          <!-- <p class="fine">Seed: {result.seed}</p> -->
         </div>
       </div>
 
