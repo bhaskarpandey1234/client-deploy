@@ -8,7 +8,7 @@
     { title: 'Observe hand & mounts', text: 'Shape, fingers, thumb, and prominence near Venus/Jupiter/Saturn/Apollo/Mercury.' },
     { title: 'Trace major lines', text: 'Life, Head, Heart—continuity, breaks, forks, and clarity.' },
     { title: 'Study minor lines & marks', text: 'Fate, Apollo, Mercury, intuition; islands, stars, chains, crosses.' },
-    { title: 'Synthesize', text: 'Relate features to the querent's question; note practical guidance.' }
+    { title: 'Synthesize', text: 'Relate features to the querent\'s question; note practical guidance.' }
   ];
 
   let stepsOpen = true;
