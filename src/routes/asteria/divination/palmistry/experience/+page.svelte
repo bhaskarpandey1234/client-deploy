@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import FooterMain from '$lib/components/FooterMain.svelte';
   import { onMount } from 'svelte';
 

@@ -1,3 +1,21 @@
 [build]
   command = "npm run build"
   publish = "build"
+
+[dev]
+  framework = "#auto"
+  functions = "netlify/functions"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/reading/*"
+  to = "/.netlify/functions/reading?token=:splat"
+  status = 200
+
+[[redirects]]
+  from = "/webhooks/stripe"
+  to = "/.netlify/functions/stripe-webhook"
+  status = 200

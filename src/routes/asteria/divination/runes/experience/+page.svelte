@@ -1,6 +1,32 @@
 <script lang="ts">
   import FooterMain from '$lib/components/FooterMain.svelte';
   import { onMount } from 'svelte';
+  
+  const steps = [
+    { title: 'Clarify intention', text: 'Frame one open question (e.g., "What supports progress on …?").' },
+    { title: 'Center', text: 'Take three breaths; some light a candle or speak a brief invocation.' },
+    { title: 'Shuffle or stir', text: 'Move the runes in their bag or on a cloth while holding your question.' },
+    { title: 'Draw', text: 'Select one or more runes (or cast a small handful).' },
+    { title: 'Place', text: 'Lay them as they fall; note orientation if you use reversals/merkstave.' },
+    { title: 'Record', text: 'Write impressions and keywords; reflect on how the symbols relate.' }
+  ];
+  
+  let stepsOpen = true;
+  let ready = false;
+  
+  onMount(() => {
+    try {
+      const saved = localStorage.getItem('asteria.steps.open.runes');
+      if (saved !== null) stepsOpen = saved === '1';
+    } catch {}
+    ready = true;
+  });
+  
+  $: if (typeof stepsOpen !== 'undefined') {
+    try {
+      localStorage.setItem('asteria.steps.open.runes', stepsOpen ? '1' : '0');
+    } catch {}
+  }
 
   // ———————————————————————————————————————————————
   // Types
@@ -154,6 +180,7 @@
   // UI State
   // ———————————————————————————————————————————————
   let name = '';
+  let email = '';
   let question = '';
   let readingDate = '';              // yyyy-mm-dd (optional, used in seed/share)
   let spread: SpreadKey = 'three';
@@ -162,6 +189,9 @@
 
   let seed = '';                     // computed or provided via query
   let result: Result | null = null;
+  let readingId = '';
+  let summary = '';
+  let showPaywall = false;
 
   let todayStr = '';
   onMount(() => {
@@ -235,19 +265,61 @@
     return `${headline}. ${modNotes}`;
   }
 
-  function compute() {
+  async function compute() {
+    if (!email.trim()) {
+      alert('Email is required');
+      return;
+    }
     seed = seed || buildSeed();
-    const rng = prngFromSeed(seed);
-    const size = SPREADS[spread].size;
-    const draws = drawRunes(size, rng);
-    const synthesis = synthesize(draws);
-    result = { seed, draws, synthesis };
-    pushQuery();
+    
+    const inputs = {
+      name, email, question, readingDate, spread,
+      allowReversals, includeBlank, seed
+    };
+    
+    const res = await fetch('/api/create-reading', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ category: 'runes', inputs })
+    });
+    
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error || 'Failed to create reading');
+      return;
+    }
+    
+    readingId = data.readingId;
+    summary = data.summary;
+    showPaywall = true;
+    result = null;
+  }
+  
+  async function unlockReading() {
+    if (!readingId) return;
+    const res = await fetch('/api/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ readingId })
+    });
+    
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error('Checkout error:', errorText);
+      alert('Failed to start checkout');
+      return;
+    }
+    
+    const data = await res.json();
+    window.location.href = data.url;
   }
 
   function resetAll() {
     result = null;
     seed = '';
+    showPaywall = false;
+    readingId = '';
+    summary = '';
   }
 
   function shuffle() {
@@ -306,17 +378,29 @@
 <!-- ———————————————————————————————————————————————
      Layout
 ——————————————————————————————————————————————— -->
-<div class="wrap">
-  <header class="header">
-    <h1>Runes Reading</h1>
-    <p class="sub">Ask a question, choose a spread, and cast the runes.</p>
-  </header>
+<header class="exp-hero">
+  <h1>Cast Your Rune Reading</h1>
+  <p class="sub">Start in under 2 minutes. Steps are optional and always available.</p>
+  <div class="cta-row">
+    <a class="btn" href="#experience-form">Start now</a>
+    <a class="link" href="/asteria/divination/runes/information">What are runes?</a>
+  </div>
+</header>
+
+<div class="exp-grid">
+  <section id="experience-form" class="exp-form" aria-label="Rune reading form">
+    <div class="wrap">
 
   <form class="card form" on:submit|preventDefault={compute}>
     <div class="grid">
       <label class="field">
         <span>Name (optional)</span>
         <input type="text" bind:value={name} placeholder="Your name" autocomplete="name" />
+      </label>
+
+      <label class="field">
+        <span>Email (required)</span>
+        <input type="email" bind:value={email} placeholder="your@email.com" autocomplete="email" required />
       </label>
 
       <label class="field">
@@ -356,8 +440,7 @@
     </div>
 
     <div class="actions">
-      <button class="btn primary" type="submit">Get reading</button>
-      <button class="btn" type="button" on:click={shuffle}>Shuffle</button>
+      <button class="btn primary" type="submit">Get reading summary</button>
       <button class="btn" type="button" on:click={resetAll}>Reset</button>
     </div>
 
@@ -366,6 +449,15 @@
       <p>Some traditions don't use reversals for certain runes (e.g., Gebo, Isa, Jera, Eihwaz, Sowilo, Ingwaz, Dagaz), and some omit the blank rune entirely. This tool lets you choose.</p>
     </details>
   </form>
+
+  {#if showPaywall}
+    <section class="card paywall" aria-live="polite">
+      <h2>Your Reading Summary</h2>
+      <p class="summary-text">{summary}</p>
+      <button class="btn primary large" type="button" on:click={unlockReading}>Pay to unlock full reading</button>
+      <p class="hint">The full personalized reading will be emailed to you after payment.</p>
+    </section>
+  {/if}
 
   {#if result}
     <section class="card result" aria-live="polite">
@@ -414,7 +506,28 @@
     </section>
   {/if}
 
-  
+    </div>
+  </section>
+
+  <aside class="exp-steps" class:ready aria-label="How to cast runes">
+    <details class="steps-panel" bind:open={stepsOpen}>
+      <summary class="steps-summary">
+        <span>How to Cast Runes</span>
+        <span class="hint">{stepsOpen ? 'Hide steps' : 'Need guidance?'}</span>
+      </summary>
+      <ol class="steps-list">
+        {#each steps as step, i}
+          <li class="step">
+            <div class="step-badge">{String(i+1).padStart(2,'0')}</div>
+            <div>
+              <h4 class="step-title">{step.title}</h4>
+              <p class="step-text">{step.text}</p>
+            </div>
+          </li>
+        {/each}
+      </ol>
+    </details>
+  </aside>
 </div>
 <FooterMain/>
 <style>
@@ -493,11 +606,48 @@
 
   .result__actions { display: flex; gap: 10px; padding: 0 16px 16px; flex-wrap: wrap; }
 
+  .paywall { margin-top: 18px; padding: 32px; text-align: center; }
+  .paywall h2 { margin: 0 0 16px; color: var(--brand); }
+  .summary-text { font-size: 1.1rem; line-height: 1.7; margin: 20px 0; color: var(--text); }
+  .btn.large { padding: 14px 28px; font-size: 1.05rem; }
+  .paywall .hint { margin-top: 16px; color: var(--muted); font-size: 0.9rem; }
+
+  /* Hero */
+  .exp-hero { padding: 48px 20px 12px; text-align: center; background: var(--bg); }
+  .exp-hero h1 { margin: 0 0 6px; font-variant: small-caps; letter-spacing: .02em; font-size: 28px; }
+  .exp-hero .sub { margin: 0; color: var(--muted); }
+  .cta-row { margin-top: 14px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .exp-hero .btn { padding: 10px 16px; border-radius: 12px; text-decoration: none; font-weight: 600; color: #0c0d10; background: linear-gradient(90deg, var(--brand), var(--brand-2)); }
+  .exp-hero .link { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Grid */
+  .exp-grid { display: grid; gap: 24px; padding: 20px; max-width: 1200px; margin: 0 auto 48px; grid-template-columns: 1fr; }
+  .exp-form { order: 1; }
+  .exp-steps { order: 2; visibility: hidden; }
+  .exp-steps.ready { visibility: visible; }
+  @media (min-width: 1024px) {
+    .exp-grid { grid-template-columns: minmax(420px, 1fr) minmax(280px, 360px); align-items: start; }
+    .exp-steps { position: sticky; top: 20px; }
+  }
+
+  /* Steps Panel */
+  .steps-summary { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 12px 14px; border: 1px solid #1e222b; border-radius: 12px; background: #11141b; gap: 12px; transition: border-color 0.15s ease; }
+  .steps-summary:hover { border-color: #3d4458; }
+  .steps-summary .hint { color: var(--muted); font-size: .9rem; transition: opacity 0.2s ease; }
+  .steps-list { margin: 12px 0 0; padding: 0; list-style: none; }
+  .step { display: grid; grid-template-columns: auto 1fr; gap: 10px; padding: 12px; border: 1px solid #1e222b; border-radius: 12px; background: #11141b; margin-top: 10px; transition: transform 0.15s ease; }
+  .step:hover { transform: translateY(-1px); }
+  .step-badge { width: 34px; height: 28px; display: grid; place-items: center; border: 1px solid #1e222b; border-radius: 999px; font-size: 12px; opacity: .85; }
+  .step-title { margin: 0 0 4px; font-size: 16px; }
+  .step-text { margin: 0; color: var(--muted); line-height: 1.55; }
+
+
+
   /* Print */
   @media print {
     body { background: #fff; color: #000; }
     .wrap { padding: 0; }
-    .form, .footer, .header, .result__actions { display: none !important; }
+    .form, .footer, .exp-hero, .exp-steps, .result__actions { display: none !important; }
     .card, .rune { border: none; box-shadow: none; background: #fff; }
     .glyph { border: none; background: #fff; }
   }
