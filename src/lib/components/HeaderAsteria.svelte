@@ -123,7 +123,7 @@
     <div class="chips">
       {#each LANGS as L}
         <button class="chip" aria-pressed={L === $lang} on:click={() => chooseLang(L)}>
-          {L === 'RU' ? 'РУ' : L === 'RS' ? 'RS/HR' : L === 'TR' ? 'TR' : L}
+          {L === 'RS' ? 'RS/HR' : L === 'TR' ? 'TR' : L}
         </button>
       {/each}
       <span class="pill" style="--i:{Math.max(0, LANGS.indexOf($lang || 'EN'))}"></span>
