@@ -54,46 +54,99 @@
   .newsletter-section {
     padding: 64px 24px;
   }
+
+  @media (max-width: 768px) {
+    .newsletter-section {
+      padding: 48px 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .newsletter-section {
+      padding: 32px 16px;
+    }
+  }
   .newsletter-card {
     max-width: 700px;
     margin: 0 auto;
     padding: 48px;
     text-align: center;
     border-radius: 20px;
-border: var(--stroke-weight-1, 1px) solid rgba(255, 255, 255, 0.12);
-background: #FAEECE;
-backdrop-filter: blur(10px);
+    border: var(--stroke-weight-1, 1px) solid rgba(255, 255, 255, 0.12);
+    background: #FAEECE;
+    backdrop-filter: blur(10px);
+  }
+
+  @media (max-width: 768px) {
+    .newsletter-card {
+      padding: 32px 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .newsletter-card {
+      padding: 24px 16px;
+      border-radius: 12px;
+    }
   }
   .newsletter-title {
-    font-size: 32px;
-    line-height: 40px;
-    margin: 0 0 12px;
     color: #2A2A2A;
-text-align: center;
-font-family: Inter;
-font-size: 31.6px;
-font-style: normal;
-font-weight: 700;
-line-height: var(--font-size-40, 40px); /* 126.582% */
+    text-align: center;
+    font-family: Inter;
+    font-size: 31.6px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: var(--font-size-40, 40px);
+    margin: 0 0 12px;
+  }
+
+  @media (max-width: 768px) {
+    .newsletter-title {
+      font-size: 26px;
+      line-height: 34px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .newsletter-title {
+      font-size: 22px;
+      line-height: 30px;
+    }
   }
   .newsletter-description {
-    font-size: 16px;
-    color: var(--muted);
-    margin: 0 0 24px;
     color: #2A2A2A;
-text-align: center;
+    text-align: center;
+    font-family: var(--font-family-Font-1, Inter);
+    font-size: 14.9px;
+    font-style: normal;
+    font-weight: var(--font-weight-400, 400);
+    line-height: var(--line-height-24, 24px);
+    margin: 0 0 24px;
+  }
 
-/* asteria-guide.netlify.app/Inter/Regular */
-font-family: var(--font-family-Font-1, Inter);
-font-size: 14.9px;
-font-style: normal;
-font-weight: var(--font-weight-400, 400);
-line-height: var(--line-height-24, 24px); /* 161.074% */
+  @media (max-width: 768px) {
+    .newsletter-description {
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .newsletter-description {
+      font-size: 13px;
+      line-height: 20px;
+    }
   }
   .newsletter-form {
     display: flex;
     gap: 12px;
     margin-bottom: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .newsletter-form {
+      flex-direction: column;
+    }
   }
   .newsletter-input {
     flex: 1;
@@ -104,46 +157,69 @@ line-height: var(--line-height-24, 24px); /* 161.074% */
     color: var(--ink);
     font-size: 16px;
   }
+
+  @media (max-width: 768px) {
+    .newsletter-input {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .newsletter-input {
+      font-size: 14px;
+      padding: 10px 14px;
+    }
+  }
   .newsletter-input:focus {
     outline: none;
     border-color: var(--clarity);
   }
   .btn.primary {
-    background: var(--destiny);
-    color: #fff;
-    font-weight: 600;
-    padding: 12px 24px;
     border-radius: 12px;
-border: var(--stroke-weight-1, 1px) solid rgba(255, 255, 255, 0.13);
-background: #EDB92E;
-color: #0B0D14;
-text-align: center;
+    border: var(--stroke-weight-1, 1px) solid rgba(255, 255, 255, 0.13);
+    background: #EDB92E;
+    color: #0B0D14;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13.3px;
+    font-style: normal;
+    font-weight: var(--font-weight-700, 700);
+    line-height: normal;
+    padding: 12px 24px;
+  }
 
-/* asteria-guide.netlify.app/Semantic/Button */
-font-family: Inter;
-font-size: 13.3px;
-font-style: normal;
-font-weight: var(--font-weight-700, 700);
-line-height: normal;
+  @media (max-width: 768px) {
+    .btn.primary {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .btn.primary {
+      font-size: 12px;
+      padding: 10px 20px;
+    }
   }
   .consent-label {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-size: 13px;
-    color: var(--muted);
-    cursor: pointer;
-
     color: #2A2A2A;
-text-align: center;
+    text-align: center;
+    font-family: var(--font-family-Font-1, Inter);
+    font-size: 12.2px;
+    font-style: normal;
+    font-weight: var(--font-weight-400, 400);
+    line-height: var(--line-height-19_5, 19.5px);
+    cursor: pointer;
+  }
 
-/* asteria-guide.netlify.app/Semantic/Label */
-font-family: var(--font-family-Font-1, Inter);
-font-size: 12.2px;
-font-style: normal;
-font-weight: var(--font-weight-400, 400);
-line-height: var(--line-height-19_5, 19.5px); /* 159.836% */
+  @media (max-width: 480px) {
+    .consent-label {
+      font-size: 11px;
+      line-height: 18px;
+    }
   }
   .consent-label input {
     cursor: pointer;
@@ -155,12 +231,11 @@ line-height: var(--line-height-19_5, 19.5px); /* 159.836% */
     border-radius: 12px;
     font-weight: 600;
   }
-  @media (max-width: 768px) {
-    .newsletter-card {
-      padding: 32px 24px;
-    }
-    .newsletter-form {
-      flex-direction: column;
+
+  @media (max-width: 480px) {
+    .success-message {
+      padding: 16px;
+      font-size: 14px;
     }
   }
 </style>

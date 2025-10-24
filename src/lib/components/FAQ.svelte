@@ -42,6 +42,22 @@
     margin-bottom: 48px;
     color: white;
   }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 32px;
+      line-height: 40px;
+      margin-bottom: 32px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: 28px;
+      line-height: 36px;
+      margin-bottom: 24px;
+    }
+  }
   .faq-grid {
     max-width: 900px;
     margin: 0 auto;
@@ -49,20 +65,31 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+
+  @media (max-width: 768px) {
+    .faq-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
   .faq-item {
-    /* background: var(--glass); */
     background: #FAEECE;
     backdrop-filter: blur(20px);
     border: 1px solid #ffffff1f;
     border-radius: 12px;
     overflow: hidden;
   }
+
+  @media (max-width: 480px) {
+    .faq-item {
+      border-radius: 8px;
+    }
+  }
   .faq-question {
     width: 100%;
     padding: 20px;
     background: transparent;
     border: none;
-    /* color: var(--ink); */
     color: black;
     font-size: 16px;
     font-weight: 600;
@@ -73,6 +100,20 @@
     align-items: flex-start;
     gap: 12px;
     transition: background 0.2s;
+  }
+
+  @media (max-width: 768px) {
+    .faq-question {
+      padding: 16px;
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .faq-question {
+      padding: 14px;
+      font-size: 14px;
+    }
   }
   .faq-question:hover {
     background: rgba(255,255,255,0.05);
@@ -89,12 +130,36 @@
     padding: 0 20px 20px;
     animation: slideDown 0.22s cubic-bezier(0.17, 0.84, 0.44, 1);
   }
+
+  @media (max-width: 768px) {
+    .faq-answer {
+      padding: 0 16px 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .faq-answer {
+      padding: 0 14px 14px;
+    }
+  }
+
   .faq-answer p {
     margin: 0;
     color: black;
-    /* color: var(--muted); */
     line-height: 1.6;
     font-size: 15px;
+  }
+
+  @media (max-width: 768px) {
+    .faq-answer p {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .faq-answer p {
+      font-size: 13px;
+    }
   }
   @keyframes slideDown {
     from {
@@ -104,11 +169,6 @@
     to {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-  @media (max-width: 768px) {
-    .faq-grid {
-      grid-template-columns: 1fr;
     }
   }
 </style>

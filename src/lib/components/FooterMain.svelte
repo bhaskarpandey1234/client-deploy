@@ -5,26 +5,26 @@
     product: [
       { label: 'How It Works', href: '/how-it-works' },
       { label: 'Pricing', href: '/pricing' },
-      { label: 'Journeys', href: '/journeys' },
-      { label: 'Install App', href: '/install' }
+      // { label: 'Journeys', href: '/journeys' },
+      // { label: 'Install App', href: '/install' }
     ],
     company: [
       { label: 'About', href: '/about' },
-      { label: 'Ethics', href: '/ethics' },
-      { label: 'Press', href: '/press' },
+      // { label: 'Ethics', href: '/ethics' },
+      // { label: 'Press', href: '/press' },
       { label: 'Contact', href: '/contact' }
     ],
     legal: [
       { label: 'Privacy', href: '/privacy' },
       { label: 'Terms', href: '/terms' },
-      { label: 'Refunds', href: '/refunds' },
-      { label: 'Data Request', href: '/data-request' }
+      // { label: 'Refunds', href: '/refunds' },
+      // { label: 'Data Request', href: '/data-request' }
     ],
     support: [
       { label: 'FAQ', href: '#faq' },
       { label: 'Email Support', href: 'mailto:support@asteriaguide.com' },
-      { label: 'Community', href: '/community' },
-      { label: 'Status', href: '/status' }
+      // { label: 'Community', href: '/community' },
+      // { label: 'Status', href: '/status' }
     ]
   };
 </script>
@@ -124,6 +124,18 @@
     border-top: 1px solid #ffffff1f;
     padding: 80px 24px 40px;
   }
+
+  @media (max-width: 768px) {
+    .footer {
+      padding: 48px 16px 32px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer {
+      padding: 32px 16px 24px;
+    }
+  }
   .footer-content {
     max-width: 1120px;
     margin: 0 auto;
@@ -134,6 +146,22 @@
     gap: 48px;
     margin-bottom: 64px;
   }
+
+  @media (max-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+  }
   .footer-heading {
     font-size: 14px;
     font-weight: 700;
@@ -141,6 +169,13 @@
     letter-spacing: 0.5px;
     margin: 0 0 16px;
     color: var(--ink);
+  }
+
+  @media (max-width: 480px) {
+    .footer-heading {
+      font-size: 13px;
+      margin: 0 0 12px;
+    }
   }
   .footer-links {
     list-style: none;
@@ -156,6 +191,12 @@
     font-size: 14px;
     transition: color 0.2s;
   }
+
+  @media (max-width: 480px) {
+    .footer-links a {
+      font-size: 13px;
+    }
+  }
   .footer-links a:hover {
     color: var(--ink);
   }
@@ -167,14 +208,38 @@
     border-top: 1px solid #ffffff1f;
     gap: 24px;
   }
+
+  @media (max-width: 768px) {
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+      padding-top: 24px;
+    }
+  }
   .footer-legal p {
     margin: 0;
     font-size: 13px;
     color: var(--muted);
   }
+
+  @media (max-width: 480px) {
+    .footer-legal p {
+      font-size: 12px;
+    }
+  }
   .footer-social {
     display: flex;
     gap: 20px;
+  }
+
+  @media (max-width: 480px) {
+    .footer-social {
+      gap: 16px;
+    }
+    .footer-social svg {
+      width: 36px;
+      height: 36px;
+    }
   }
   .footer-social a {
     font-size: 20px;
@@ -193,14 +258,11 @@
     font-size: 13px;
     cursor: pointer;
   }
-  @media (max-width: 768px) {
-    .footer-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-    }
-    .footer-bottom {
-      flex-direction: column;
-      text-align: center;
+
+  @media (max-width: 480px) {
+    .lang-selector {
+      font-size: 12px;
+      padding: 6px 10px;
     }
   }
 </style>

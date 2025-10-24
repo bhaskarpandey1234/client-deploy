@@ -9,7 +9,7 @@ const priceMap = {
   iching: process.env.STRIPE_PRICE_ID_ICHING || 'price_iching_dev',
 };
 
-const SITE_URL = process.env.SITE_URL || 'http://localhost:5173';
+const SITE_URL = process.env.SITE_URL || process.env.URL || 'http://localhost:5173';
 
 export async function POST({ request }) {
   try {

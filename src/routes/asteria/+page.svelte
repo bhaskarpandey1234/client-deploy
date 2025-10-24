@@ -65,7 +65,7 @@
 <ResonancePanel />
 <!-- <PricingRibbon /> -->
 <!-- <EthicsAccordion /> -->
-<FAQ {faqs} />
+<!-- <FAQ {faqs} /> -->
 <!-- <InstallCTA /> -->
 <Newsletter />
 <FooterMain />

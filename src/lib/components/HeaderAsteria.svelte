@@ -2,6 +2,7 @@
   let astrologyOpen = false;
   let numerologyOpen = false;
   let divinationOpen = false;
+  let selectedLang = 'EN';
 
   function toggleAstrology() {
     astrologyOpen = !astrologyOpen;
@@ -26,6 +27,10 @@
     numerologyOpen = false;
     divinationOpen = false;
   }
+
+  function handleLangChange(e: Event) {
+    selectedLang = (e.target as HTMLSelectElement).value;
+  }
 </script>
 
 <header class="header">
@@ -40,6 +45,8 @@
     </a>
 
     <nav class="nav-menu">
+      <a href="/asteria/guides" class="nav-link">Guides</a>
+      
       <div class="nav-dropdown">
         <button class="nav-link dropdown-toggle" on:click={toggleAstrology}>
           Astrology
@@ -88,22 +95,22 @@
             <a href="/asteria/divination/palmistry/information" class="dropdown-item" on:click={closeAllDropdowns}>Palmistry</a>
             <a href="/asteria/divination/runes/information" class="dropdown-item" on:click={closeAllDropdowns}>Runes</a>
             <a href="/asteria/divination/tarot-cards/information" class="dropdown-item" on:click={closeAllDropdowns}>Tarot Cards</a>
-            <!-- <a href="/asteria/divination/vedic/information" class="dropdown-item" on:click={closeAllDropdowns}>Vedic</a> -->
           </div>
         {/if}
       </div>
 
-
+      <a href="/asteria/pricing?lang={selectedLang}" class="nav-link">Pricing</a>
+      <a href="/asteria/features" class="nav-link">Features</a>
+      <a href="/asteria/faq" class="nav-link">FAQ</a>
+      <a href="/asteria/contact" class="nav-link">Contact</a>
     </nav>
 
     <div class="footer-lang">
-      <select class="lang-selector">
-        <option value="en" selected>English</option>
-        <option value="hr">Croatian</option>
-        <option value="it">Italian</option>
-        <option value="pl">Polish</option>
-        <option value="ru">Русский</option>
-        <option value="sr">Српски</option>
+      <select class="lang-selector" bind:value={selectedLang} on:change={handleLangChange}>
+        <option value="EN">EN</option>
+        <option value="RS/HR">RS/HR</option>
+        <option value="RU">RU</option>
+        <option value="TR">TR</option>
       </select>
     </div>
   </div>

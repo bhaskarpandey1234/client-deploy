@@ -25,12 +25,21 @@
 </section>
 
 <style>
-  .creator-strip { padding: 48px 24px; overflow: hidden; }
+  .creator-strip { 
+    padding: 48px 24px; 
+    overflow: hidden; 
+  }
   .carousel {
     display: flex;
     gap: 24px;
     animation: scroll 24s linear infinite;
     width: fit-content;
+  }
+
+  @media (max-width: 768px) {
+    .creator-strip {
+      padding: 32px 16px;
+    }
   }
   .proof-item {
     display: flex;
@@ -43,8 +52,19 @@
     border-radius: 12px;
     white-space: nowrap;
     min-width: 280px;
+  }
 
-    
+  @media (max-width: 768px) {
+    .proof-item {
+      min-width: 240px;
+      padding: 12px 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .proof-item {
+      min-width: 200px;
+    }
   }
   .avatar {
     width: 40px;
