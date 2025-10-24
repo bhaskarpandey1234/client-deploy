@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
+  import { lang, setLang, LANGS } from '$lib/stores/checkout.js';
+
   let astrologyOpen = false;
   let numerologyOpen = false;
   let divinationOpen = false;
-  let selectedLang = 'EN';
 
   function toggleAstrology() {
     astrologyOpen = !astrologyOpen;
@@ -28,8 +31,20 @@
     divinationOpen = false;
   }
 
-  function handleLangChange(e: Event) {
-    selectedLang = (e.target as HTMLSelectElement).value;
+  function withLang(href: string) {
+    try {
+      const base = typeof window !== 'undefined' ? window.location.origin : 'https://example.com';
+      const u = new URL(href, base);
+      u.searchParams.set('lang', $lang || 'EN');
+      return u.pathname + u.search + u.hash;
+    } catch { return href; }
+  }
+
+  async function chooseLang(L: string) {
+    setLang(L);
+    const u = new URL($page.url);
+    u.searchParams.set('lang', L);
+    await goto(u.pathname + u.search + u.hash, { replaceState: true, noScroll: true, keepFocus: true });
   }
 </script>
 
@@ -45,7 +60,7 @@
     </a>
 
     <nav class="nav-menu">
-      <a href="/asteria/guides" class="nav-link">Guides</a>
+      <a href={withLang('/asteria/guides')} class="nav-link">Guides</a>
       
       <div class="nav-dropdown">
         <button class="nav-link dropdown-toggle" on:click={toggleAstrology}>
@@ -54,14 +69,14 @@
         </button>
         {#if astrologyOpen}
           <div class="dropdown-menu">
-            <a href="/asteria/astrology/celtic/information" class="dropdown-item" on:click={closeAllDropdowns}>Celtic Tree Zodiac</a>
-            <a href="/asteria/astrology/chinese-zodiac/information" class="dropdown-item" on:click={closeAllDropdowns}>Chinese Zodiac</a>
-            <a href="/asteria/astrology/egyptian/information" class="dropdown-item" on:click={closeAllDropdowns}>Egyptian</a>
-            <a href="/asteria/astrology/japanese/information" class="dropdown-item" on:click={closeAllDropdowns}>Japanese</a>
-            <a href="/asteria/astrology/mayan/information" class="dropdown-item" on:click={closeAllDropdowns}>Mayan</a>
-            <a href="/asteria/astrology/panchang/information" class="dropdown-item" on:click={closeAllDropdowns}>Panchang</a>
-            <a href="/asteria/astrology/vedic/information" class="dropdown-item" on:click={closeAllDropdowns}>Vedic</a>
-            <a href="/asteria/astrology/western/information" class="dropdown-item" on:click={closeAllDropdowns}>Western</a>
+            <a href={withLang('/asteria/astrology/celtic/information')} class="dropdown-item" on:click={closeAllDropdowns}>Celtic Tree Zodiac</a>
+            <a href={withLang('/asteria/astrology/chinese-zodiac/information')} class="dropdown-item" on:click={closeAllDropdowns}>Chinese Zodiac</a>
+            <a href={withLang('/asteria/astrology/egyptian/information')} class="dropdown-item" on:click={closeAllDropdowns}>Egyptian</a>
+            <a href={withLang('/asteria/astrology/japanese/information')} class="dropdown-item" on:click={closeAllDropdowns}>Japanese</a>
+            <a href={withLang('/asteria/astrology/mayan/information')} class="dropdown-item" on:click={closeAllDropdowns}>Mayan</a>
+            <a href={withLang('/asteria/astrology/panchang/information')} class="dropdown-item" on:click={closeAllDropdowns}>Panchang</a>
+            <a href={withLang('/asteria/astrology/vedic/information')} class="dropdown-item" on:click={closeAllDropdowns}>Vedic</a>
+            <a href={withLang('/asteria/astrology/western/information')} class="dropdown-item" on:click={closeAllDropdowns}>Western</a>
           </div>
         {/if}
       </div>
@@ -73,11 +88,11 @@
         </button>
         {#if numerologyOpen}
           <div class="dropdown-menu">
-            <a href="/asteria/numerology/angle/information" class="dropdown-item" on:click={closeAllDropdowns}>Angel Numbers</a>
-            <a href="/asteria/numerology/chaldean/information" class="dropdown-item" on:click={closeAllDropdowns}>Chaldean</a>
-            <a href="/asteria/numerology/chinese/information" class="dropdown-item" on:click={closeAllDropdowns}>Chinese</a>
-            <a href="/asteria/numerology/kabbalistic/information" class="dropdown-item" on:click={closeAllDropdowns}>Kabbalistic</a>
-            <a href="/asteria/numerology/western/information" class="dropdown-item" on:click={closeAllDropdowns}>Western</a>
+            <a href={withLang('/asteria/numerology/angle/information')} class="dropdown-item" on:click={closeAllDropdowns}>Angel Numbers</a>
+            <a href={withLang('/asteria/numerology/chaldean/information')} class="dropdown-item" on:click={closeAllDropdowns}>Chaldean</a>
+            <a href={withLang('/asteria/numerology/chinese/information')} class="dropdown-item" on:click={closeAllDropdowns}>Chinese</a>
+            <a href={withLang('/asteria/numerology/kabbalistic/information')} class="dropdown-item" on:click={closeAllDropdowns}>Kabbalistic</a>
+            <a href={withLang('/asteria/numerology/western/information')} class="dropdown-item" on:click={closeAllDropdowns}>Western</a>
           </div>
         {/if}
       </div>
@@ -89,29 +104,29 @@
         </button>
         {#if divinationOpen}
           <div class="dropdown-menu">
-            <a href="/asteria/divination/conchomancy/information" class="dropdown-item" on:click={closeAllDropdowns}>Conchomancy</a>
-            <a href="/asteria/divination/i-ching/information" class="dropdown-item" on:click={closeAllDropdowns}>I Ching</a>
-            <a href="/asteria/divination/oracle/information" class="dropdown-item" on:click={closeAllDropdowns}>Oracle Cards</a>
-            <a href="/asteria/divination/palmistry/information" class="dropdown-item" on:click={closeAllDropdowns}>Palmistry</a>
-            <a href="/asteria/divination/runes/information" class="dropdown-item" on:click={closeAllDropdowns}>Runes</a>
-            <a href="/asteria/divination/tarot-cards/information" class="dropdown-item" on:click={closeAllDropdowns}>Tarot Cards</a>
+            <a href={withLang('/asteria/divination/conchomancy/information')} class="dropdown-item" on:click={closeAllDropdowns}>Conchomancy</a>
+            <a href={withLang('/asteria/divination/i-ching/information')} class="dropdown-item" on:click={closeAllDropdowns}>I Ching</a>
+            <a href={withLang('/asteria/divination/oracle/information')} class="dropdown-item" on:click={closeAllDropdowns}>Oracle Cards</a>
+            <a href={withLang('/asteria/divination/palmistry/information')} class="dropdown-item" on:click={closeAllDropdowns}>Palmistry</a>
+            <a href={withLang('/asteria/divination/runes/information')} class="dropdown-item" on:click={closeAllDropdowns}>Runes</a>
+            <a href={withLang('/asteria/divination/tarot-cards/information')} class="dropdown-item" on:click={closeAllDropdowns}>Tarot Cards</a>
           </div>
         {/if}
       </div>
 
-      <a href="/asteria/pricing?lang={selectedLang}" class="nav-link">Pricing</a>
-      <a href="/asteria/features" class="nav-link">Features</a>
-      <a href="/asteria/faq" class="nav-link">FAQ</a>
-      <a href="/asteria/contact" class="nav-link">Contact</a>
+      <a href={withLang('/asteria/pricing')} class="nav-link">Pricing</a>
+      <a href={withLang('/asteria/features')} class="nav-link">Features</a>
+      <a href={withLang('/asteria/faq')} class="nav-link">FAQ</a>
+      <a href={withLang('/asteria/contact')} class="nav-link">Contact</a>
     </nav>
 
-    <div class="footer-lang">
-      <select class="lang-selector" bind:value={selectedLang} on:change={handleLangChange}>
-        <option value="EN">EN</option>
-        <option value="RS/HR">RS/HR</option>
-        <option value="RU">RU</option>
-        <option value="TR">TR</option>
-      </select>
+    <div class="chips">
+      {#each LANGS as L}
+        <button class="chip" aria-pressed={L === $lang} on:click={() => chooseLang(L)}>
+          {L === 'RU' ? 'РУ' : L === 'RS' ? 'RS/HR' : L === 'TR' ? 'TR' : L}
+        </button>
+      {/each}
+      <span class="pill" style="--i:{Math.max(0, LANGS.indexOf($lang || 'EN'))}"></span>
     </div>
   </div>
 </header>
@@ -237,20 +252,48 @@
     background: var(--glass, rgba(255, 255, 255, 0.06));
   }
 
-  .footer-lang {
+  .chips {
     justify-self: end;
+    display: inline-grid;
+    grid-auto-flow: column;
+    gap: .35rem;
+    padding: .3rem;
+    background: #0f1424;
+    border: 1px solid var(--border, #262c43);
+    border-radius: 999px;
+    position: relative;
   }
 
-  .lang-selector {
-    padding: 8px 12px;
-    background: rgba(20, 17, 39, 0.98);
-    background: var(--panel, rgba(20, 17, 39, 0.98));
-    border: 1px solid #ffffff22;
-    border-radius: 8px;
-    color: #EDEBFF;
+  .chip {
+    position: relative;
+    z-index: 1;
+    padding: .35rem .7rem;
+    border-radius: 999px;
+    background: transparent;
     color: var(--ink, #EDEBFF);
-    font-size: 13px;
+    border: 0;
     cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .chip[aria-pressed="true"] {
+    color: #0a0c11;
+    font-weight: 800;
+  }
+
+  .pill {
+    position: absolute;
+    z-index: 0;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    width: calc(16.666% - 8px);
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--gold, #f5c64f), #ffe59a);
+    transform: translateX(calc(var(--i) * (100% + .35rem)));
+    transition: transform 180ms ease;
   }
 
   @media (max-width: 768px) {
@@ -266,6 +309,16 @@
       position: static;
       margin-top: 8px;
       box-shadow: none;
+    }
+
+    .chips {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pill {
+      transition: none;
     }
   }
 </style>

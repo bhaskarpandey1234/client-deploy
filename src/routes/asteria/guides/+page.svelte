@@ -1,126 +1,184 @@
-<script lang="ts">
-  const guides = [
-    { category: 'Astrology', name: 'Celtic Tree Zodiac', desc: 'Ancient Celtic wisdom through sacred trees', img: '/celtic.png', url: '/asteria/astrology/celtic/information' },
-    { category: 'Astrology', name: 'Chinese Zodiac', desc: 'Eastern zodiac based on lunar calendar', img: '/chinese.png', url: '/asteria/astrology/chinese-zodiac/information' },
-    { category: 'Astrology', name: 'Egyptian', desc: 'Ancient Egyptian astrological system', img: '/egyptian.png', url: '/asteria/astrology/egyptian/information' },
-    { category: 'Astrology', name: 'Japanese', desc: 'Traditional Japanese star reading', img: '/japanese.png', url: '/asteria/astrology/japanese/information' },
-    { category: 'Astrology', name: 'Mayan', desc: 'Mesoamerican calendar astrology', img: '/mayan.png', url: '/asteria/astrology/mayan/information' },
-    { category: 'Astrology', name: 'Panchang', desc: 'Hindu calendar and auspicious timing', img: '/panch_logo.png', url: '/asteria/astrology/panchang/information' },
-    { category: 'Astrology', name: 'Vedic', desc: 'Ancient Indian Jyotish astrology', img: '/vedic.png', url: '/asteria/astrology/vedic/information' },
-    { category: 'Astrology', name: 'Western', desc: 'Traditional zodiac and horoscopes', img: '/western.png', url: '/asteria/astrology/western/information' },
-    { category: 'Numerology', name: 'Angel Numbers', desc: 'Divine messages through numbers', img: '/angle.png', url: '/asteria/numerology/angle/information' },
-    { category: 'Numerology', name: 'Chaldean', desc: 'Ancient Babylonian number system', img: '/chaldean.png', url: '/asteria/numerology/chaldean/information' },
-    { category: 'Numerology', name: 'Chinese', desc: 'Eastern numerology traditions', img: '/chineseN.png', url: '/asteria/numerology/chinese/information' },
-    { category: 'Numerology', name: 'Kabbalistic', desc: 'Hebrew mystical numerology', img: '/kabbalistic.png', url: '/asteria/numerology/kabbalistic/information' },
-    { category: 'Numerology', name: 'Western', desc: 'Pythagorean number meanings', img: '/westernN.png', url: '/asteria/numerology/western/information' },
-    { category: 'Divination', name: 'Conchomancy', desc: 'Shell casting divination', img: '/shell.png', url: '/asteria/divination/conchomancy/information' },
-    { category: 'Divination', name: 'I Ching', desc: 'Ancient Chinese oracle', img: '/iching.png', url: '/asteria/divination/i-ching/information' },
-    { category: 'Divination', name: 'Oracle Cards', desc: 'Intuitive card guidance', img: '/oracle.png', url: '/asteria/divination/oracle/information' },
-    { category: 'Divination', name: 'Palmistry', desc: 'Reading the lines of your hand', img: '/palmistry.png', url: '/asteria/divination/palmistry/information' },
-    { category: 'Divination', name: 'Runes', desc: 'Norse alphabet divination', img: '/runes.png', url: '/asteria/divination/runes/information' },
-    { category: 'Divination', name: 'Tarot Cards', desc: 'Traditional card reading', img: '/tarot-cards.png', url: '/asteria/divination/tarot-cards/information' }
-  ];
+<script>
+  import { fade, fly } from 'svelte/transition';
+  import { flip } from 'svelte/animate';
+  import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
+  import { GUIDE_CATEGORIES, linkFor } from '$lib/data/guides.js';
+  import { lang as siteLang } from '$lib/stores/checkout.js';
+
+  $: lang = ($page.url.searchParams.get('lang') || $siteLang || 'EN').toUpperCase();
+
+  let q = '';
+
+  $: filtered = q
+    ? GUIDE_CATEGORIES.filter(cat => {
+        const t = q.toLowerCase();
+        return (
+          cat.name.toLowerCase().includes(t) ||
+          cat.subs.some(s => s.name.toLowerCase().includes(t) || s.desc.toLowerCase().includes(t))
+        );
+      })
+    : GUIDE_CATEGORIES;
+
+  function openSub(cat, sub) {
+    const url = linkFor(cat.slug, sub.slug);
+    const u = new URL(url, window.location.origin);
+    u.searchParams.set('lang', lang);
+    goto(u.pathname + u.search);
+  }
+
+  const fallback = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="16"><defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="%23111624"/><stop offset=".9" stop-color="%230c111f"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23g)"/></svg>';
 </script>
 
-<div class="guides-page">
-  <h1>All Guides</h1>
-  <p class="subtitle">Explore all mystical practices at a glance</p>
-  
-  <div class="guides-grid">
-    {#each guides as guide}
-      <a href={guide.url} class="guide-card">
-        <img src={guide.img} alt={guide.name} />
-        <div class="guide-content">
-          <span class="category">{guide.category}</span>
-          <h3>{guide.name}</h3>
-          <p>{guide.desc}</p>
-        </div>
-      </a>
-    {/each}
-  </div>
-</div>
+<svelte:head>
+  <title>Guides • Asteria</title>
+  <meta name="description" content="Browse Asteria guides by category—see sub‑topics, thumbnails, and quick summaries." />
+</svelte:head>
+
+<section class="hero" in:fade>
+  <h1 class="h1">Guides</h1>
+  <p class="sub">Browse by category and pick a method to begin.</p>
+
+  <label class="search">
+    <span class="sr">Search guides</span>
+    <input
+      placeholder="Search guides (e.g., Tarot, Birth Chart, Personal Year)…"
+      bind:value={q}
+      inputmode="search"
+      aria-label="Search guides"
+    />
+    {#if q}
+      <button class="clear" aria-label="Clear search" on:click={() => (q = '')}>&times;</button>
+    {/if}
+  </label>
+</section>
+
+<section class="grid">
+  {#each filtered as cat (cat.slug)}
+    <article class="card" in:fly={{ y: 10, duration: 180 }} animate:flip>
+      <div class="banner">
+        <img
+          src={cat.cover || fallback}
+          alt=""
+          loading="lazy"
+          on:error={(e) => (e.currentTarget.src = fallback)}
+          in:fade
+        />
+      </div>
+
+      <header class="head">
+        <h2 class="h2">{cat.name}</h2>
+        <p class="blurb">{cat.blurb}</p>
+      </header>
+
+      <div class="subs">
+        {#each cat.subs as sub (sub.slug)}
+          <button class="sub" on:click={() => openSub(cat, sub)}>
+            <img
+              src={sub.thumb || fallback}
+              alt=""
+              loading="lazy"
+              on:error={(e) => (e.currentTarget.src = fallback)}
+              in:fade={{ duration: 120 }}
+            />
+            <div class="meta">
+              <div class="title">{sub.name}</div>
+              <div class="desc">{sub.desc}</div>
+            </div>
+            <span class="go" aria-hidden="true">›</span>
+          </button>
+        {/each}
+      </div>
+    </article>
+  {/each}
+
+  {#if filtered.length === 0}
+    <p class="empty">No results for "{q}". Try a different term.</p>
+  {/if}
+</section>
 
 <style>
-  .guides-page {
-    min-height: 100vh;
-    padding: 120px 24px 80px;
-    max-width: 1400px;
-    margin: 0 auto;
+  :global(:root) {
+    --bg: #0e1019;
+    --surface: #111624;
+    --surface-2: #0c111f;
+    --border: #262c43;
+    --muted: #9ea6bf;
+    --text: #e8edf7;
+    --gold: #f5c64f;
+    --gold-2: #f1b53c;
   }
+  :global(body) { background: var(--bg); color: var(--text); }
 
-  h1 {
-    font-size: 3rem;
-    text-align: center;
-    background: linear-gradient(90deg, var(--destiny, #9C6CFF), var(--clarity, #30D5C8));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 16px;
-  }
+  .hero { text-align: center; padding: 2rem 1rem 1.2rem; }
+  .h1 { font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 600; margin: 0 0 .35rem; }
+  .sub { color: var(--muted); margin: 0 0 .8rem; }
 
-  .subtitle {
-    text-align: center;
-    color: var(--ink, #EDEBFF);
-    opacity: 0.7;
-    margin-bottom: 48px;
-  }
-
-  .guides-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-  }
-
-  .guide-card {
-    background: var(--panel, rgba(20, 17, 39, 0.98));
-    border: 1px solid #ffffff1f;
-    border-radius: 16px;
-    overflow: hidden;
-    text-decoration: none;
-    transition: transform 0.2s, border-color 0.2s;
-  }
-
-  .guide-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--clarity, #30D5C8);
-  }
-
-  .guide-card img {
+  .search { position: relative; max-width: 720px; margin: 0 auto; }
+  .search input {
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    background: #0f1424;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    padding: .6rem .9rem;
+  }
+  .clear {
+    position: absolute; right: .2rem; top: 50%; transform: translateY(-50%);
+    background: transparent; border: 0; color: var(--muted);
+    font-size: 1.1rem; cursor: pointer; padding: .35rem .6rem; border-radius: 8px;
   }
 
-  .guide-content {
-    padding: 20px;
+  .grid {
+    max-width: 1200px; margin: 0 auto 3rem; padding: 0 1rem;
+    display: grid; grid-template-columns: 1fr; gap: 1rem;
+  }
+  @media (min-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1280px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+  .card {
+    display: flex; flex-direction: column;
+    background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--border);
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 10px 24px rgba(0,0,0,.35);
   }
 
-  .category {
-    font-size: 12px;
-    color: var(--clarity, #30D5C8);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  .banner { aspect-ratio: 16/9; background: #0f1424; overflow: hidden; }
+  .banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .head { padding: .9rem .9rem 0; }
+  .h2 { font-size: 1.15rem; margin: 0 0 .25rem; }
+  .blurb { color: var(--muted); margin: 0 0 .6rem; line-height: 1.45; }
+
+  .subs {
+    display: grid; grid-template-columns: 1fr;
+    gap: .5rem; padding: 0 .9rem .9rem;
   }
 
-  h3 {
-    color: var(--ink, #EDEBFF);
-    font-size: 1.25rem;
-    margin: 8px 0;
+  .sub {
+    display: grid; grid-template-columns: auto 1fr auto;
+    align-items: center; gap: .65rem;
+    width: 100%;
+    text-align: left;
+    padding: .55rem .6rem;
+    background: #0f1424; border: 1px solid var(--border);
+    border-radius: 12px; color: inherit; cursor: pointer;
+    transition: border-color 120ms ease, transform 120ms ease;
   }
+  .sub:hover { border-color: #31406a; transform: translateY(-1px); }
+  .sub img { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; }
+  .meta { display: grid; gap: 2px; }
+  .title { font-weight: 700; font-size: .98rem; }
+  .desc { color: var(--muted); font-size: .9rem; line-height: 1.3;
+          display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .go { opacity: .6; font-size: 1.5rem; }
 
-  p {
-    color: var(--ink, #EDEBFF);
-    opacity: 0.7;
-    font-size: 14px;
-    line-height: 1.5;
-  }
+  .empty { color: var(--muted); text-align: center; padding: 2rem 1rem; }
 
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 2rem;
-    }
-    
-    .guides-grid {
-      grid-template-columns: 1fr;
-    }
+  .sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sub, .card { transition: none !important; }
   }
 </style>

@@ -81,14 +81,6 @@
 <!-- </section> -->
 
 <style>
-  .hero {
-    width: 100%;
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%);
-    min-height: 600px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
   .hero-content {
     padding: 4%;
