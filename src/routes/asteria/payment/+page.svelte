@@ -1,37 +1,27 @@
-<script lang="ts">
+<script>
   import { fade } from 'svelte/transition';
   import { page } from '$app/stores';
   import { byCode } from '$lib/data/geo.js';
-  import {
-    oneTimePrice, subscriptionPrice,
-    paymentLinkForOneTime, paymentLinkForSubscription,
-    formatCurrency
-  } from '$lib/data/pricing';
-  import { checkout } from '$lib/stores/checkout.js';
-  import { lang as siteLang } from '$lib/stores/checkout.js';
-  import { localeForLang } from '$lib/i18n/pricing.js';
+  import { priceForCountry, paymentLinkFor, formatCurrency } from '$lib/data/pricing.js';
+  import { checkout, lang as siteLang } from '$lib/stores/checkout.js';
 
   $: lang = ($page.url.searchParams.get('lang') || $siteLang || 'EN').toUpperCase();
-  $: tier = ($page.url.searchParams.get('tier') || 'one-time').toLowerCase(); // 'one-time' | 'subscription'
-  $: chat = ($page.url.searchParams.get('chat') || '1') === '1';               // for one-time
-  $: cycle = ($page.url.searchParams.get('cycle') || 'monthly').toUpperCase(); // for subscription
-
   $: country = ($page.url.searchParams.get('country') || ($checkout?.country || '')).toUpperCase();
   $: info = byCode(country);
 
-  const fmt = (amt: number, cur: string) => formatCurrency(amt, cur, localeForLang(lang));
+  const localeForLang = (L) => {
+    const x = (L || '').toUpperCase();
+    if (x.startsWith('RS')) return 'sr-RS';
+    if (x === 'HR') return 'hr-HR';
+    if (x === 'RU') return 'ru-RU';
+    if (x === 'IT') return 'it-IT';
+    if (x === 'PL') return 'pl-PL';
+    return 'en-GB';
+  };
 
-  $: price =
-    tier === 'subscription'
-      ? subscriptionPrice(country, cycle as 'MONTHLY'|'ANNUAL')
-      : oneTimePrice(country, { includeChat: chat });
-
-  $: display = price ? fmt(price.amount, price.currency) : null;
-
-  $: payUrl =
-    tier === 'subscription'
-      ? paymentLinkForSubscription(country, cycle as 'MONTHLY'|'ANNUAL')
-      : paymentLinkForOneTime(country, { includeChat: chat });
+  $: price = priceForCountry(country);
+  $: display = price ? formatCurrency(price.amount, price.currency, localeForLang(lang)) : null;
+  $: payUrl = paymentLinkFor(country);
 </script>
 
 <svelte:head>
@@ -46,15 +36,6 @@
       <div class="row">
         <div><div class="k">Language</div><div class="v">{lang}</div></div>
         <div><div class="k">Billing Country</div><div class="v">{info.name}</div></div>
-        <div><div class="k">Plan</div>
-          <div class="v">
-            {#if tier === 'subscription'}
-              Subscription — {cycle === 'ANNUAL' ? 'Annual' : 'Monthly'}
-            {:else}
-              One‑time — {chat ? 'Reading + 10‑min chat' : 'Reading only'}
-            {/if}
-          </div>
-        </div>
         <div><div class="k">Price</div><div class="v">{display}</div></div>
       </div>
 
@@ -62,7 +43,7 @@
       <p class="muted">You'll complete your payment on our secure checkout. We'll email the receipt immediately.</p>
     </div>
   {:else}
-    <p class="err">Missing details. Please return to <a href="/asteria/pricing">Pricing</a>.</p>
+    <p class="err">Country or price unavailable. Please return to <a href="/asteria/pricing">Pricing</a>.</p>
   {/if}
 </section>
 
@@ -72,7 +53,7 @@
   .panel { background: linear-gradient(180deg, var(--surface), var(--surface-2));
     border: 1px solid var(--border); border-radius: 20px; padding: 1rem; }
   .row { display: grid; gap: .75rem; grid-template-columns: 1fr; margin-bottom: .8rem; }
-  @media (min-width: 640px) { .row { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 640px) { .row { grid-template-columns: repeat(3, 1fr); } }
   .k { color: var(--muted); font-size: .85rem; }
   .v { font-weight: 700; }
   .cta {
