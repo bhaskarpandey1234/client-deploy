@@ -9,7 +9,7 @@
       // { label: 'Install App', href: '/install' }
     ],
     company: [
-      { label: 'About', href: '/about' },
+      // { label: 'About', href: '/about' },
       // { label: 'Ethics', href: '/ethics' },
       // { label: 'Press', href: '/press' },
       { label: 'Contact', href: '/contact' }

@@ -2,10 +2,13 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import { lang, setLang, LANGS } from '$lib/stores/checkout.js';
+  import { slide, fade } from 'svelte/transition';
 
   let astrologyOpen = false;
   let numerologyOpen = false;
   let divinationOpen = false;
+  let langOpen = false; // For desktop language dropdown
+  let mobileMenuOpen = false; // For mobile drawer
 
   function toggleAstrology() {
     astrologyOpen = !astrologyOpen;
@@ -31,6 +34,22 @@
     divinationOpen = false;
   }
 
+  function toggleLang() {
+    langOpen = !langOpen;
+  }
+
+  function closeLang() {
+    langOpen = false;
+  }
+
+  function toggleMobileMenu() {
+    mobileMenuOpen = !mobileMenuOpen;
+  }
+
+  function closeMobileMenu() {
+    mobileMenuOpen = false;
+  }
+
   function withLang(href: string) {
     try {
       const base = typeof window !== 'undefined' ? window.location.origin : 'https://example.com';
@@ -42,11 +61,22 @@
 
   async function chooseLang(L: string) {
     setLang(L);
+    langOpen = false;
+    mobileMenuOpen = false;
     const u = new URL($page.url);
     u.searchParams.set('lang', L);
     await goto(u.pathname + u.search + u.hash, { replaceState: true, noScroll: true, keepFocus: true });
   }
+
+  // Lock body scroll when mobile menu opens
+  $: if (typeof document !== 'undefined') document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
 </script>
+
+<svelte:window on:click={(e) => {
+  if (e.target && e.target instanceof HTMLElement && !e.target.closest('.lang-dropdown')) {
+    closeLang();
+  }
+}} />
 
 <header class="header">
   <div class="container">
@@ -120,15 +150,85 @@
       <a href={withLang('/asteria/contact')} class="nav-link">Contact</a>
     </nav>
 
-    <div class="chips">
-      {#each LANGS as L}
-        <button class="chip" aria-pressed={L === $lang} on:click={() => chooseLang(L)}>
-          {L === 'RS' ? 'RS/HR' : L === 'TR' ? 'TR' : L}
-        </button>
-      {/each}
-      <span class="pill" style="--i:{Math.max(0, LANGS.indexOf($lang || 'EN'))}"></span>
+    <!-- Desktop Language Dropdown -->
+    <div class="lang-dropdown">
+      <button class="lang-btn" on:click|stopPropagation={toggleLang} aria-expanded={langOpen}>
+        <span class="globe-icon">🌐</span>
+        <span>{$lang === 'RS' ? 'RS/HR' : $lang === 'TR' ? 'TR' : $lang}</span>
+        <span class="arrow" class:open={langOpen}>▼</span>
+      </button>
+      {#if langOpen}
+        <div class="lang-panel" transition:slide={{ duration: 150 }}>
+          {#each LANGS as L}
+            <button
+              class="lang-option"
+              class:active={L === $lang}
+              on:click={() => chooseLang(L)}
+            >
+              {L === 'RS' ? 'RS/HR' : L === 'TR' ? 'TR' : L}
+              {#if L === $lang}
+                <span class="check">✓</span>
+              {/if}
+            </button>
+          {/each}
+        </div>
+      {/if}
     </div>
+
+    <!-- Mobile Hamburger -->
+    <button class="burger" on:click={toggleMobileMenu} aria-expanded={mobileMenuOpen} aria-controls="mobile-drawer">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="sr-only">Menu</span>
+    </button>
   </div>
+
+  <!-- Mobile Menu Backdrop -->
+  {#if mobileMenuOpen}
+    <div class="drawer-backdrop" on:click={closeMobileMenu} transition:fade={{ duration: 200 }}></div>
+  {/if}
+
+  <!-- Mobile Drawer -->
+  {#if mobileMenuOpen}
+    <aside class="drawer" id="mobile-drawer" transition:slide={{ duration: 200, axis: 'x' }} aria-hidden={!mobileMenuOpen}>
+      <div class="drawer__inner">
+        <button class="close" on:click={closeMobileMenu} aria-label="Close">✕</button>
+
+        <!-- Mobile Language Selection -->
+        <div class="mchips">
+          <div class="lang-label">
+            <span class="globe-icon">🌐</span>
+            Language
+          </div>
+          {#each LANGS as L}
+            <button
+              class="mchip"
+              class:active={L === $lang}
+              on:click={() => chooseLang(L)}
+            >
+              {L === 'RS' ? 'RS/HR' : L === 'TR' ? 'TR' : L}
+              {#if L === $lang}
+                <span class="check">✓</span>
+              {/if}
+            </button>
+          {/each}
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav class="mnav">
+          <a href={withLang('/asteria/guides')} class="mlink" on:click={closeMobileMenu}>Guides</a>
+          <a href={withLang('/asteria/astrology')} class="mlink" on:click={closeMobileMenu}>Astrology</a>
+          <a href={withLang('/asteria/numerology')} class="mlink" on:click={closeMobileMenu}>Numerology</a>
+          <a href={withLang('/asteria/divination')} class="mlink" on:click={closeMobileMenu}>Divination</a>
+          <a href={withLang('/asteria/pricing')} class="mlink" on:click={closeMobileMenu}>Pricing</a>
+          <a href={withLang('/asteria/features')} class="mlink" on:click={closeMobileMenu}>Features</a>
+          <a href={withLang('/asteria/faq')} class="mlink" on:click={closeMobileMenu}>FAQ</a>
+          <a href={withLang('/asteria/contact')} class="mlink" on:click={closeMobileMenu}>Contact</a>
+        </nav>
+      </div>
+    </aside>
+  {/if}
 </header>
 
 <style>
@@ -208,6 +308,272 @@
     color: var(--clarity, #30D5C8);
   }
 
+  /* Desktop Language Dropdown */
+  .lang-dropdown {
+    position: relative;
+  }
+
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.8rem;
+    background: #0f1424;
+    border: 1px solid #262c43;
+    border-radius: 10px;
+    color: #EDEBFF;
+    color: var(--ink, #EDEBFF);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .lang-btn:hover {
+    background: #1a2235;
+    border-color: #9C6CFF;
+    border-color: var(--destiny, #9C6CFF);
+  }
+
+  .globe-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .arrow {
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+  }
+
+  .arrow.open {
+    transform: rotate(180deg);
+  }
+
+  .lang-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #141127;
+    background: var(--panel, #141127);
+    border: 1px solid #ffffff1f;
+    border-radius: 12px;
+    padding: 0.5rem;
+    min-width: 120px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: #EDEBFF;
+    color: var(--ink, #EDEBFF);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    text-align: left;
+    transition: all 0.2s ease;
+  }
+
+  .lang-option:hover {
+    background: rgba(255, 255, 255, 0.06);
+    background: var(--glass, rgba(255, 255, 255, 0.06));
+  }
+
+  .lang-option.active {
+    background: linear-gradient(135deg, #9C6CFF, #30D5C8);
+    background: linear-gradient(135deg, var(--destiny, #9C6CFF), var(--clarity, #30D5C8));
+    color: #0a0c11;
+  }
+
+  .check {
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  /* Mobile Hamburger */
+  .burger {
+    border: 1px solid #262c43;
+    background: #0f1424;
+    color: #EDEBFF;
+    color: var(--ink, #EDEBFF);
+    border-radius: 10px;
+    width: 42px;
+    height: 42px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .burger:hover {
+    background: #1a2235;
+    border-color: #9C6CFF;
+    border-color: var(--destiny, #9C6CFF);
+  }
+
+  .bar {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #EDEBFF;
+    background: var(--ink, #EDEBFF);
+    transition: all 0.2s ease;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Mobile Drawer */
+  .drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 58;
+    backdrop-filter: blur(2px);
+  }
+
+  .drawer {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(90%, 380px);
+    z-index: 59;
+  }
+
+  .drawer__inner {
+    height: 100%;
+    background: linear-gradient(180deg, #141127, #0f1424);
+    background: linear-gradient(180deg, var(--panel, #141127), var(--bg, #0f1424));
+    border-left: 1px solid #ffffff1f;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding-top: calc(1rem + env(safe-area-inset-top));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .close {
+    align-self: flex-end;
+    border: 1px solid #262c43;
+    background: #0f1424;
+    color: #EDEBFF;
+    color: var(--ink, #EDEBFF);
+    padding: 0.5rem 0.75rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: all 0.2s ease;
+  }
+
+  .close:hover {
+    background: #1a2235;
+    border-color: #9C6CFF;
+    border-color: var(--destiny, #9C6CFF);
+  }
+
+  /* Mobile Language Chips */
+  .mchips {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #0a0c14;
+    border: 1px solid #262c43;
+    border-radius: 14px;
+  }
+
+  .lang-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #EDEBFF;
+    color: var(--ink, #EDEBFF);
+    opacity: 0.7;
+    margin-bottom: 0.3rem;
+  }
+
+  .mchip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    background: #0f1424;
+    border: 1px solid #262c43;
+    color: #EDEBFF;
+    color: var(--ink, #EDEBFF);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: left;
+  }
+
+  .mchip:hover {
+    background: #1a2235;
+    border-color: rgba(156, 108, 255, 0.3);
+  }
+
+  .mchip.active {
+    background: linear-gradient(135deg, #9C6CFF, #30D5C8);
+    background: linear-gradient(135deg, var(--destiny, #9C6CFF), var(--clarity, #30D5C8));
+    color: #0a0c11;
+    border-color: #3b2a00;
+    box-shadow: 0 4px 12px rgba(156, 108, 255, 0.3);
+  }
+
+  /* Mobile Navigation */
+  .mnav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem;
+  }
+
+  .mlink {
+    padding: 0.75rem 0.85rem;
+    border: 1px solid #262c43;
+    border-radius: 12px;
+    background: #0f1424;
+    color: #EDEBFF;
+    color: var(--ink, #EDEBFF);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .mlink:hover {
+    background: #1a2235;
+    border-color: #9C6CFF;
+    border-color: var(--destiny, #9C6CFF);
+  }
+
   .nav-dropdown {
     position: relative;
   }
@@ -252,57 +618,22 @@
     background: var(--glass, rgba(255, 255, 255, 0.06));
   }
 
-  .chips {
-    justify-self: end;
-    display: inline-grid;
-    grid-auto-flow: column;
-    gap: .35rem;
-    padding: .3rem;
-    background: #0f1424;
-    border: 1px solid var(--border, #262c43);
-    border-radius: 999px;
-    position: relative;
-  }
-
-  .chip {
-    position: relative;
-    z-index: 1;
-    padding: .35rem .7rem;
-    border-radius: 999px;
-    background: transparent;
-    color: var(--ink, #EDEBFF);
-    border: 0;
-    cursor: pointer;
-    font: inherit;
-    font-size: 13px;
-    white-space: nowrap;
-  }
-
-  .chip[aria-pressed="true"] {
-    color: #0a0c11;
-    font-weight: 800;
-  }
-
-  .pill {
-    position: absolute;
-    z-index: 0;
-    top: 4px;
-    bottom: 4px;
-    left: 4px;
-    width: calc(16.666% - 8px);
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--gold, #f5c64f), #ffe59a);
-    transform: translateX(calc(var(--i) * (100% + .35rem)));
-    transition: transform 180ms ease;
-  }
-
   @media (max-width: 768px) {
     .container {
       padding: 16px;
+      grid-template-columns: auto 1fr auto;
     }
 
     .nav-menu {
-      gap: 16px;
+      display: none;
+    }
+
+    .lang-dropdown {
+      display: none;
+    }
+
+    .burger {
+      display: flex;
     }
 
     .dropdown-menu {
@@ -310,15 +641,15 @@
       margin-top: 8px;
       box-shadow: none;
     }
-
-    .chips {
-      display: none;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .pill {
-      transition: none;
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
   }
 </style>

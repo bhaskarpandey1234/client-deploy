@@ -9,14 +9,15 @@ export const EN = {
     summary: '3) Summary'
   },
   oneTime: {
-    title: 'One-time Reading',
-    withChat: 'With 10-min chat',
+    title: 'Starter 1 + 10',
+    withChat: '1 Reading + 10 Minutes of Chat',
     noChat: 'Reading only',
-    toggle: 'Include 10-min chat'
+    toggle: 'Include 10-min chat',
+    toggleRemove: 'Remove 10-min chat'
   },
   subscription: {
-    title: 'Unlimited Readings',
-    includes: 'Includes {count} readings per month',
+    title: 'Flexible 15 / 15',
+    includes: '15 readings + 15 hrs messaging / month',
     monthly: 'Monthly',
     annual: 'Annual',
     billedMonthly: 'Billed monthly',
@@ -47,14 +48,15 @@ export const SR = {
     summary: '3) Pregled'
   },
   oneTime: {
-    title: 'Jednokratno čitanje',
-    withChat: 'Sa 10-min razgovorom',
+    title: 'Starter 1 + 10',
+    withChat: '1 Čitanje + 10 Minuta Razgovora',
     noChat: 'Samo čitanje',
-    toggle: 'Uključi 10-min razgovor'
+    toggle: 'Uključi 10-min razgovor',
+    toggleRemove: 'Ukloni 10-min razgovor'
   },
   subscription: {
-    title: 'Neograničena čitanja',
-    includes: 'Uključuje {count} čitanja mesečno',
+    title: 'Flexible 15 / 15',
+    includes: '15 čitanja + 15 sati poruka / mesec',
     monthly: 'Mesečno',
     annual: 'Godišnje',
     billedMonthly: 'Naplaćuje se mesečno',
@@ -85,14 +87,15 @@ export const RU = {
     summary: '3) Сводка'
   },
   oneTime: {
-    title: 'Разовая консультация',
-    withChat: 'С 10-минутным разговором',
+    title: 'Starter 1 + 10',
+    withChat: '1 Консультация + 10 Минут Разговора',
     noChat: 'Только чтение',
-    toggle: 'Включить 10-минутный разговор'
+    toggle: 'Включить 10-минутный разговор',
+    toggleRemove: 'Убрать 10-минутный разговор'
   },
   subscription: {
-    title: 'Неограниченные консультации',
-    includes: 'Включает {count} консультаций в месяц',
+    title: 'Flexible 15 / 15',
+    includes: '15 консультаций + 15 часов сообщений / месяц',
     monthly: 'Ежемесячно',
     annual: 'Ежегодно',
     billedMonthly: 'Списание ежемесячно',
@@ -123,14 +126,15 @@ export const TR = {
     summary: '3) Özet'
   },
   oneTime: {
-    title: 'Tek seferlik okuma',
-    withChat: '10 dakikalık sohbet ile',
+    title: 'Starter 1 + 10',
+    withChat: '1 Okuma + 10 Dakika Sohbet',
     noChat: 'Sadece okuma',
-    toggle: '10 dakikalık sohbet ekle'
+    toggle: '10 dakikalık sohbet ekle',
+    toggleRemove: '10 dakikalık sohbeti kaldır'
   },
   subscription: {
-    title: 'Sınırsız okumalar',
-    includes: 'Ayda {count} okuma içerir',
+    title: 'Flexible 15 / 15',
+    includes: '15 okuma + 15 saat mesajlaşma / ay',
     monthly: 'Aylık',
     annual: 'Yıllık',
     billedMonthly: 'Aylık faturalandırılır',
@@ -161,14 +165,15 @@ export const PL = {
     summary: '3) Podsumowanie'
   },
   oneTime: {
-    title: 'Jednorazowe czytanie',
-    withChat: 'Z 10-minutową rozmową',
+    title: 'Starter 1 + 10',
+    withChat: '1 Czytanie + 10 Minut Rozmowy',
     noChat: 'Tylko czytanie',
-    toggle: 'Dodaj 10-minutową rozmowę'
+    toggle: 'Dodaj 10-minutową rozmowę',
+    toggleRemove: 'Usuń 10-minutową rozmowę'
   },
   subscription: {
-    title: 'Nieograniczone czytania',
-    includes: 'Zawiera {count} czytań miesięcznie',
+    title: 'Flexible 15 / 15',
+    includes: '15 czytań + 15 godzin wiadomości / miesiąc',
     monthly: 'Miesięcznie',
     annual: 'Rocznie',
     billedMonthly: 'Rozliczane miesięcznie',
@@ -199,14 +204,15 @@ export const IT = {
     summary: '3) Riepilogo'
   },
   oneTime: {
-    title: 'Lettura singola',
-    withChat: 'Con chat di 10 minuti',
+    title: 'Starter 1 + 10',
+    withChat: '1 Lettura + 10 Minuti di Chat',
     noChat: 'Solo lettura',
-    toggle: 'Includi chat di 10 minuti'
+    toggle: 'Includi chat di 10 minuti',
+    toggleRemove: 'Rimuovi chat di 10 minuti'
   },
   subscription: {
-    title: 'Letture illimitate',
-    includes: 'Include {count} letture al mese',
+    title: 'Flexible 15 / 15',
+    includes: '15 letture + 15 ore di messaggi / mese',
     monthly: 'Mensile',
     annual: 'Annuale',
     billedMonthly: 'Fatturato mensilmente',

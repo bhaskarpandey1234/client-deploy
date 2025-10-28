@@ -13,13 +13,19 @@ import { ALL_COUNTRIES } from './geo.js';
 // Base one-time reading price per currency (Type 1)
 export const ONE_TIME_BASE = {
   EUR: 19,  GBP: 17,  USD: 19,  RSD: 1590, INR: 799,
-  BGN: 37,  CZK: 469, DKK: 145, HUF: 7490, PLN: 85, RON: 95, SEK: 219
+  BGN: 37,  CZK: 469, DKK: 145, HUF: 7490, PLN: 85, RON: 95, SEK: 219,
+  // New currencies
+  CAD: 25, ZAR: 349, SGD: 27, MYR: 89, HKD: 149, JPY: 2799, KRW: 24900, QAR: 69, AUD: 29, NZD: 31,
+  BAM: 37, TWD: 599
 };
 
 // 10-min chat add-on (added to base for Type 2)
 export const CHAT_ADDON_10MIN = {
   EUR: 6,   GBP: 5,   USD: 6,   RSD: 490,  INR: 249,
-  BGN: 11,  CZK: 149, DKK: 45,  HUF: 2490, PLN: 27, RON: 29, SEK: 69
+  BGN: 11,  CZK: 149, DKK: 45,  HUF: 2490, PLN: 27, RON: 29, SEK: 69,
+  // New currencies
+  CAD: 8, ZAR: 109, SGD: 8, MYR: 28, HKD: 47, JPY: 899, KRW: 7990, QAR: 22, AUD: 9, NZD: 10,
+  BAM: 11, TWD: 189
 };
 
 // Subscription includes 15 hours chat
@@ -27,11 +33,17 @@ export const SUBSCRIPTION = {
   INCLUDED_CHAT_HOURS: 15,
   MONTHLY: {
     EUR: 29,  GBP: 25,  USD: 29,  RSD: 2990, INR: 1499,
-    BGN: 55,  CZK: 699, DKK: 215, HUF: 10990, PLN: 129, RON: 139, SEK: 329
+    BGN: 55,  CZK: 699, DKK: 215, HUF: 10990, PLN: 129, RON: 139, SEK: 329,
+    // New currencies
+    CAD: 38, ZAR: 549, SGD: 41, MYR: 139, HKD: 229, JPY: 4299, KRW: 38900, QAR: 107, AUD: 44, NZD: 47,
+    BAM: 55, TWD: 929
   },
   ANNUAL: {
     EUR: 290,  GBP: 249,  USD: 290,  RSD: 29990, INR: 14999,
-    BGN: 550,  CZK: 6990, DKK: 2150, HUF: 109900, PLN: 1290, RON: 1390, SEK: 3290
+    BGN: 550,  CZK: 6990, DKK: 2150, HUF: 109900, PLN: 1290, RON: 1390, SEK: 3290,
+    // New currencies
+    CAD: 380, ZAR: 5490, SGD: 410, MYR: 1390, HKD: 2290, JPY: 42990, KRW: 389000, QAR: 1070, AUD: 440, NZD: 470,
+    BAM: 550, TWD: 9290
   }
 };
 
@@ -53,7 +65,9 @@ export const PAYMENT_LINKS = {
       },
       BY_CURRENCY: {
         EUR: '#', GBP: '#', USD: '#', RSD: '#', INR: '#',
-        BGN: '#', CZK: '#', DKK: '#', HUF: '#', PLN: '#', RON: '#', SEK: '#'
+        BGN: '#', CZK: '#', DKK: '#', HUF: '#', PLN: '#', RON: '#', SEK: '#',
+        CAD: '#', ZAR: '#', SGD: '#', MYR: '#', HKD: '#', JPY: '#', KRW: '#', QAR: '#', AUD: '#', NZD: '#',
+        BAM: '#', TWD: '#'
       }
     },
     // Type 1 (no chat)
@@ -63,7 +77,9 @@ export const PAYMENT_LINKS = {
       },
       BY_CURRENCY: {
         EUR: '#', GBP: '#', USD: '#', RSD: '#', INR: '#',
-        BGN: '#', CZK: '#', DKK: '#', HUF: '#', PLN: '#', RON: '#', SEK: '#'
+        BGN: '#', CZK: '#', DKK: '#', HUF: '#', PLN: '#', RON: '#', SEK: '#',
+        CAD: '#', ZAR: '#', SGD: '#', MYR: '#', HKD: '#', JPY: '#', KRW: '#', QAR: '#', AUD: '#', NZD: '#',
+        BAM: '#', TWD: '#'
       }
     }
   },
@@ -74,7 +90,9 @@ export const PAYMENT_LINKS = {
       },
       BY_CURRENCY: {
         EUR: '#', GBP: '#', USD: '#', RSD: '#', INR: '#',
-        BGN: '#', CZK: '#', DKK: '#', HUF: '#', PLN: '#', RON: '#', SEK: '#'
+        BGN: '#', CZK: '#', DKK: '#', HUF: '#', PLN: '#', RON: '#', SEK: '#',
+        CAD: '#', ZAR: '#', SGD: '#', MYR: '#', HKD: '#', JPY: '#', KRW: '#', QAR: '#', AUD: '#', NZD: '#',
+        BAM: '#', TWD: '#'
       }
     },
     ANNUAL: {
@@ -83,7 +101,9 @@ export const PAYMENT_LINKS = {
       },
       BY_CURRENCY: {
         EUR: '#', GBP: '#', USD: '#', RSD: '#', INR: '#',
-        BGN: '#', CZK: '#', DKK: '#', HUF: '#', PLN: '#', RON: '#', SEK: '#'
+        BGN: '#', CZK: '#', DKK: '#', HUF: '#', PLN: '#', RON: '#', SEK: '#',
+        CAD: '#', ZAR: '#', SGD: '#', MYR: '#', HKD: '#', JPY: '#', KRW: '#', QAR: '#', AUD: '#', NZD: '#',
+        BAM: '#', TWD: '#'
       }
     }
   }

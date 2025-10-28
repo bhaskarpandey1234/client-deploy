@@ -394,12 +394,12 @@
   <form class="card form" on:submit|preventDefault={compute}>
     <div class="grid">
       <label class="field">
-        <span>Name (optional)</span>
-        <input type="text" bind:value={name} placeholder="Your name" autocomplete="name" />
+        <span>Name</span>
+        <input type="text" bind:value={name} placeholder="Your name" autocomplete="name"  required/>
       </label>
 
       <label class="field">
-        <span>Email (required)</span>
+        <span>Email</span>
         <input type="email" bind:value={email} placeholder="your@email.com" autocomplete="email" required />
       </label>
 

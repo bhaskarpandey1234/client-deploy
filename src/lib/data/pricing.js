@@ -4,8 +4,8 @@ export const BASE_PRICES = {
   EUR: 19,
   GBP: 17,
   USD: 19,
-  RSD: 1590,
-  INR: 799,
+  RSD: 699,
+  INR: 599,
   BGN: 37,
   CZK: 469,
   DKK: 145,
@@ -19,8 +19,8 @@ export const SUBSCRIPTION_PRICES = {
   EUR: 9,
   GBP: 8,
   USD: 9,
-  RSD: 750,
-  INR: 399,
+  RSD: 3500,
+  INR: 3499,
   BGN: 18,
   CZK: 235,
   DKK: 72,
@@ -70,7 +70,9 @@ export function oneTimePrice(code, options = {}) {
   if (!baseAmount) return null;
   
   // Add chat cost if included
-  const chatCost = options.includeChat ? (baseAmount * 0.3) : 0; // 30% more for chat
+  const chatCost = options.includeChat 
+    ? (currency === 'INR' ? 400 : currency === 'RSD' ? 300 : Math.round(baseAmount * 0.3))
+    : 0;
   const amount = Math.round(baseAmount + chatCost);
   
   return { amount, currency };
@@ -84,7 +86,9 @@ export function subscriptionPrice(code, cycle = 'MONTHLY') {
   if (!baseAmount) return null;
   
   // Annual gets 2 months free (10 months price for 12 months)
-  const amount = cycle === 'ANNUAL' ? Math.round(baseAmount * 10) : baseAmount;
+  const amount = cycle === 'ANNUAL' 
+    ? (currency === 'INR' ? 35999 : currency === 'RSD' ? 36000 : Math.round(baseAmount * 10))
+    : baseAmount;
   
   return { amount, currency };
 }

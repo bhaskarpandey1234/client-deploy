@@ -32,23 +32,42 @@ export const EXTRA_COUNTRIES = [
   { code: 'RS', name: 'Serbia', currency: 'RSD' },
   { code: 'GB', name: 'United Kingdom', currency: 'GBP' },
   { code: 'US', name: 'United States', currency: 'USD' },
-  { code: 'IN', name: 'India', currency: 'INR' }
+  { code: 'IN', name: 'India', currency: 'INR' },
+  // New markets
+  { code: 'CA', name: 'Canada', currency: 'CAD' },
+  { code: 'ZA', name: 'South Africa', currency: 'ZAR' },
+  { code: 'SG', name: 'Singapore', currency: 'SGD' },
+  { code: 'MY', name: 'Malaysia', currency: 'MYR' },
+  { code: 'HK', name: 'Hong Kong', currency: 'HKD' },
+  { code: 'JP', name: 'Japan', currency: 'JPY' },
+  { code: 'KR', name: 'South Korea', currency: 'KRW' },
+  { code: 'QA', name: 'Qatar', currency: 'QAR' },
+  { code: 'AU', name: 'Australia', currency: 'AUD' },
+  { code: 'NZ', name: 'New Zealand', currency: 'NZD' },
+  { code: 'BA', name: 'Bosnia and Herzegovina', currency: 'BAM' },
+  { code: 'TW', name: 'Taiwan', currency: 'TWD' }
 ];
 
 export const ALL_COUNTRIES = [...EU_COUNTRIES, ...EXTRA_COUNTRIES];
 
+/** @type {(code: string) => typeof ALL_COUNTRIES[number] | undefined} */
 export const byCode = (code) =>
   ALL_COUNTRIES.find((c) => c.code === String(code).toUpperCase());
 
+/** @type {(lang: string) => string[]} */
 export function countriesForLanguage(lang) {
   const L = String(lang || 'EN').toUpperCase();
   const EU = EU_COUNTRIES.map((c) => c.code);
+  /** @type {(arr: string[]) => string[]} */
   const uniq = (arr) => [...new Set(arr)];
+  
+  // New market countries
+  const NEW_MARKETS = ['CA', 'ZA', 'SG', 'MY', 'HK', 'JP', 'KR', 'QA', 'AU', 'NZ', 'BA', 'TW'];
 
   if (L === 'RS' || L === 'SR') return ['RS', 'HR'];
   if (L === 'HR') return ['RS', 'HR'];
-  if (L === 'EN') return uniq([...EU, 'IN', 'RS', 'US', 'GB']);
-  if (L === 'RU' || L === 'IT' || L === 'PL') return uniq([...EU, 'RS', 'US', 'GB']);
+  if (L === 'EN') return uniq([...EU, 'IN', 'RS', 'US', 'GB', ...NEW_MARKETS]);
+  if (L === 'RU' || L === 'IT' || L === 'PL') return uniq([...EU, 'RS', 'US', 'GB', ...NEW_MARKETS]);
 
-  return uniq([...EU, 'US', 'GB']);
+  return uniq([...EU, 'US', 'GB', ...NEW_MARKETS]);
 }

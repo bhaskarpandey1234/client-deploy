@@ -15,6 +15,7 @@
   import InstallCTA from '$lib/components/InstallCTA.svelte';
   import Newsletter from '$lib/components/Newsletter.svelte';
   import FooterMain from '$lib/components/FooterMain.svelte';
+    import HeaderAsteria from '$lib/components/HeaderAsteria.svelte';
 
   const faqs = [
     {

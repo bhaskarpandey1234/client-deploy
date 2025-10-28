@@ -20,10 +20,11 @@
   const fmt = (amt: number, cur: string) => formatCurrency(amt, cur, localeForLang(lang));
 
   // === Step 1: plan selection ===
-  // Keep Type 2 (one‑time + 10‑min chat) as default selection as per your original requirement.
   let plan: 'one-time' | 'subscription' = 'one-time';
-  let includeChat = true;        // One-time: Type 2 by default (toggle off => Type 1)
+  let removeChat = false;        // Checkbox to remove chat
   let cycle: 'MONTHLY' | 'ANNUAL' = 'MONTHLY';
+  
+  $: includeChat = !removeChat;  // includeChat is inverse of removeChat
 
   // === Step 2: country selection ===
   let q = '';
@@ -104,13 +105,13 @@
         <div class="badge">1×</div>
         <h3 class="title">{t(L,'oneTime.title')}</h3>
       </header>
-      <p class="muted">{t(L,'oneTime.withChat')} / {t(L,'oneTime.noChat')}</p>
+      <p class="muted">{t(L,'oneTime.withChat')}</p>
 
       <div class="divider"></div>
 
       <label class="toggle">
-        <input type="checkbox" bind:checked={includeChat} on:click={(e)=>e.stopPropagation()} />
-        <span>{t(L,'oneTime.toggle')}</span>
+        <input type="checkbox" bind:checked={removeChat} on:click={(e)=>e.stopPropagation()} />
+        <span>Remove 10-min chat</span>
       </label>
 
       <div class="hint">
@@ -129,7 +130,7 @@
         <div class="badge">∞</div>
         <h3 class="title">{t(L,'subscription.title')}</h3>
       </header>
-      <p class="muted">{t(L,'subscription.includes', 15)}</p>
+      <p class="muted">{t(L,'subscription.includes')}</p>
 
       <div class="divider"></div>
 
@@ -263,7 +264,7 @@
     cursor:pointer; transition:border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
   }
   .plan-card:hover{ transform:translateY(-2px); border-color:#31406a; box-shadow:0 0 0 4px var(--ring),0 12px 28px rgba(0,0,0,.35); }
-  .plan-card.is-selected{ border-color:#3a4874; box-shadow:0 0 0 4px var(--ring) }
+  .plan-card.is-selected{ border-color:var(--gold); box-shadow:0 0 0 3px var(--ring) }
   .plan-card__head{ display:flex; align-items:center; gap:.6rem }
   .badge{
     display:inline-grid; place-items:center; width:28px; height:28px; border-radius:999px;
@@ -275,7 +276,26 @@
   .divider{ height:1px; background:var(--border); margin:.5rem 0 .5rem }
 
   .toggle{ display:flex; align-items:center; gap:.5rem; }
-  .toggle input{ width:18px; height:18px }
+  
+  /* Make the 10‑minute chat checkbox clearly orange */
+  .toggle input{
+    width:22px;
+    height:22px;
+    accent-color: var(--gold);            /* iOS/Android/desktop browsers */
+  }
+
+  /* Strong focus ring for accessibility */
+  .toggle input:focus-visible{
+    outline: none;
+    box-shadow: 0 0 0 3px var(--ring);
+    border-radius: 4px;                   /* so the ring looks neat */
+  }
+
+  /* Also make the label text pop when checked */
+  .toggle input:checked + span{
+    color: var(--gold);
+    font-weight: 800;
+  }
 
   .seg{ position:relative; display:inline-grid; grid-auto-flow:column; gap:.35rem; padding:.3rem; background:#0f1424; border:1px solid var(--border); border-radius:999px }
   .seg__btn{ position:relative; z-index:1; padding:.35rem .7rem; border-radius:999px; background:transparent; color:var(--text); border:0; cursor:pointer; font:inherit }
