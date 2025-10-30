@@ -103,7 +103,7 @@ font-family: Inter;
 font-size: 15.685px;
 font-style: normal;
 font-weight: 700;
-line-height: 23.869px; /* 152.174% */
+line-height: 23.869px; 
   }
   .quote{
     color: #2A2A2A;
@@ -111,7 +111,7 @@ font-family: var(--font-family-Font-1, Inter);
 font-size: 13.867px;
 font-style: normal;
 font-weight: var(--font-weight-400, 400);
-line-height: 22.164px; /* 159.836% */
+line-height: 22.164px; 
   }
 </style>
 

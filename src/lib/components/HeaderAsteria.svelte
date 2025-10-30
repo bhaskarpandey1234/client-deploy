@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import { lang, setLang, LANGS } from '$lib/stores/checkout.js';
+  import { lang, setLang, LANGS } from '$lib/stores/checkout';
   import { slide, fade } from 'svelte/transition';
 
   let astrologyOpen = false;
@@ -9,6 +9,10 @@
   let divinationOpen = false;
   let langOpen = false; // For desktop language dropdown
   let mobileMenuOpen = false; // For mobile drawer
+  let mobileAstrologyOpen = false;
+  let mobileNumerologyOpen = false;
+  let mobileDivinationOpen = false;
+  let mobileLangOpen = false;
 
   function toggleAstrology() {
     astrologyOpen = !astrologyOpen;
@@ -48,6 +52,32 @@
 
   function closeMobileMenu() {
     mobileMenuOpen = false;
+    mobileAstrologyOpen = false;
+    mobileNumerologyOpen = false;
+    mobileDivinationOpen = false;
+    mobileLangOpen = false;
+  }
+
+  function toggleMobileAstrology() {
+    mobileAstrologyOpen = !mobileAstrologyOpen;
+    mobileNumerologyOpen = false;
+    mobileDivinationOpen = false;
+  }
+
+  function toggleMobileNumerology() {
+    mobileNumerologyOpen = !mobileNumerologyOpen;
+    mobileAstrologyOpen = false;
+    mobileDivinationOpen = false;
+  }
+
+  function toggleMobileDivination() {
+    mobileDivinationOpen = !mobileDivinationOpen;
+    mobileAstrologyOpen = false;
+    mobileNumerologyOpen = false;
+  }
+
+  function toggleMobileLang() {
+    mobileLangOpen = !mobileLangOpen;
   }
 
   function withLang(href: string) {
@@ -191,40 +221,95 @@
 
   <!-- Mobile Drawer -->
   {#if mobileMenuOpen}
-    <aside class="drawer" id="mobile-drawer" transition:slide={{ duration: 200, axis: 'x' }} aria-hidden={!mobileMenuOpen}>
+    <aside class="drawer" id="mobile-drawer" transition:slide={{ duration: 400, axis: 'x' }} aria-hidden={!mobileMenuOpen}>
       <div class="drawer__inner">
         <button class="close" on:click={closeMobileMenu} aria-label="Close">✕</button>
-
-        <!-- Mobile Language Selection -->
-        <div class="mchips">
-          <div class="lang-label">
-            <span class="globe-icon">🌐</span>
-            Language
-          </div>
-          {#each LANGS as L}
-            <button
-              class="mchip"
-              class:active={L === $lang}
-              on:click={() => chooseLang(L)}
-            >
-              {L === 'RS' ? 'RS/HR' : L === 'TR' ? 'TR' : L}
-              {#if L === $lang}
-                <span class="check">✓</span>
-              {/if}
-            </button>
-          {/each}
-        </div>
 
         <!-- Mobile Navigation -->
         <nav class="mnav">
           <a href={withLang('/asteria/guides')} class="mlink" on:click={closeMobileMenu}>Guides</a>
-          <a href={withLang('/asteria/astrology')} class="mlink" on:click={closeMobileMenu}>Astrology</a>
-          <a href={withLang('/asteria/numerology')} class="mlink" on:click={closeMobileMenu}>Numerology</a>
-          <a href={withLang('/asteria/divination')} class="mlink" on:click={closeMobileMenu}>Divination</a>
+          
+          <div class="mobile-dropdown">
+            <button class="mlink dropdown-btn" on:click={toggleMobileAstrology}>
+              Astrology
+              <span class="arrow">{mobileAstrologyOpen ? '▲' : '▼'}</span>
+            </button>
+            {#if mobileAstrologyOpen}
+              <div class="mobile-submenu">
+                <a href={withLang('/asteria/astrology/celtic/information')} class="mlink sub" on:click={closeMobileMenu}>Celtic Tree Zodiac</a>
+                <a href={withLang('/asteria/astrology/chinese-zodiac/information')} class="mlink sub" on:click={closeMobileMenu}>Chinese Zodiac</a>
+                <a href={withLang('/asteria/astrology/egyptian/information')} class="mlink sub" on:click={closeMobileMenu}>Egyptian</a>
+                <a href={withLang('/asteria/astrology/japanese/information')} class="mlink sub" on:click={closeMobileMenu}>Japanese</a>
+                <a href={withLang('/asteria/astrology/mayan/information')} class="mlink sub" on:click={closeMobileMenu}>Mayan</a>
+                <a href={withLang('/asteria/astrology/panchang/information')} class="mlink sub" on:click={closeMobileMenu}>Panchang</a>
+                <a href={withLang('/asteria/astrology/vedic/information')} class="mlink sub" on:click={closeMobileMenu}>Vedic</a>
+                <a href={withLang('/asteria/astrology/western/information')} class="mlink sub" on:click={closeMobileMenu}>Western</a>
+              </div>
+            {/if}
+          </div>
+          
+          <div class="mobile-dropdown">
+            <button class="mlink dropdown-btn" on:click={toggleMobileNumerology}>
+              Numerology
+              <span class="arrow">{mobileNumerologyOpen ? '▲' : '▼'}</span>
+            </button>
+            {#if mobileNumerologyOpen}
+              <div class="mobile-submenu">
+                <a href={withLang('/asteria/numerology/angle/information')} class="mlink sub" on:click={closeMobileMenu}>Angel Numbers</a>
+                <a href={withLang('/asteria/numerology/chaldean/information')} class="mlink sub" on:click={closeMobileMenu}>Chaldean</a>
+                <a href={withLang('/asteria/numerology/chinese/information')} class="mlink sub" on:click={closeMobileMenu}>Chinese</a>
+                <a href={withLang('/asteria/numerology/kabbalistic/information')} class="mlink sub" on:click={closeMobileMenu}>Kabbalistic</a>
+                <a href={withLang('/asteria/numerology/western/information')} class="mlink sub" on:click={closeMobileMenu}>Western</a>
+              </div>
+            {/if}
+          </div>
+          
+          <div class="mobile-dropdown">
+            <button class="mlink dropdown-btn" on:click={toggleMobileDivination}>
+              Divination
+              <span class="arrow">{mobileDivinationOpen ? '▲' : '▼'}</span>
+            </button>
+            {#if mobileDivinationOpen}
+              <div class="mobile-submenu">
+                <a href={withLang('/asteria/divination/conchomancy/information')} class="mlink sub" on:click={closeMobileMenu}>Conchomancy</a>
+                <a href={withLang('/asteria/divination/i-ching/information')} class="mlink sub" on:click={closeMobileMenu}>I Ching</a>
+                <a href={withLang('/asteria/divination/oracle/information')} class="mlink sub" on:click={closeMobileMenu}>Oracle Cards</a>
+                <a href={withLang('/asteria/divination/palmistry/information')} class="mlink sub" on:click={closeMobileMenu}>Palmistry</a>
+                <a href={withLang('/asteria/divination/runes/information')} class="mlink sub" on:click={closeMobileMenu}>Runes</a>
+                <a href={withLang('/asteria/divination/tarot-cards/information')} class="mlink sub" on:click={closeMobileMenu}>Tarot Cards</a>
+              </div>
+            {/if}
+          </div>
+          
           <a href={withLang('/asteria/pricing')} class="mlink" on:click={closeMobileMenu}>Pricing</a>
           <a href={withLang('/asteria/features')} class="mlink" on:click={closeMobileMenu}>Features</a>
           <a href={withLang('/asteria/faq')} class="mlink" on:click={closeMobileMenu}>FAQ</a>
           <a href={withLang('/asteria/contact')} class="mlink" on:click={closeMobileMenu}>Contact</a>
+          
+          <!-- Mobile Language Dropdown -->
+          <div class="mobile-dropdown">
+            <button class="mlink dropdown-btn" on:click={toggleMobileLang}>
+              <span class="globe-icon">🌐</span>
+              Language ({$lang === 'RS' ? 'RS/HR' : $lang === 'TR' ? 'TR' : $lang})
+              <span class="arrow">{mobileLangOpen ? '▲' : '▼'}</span>
+            </button>
+            {#if mobileLangOpen}
+              <div class="mobile-submenu">
+                {#each LANGS as L}
+                  <button
+                    class="mlink sub lang-option"
+                    class:active={L === $lang}
+                    on:click={() => chooseLang(L)}
+                  >
+                    {L === 'RS' ? 'RS/HR' : L === 'TR' ? 'TR' : L}
+                    {#if L === $lang}
+                      <span class="check">✓</span>
+                    {/if}
+                  </button>
+                {/each}
+              </div>
+            {/if}
+          </div>
         </nav>
       </div>
     </aside>
@@ -237,7 +322,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 1000;
     background: rgba(12, 10, 26, 0.95);
     background: var(--bg, rgba(12, 10, 26, 0.95));
     backdrop-filter: blur(20px);
@@ -249,7 +334,7 @@
     margin: 0 auto;
     padding: 16px 24px;
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr auto auto;
     align-items: center;
     gap: 24px;
     position: relative;
@@ -361,7 +446,7 @@
     padding: 0.5rem;
     min-width: 120px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    z-index: 100;
+    z-index: 1003;
   }
 
   .lang-option {
@@ -448,7 +533,7 @@
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.6);
-    z-index: 58;
+    z-index: 1001;
     backdrop-filter: blur(2px);
   }
 
@@ -456,7 +541,8 @@
     position: fixed;
     inset: 0 0 0 auto;
     width: min(90%, 380px);
-    z-index: 59;
+    height: 90vh;
+    z-index: 9999;
   }
 
   .drawer__inner {
@@ -470,6 +556,8 @@
     padding-top: calc(1rem + env(safe-area-inset-top));
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    position: relative;
+    z-index: 1003;
   }
 
   .close {
@@ -493,53 +581,7 @@
     border-color: var(--destiny, #9C6CFF);
   }
 
-  /* Mobile Language Chips */
-  .mchips {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background: #0a0c14;
-    border: 1px solid #262c43;
-    border-radius: 14px;
-  }
-
-  .lang-label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: #EDEBFF;
-    color: var(--ink, #EDEBFF);
-    opacity: 0.7;
-    margin-bottom: 0.3rem;
-  }
-
-  .mchip {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 1rem;
-    border-radius: 12px;
-    background: #0f1424;
-    border: 1px solid #262c43;
-    color: #EDEBFF;
-    color: var(--ink, #EDEBFF);
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    width: 100%;
-    text-align: left;
-  }
-
-  .mchip:hover {
-    background: #1a2235;
-    border-color: rgba(156, 108, 255, 0.3);
-  }
-
-  .mchip.active {
+  .mlink.sub.lang-option.active {
     background: linear-gradient(135deg, #9C6CFF, #30D5C8);
     background: linear-gradient(135deg, var(--destiny, #9C6CFF), var(--clarity, #30D5C8));
     color: #0a0c11;
@@ -572,6 +614,38 @@
     background: #1a2235;
     border-color: #9C6CFF;
     border-color: var(--destiny, #9C6CFF);
+  }
+
+  .mobile-dropdown {
+    margin: 0.4rem 0;
+  }
+
+  .dropdown-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    text-align: left;
+  }
+
+  .mobile-submenu {
+    margin-top: 0.4rem;
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .mlink.sub {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin: 0;
+  }
+
+  .mlink.sub.lang-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .nav-dropdown {
@@ -618,10 +692,22 @@
     background: var(--glass, rgba(255, 255, 255, 0.06));
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 999px) {
+    .nav-menu {
+      gap: 16px;
+    }
+    
+    .nav-link {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 850px) {
     .container {
       padding: 16px;
-      grid-template-columns: auto 1fr auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .nav-menu {
